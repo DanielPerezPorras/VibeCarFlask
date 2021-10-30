@@ -1,0 +1,14 @@
+// Por rellenar
+[
+    {
+        "_id": 1,
+        "id_conductor": 2,
+        "origen": null,
+        "destino": null,
+        "fecha_hora_salida": null,
+        "duracion_estimada": null,
+        "plazas": 2,
+        "precio": 15.00,
+        "permitir_valoraciones": false
+    }
+]
