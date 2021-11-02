@@ -1,0 +1,63 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: VibeCar API
+  description: "Esta es la API del servicio de compartición de coche VibeCar."
+servers:
+  - url: https://localhost:8080/api/v1
+paths:
+  /usuarios/{id}:
+    get:
+      description: Devuelve información de un usuario dado su ID.
+      parameters:
+        - name: id
+          description: "El ID del usuario a devolver."
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "Éxito, devuelve información del usuario."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+        "404":
+          description: Error, el usuario no existe.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        nombre:
+          type: string
+        apellidos:
+          type: string
+        email:
+          type: string
+        telefono:
+          type: string
+        link_paypal:
+          type: string
+        url_foto_perfil:
+          type: string
+        rol:
+          type: integer
+      required:
+        - nombre
+        - apellidos
+        - email
+        - telefono
+        - link_paypal
+        - url_foto_perfil
+        - rol
