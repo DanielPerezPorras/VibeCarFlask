@@ -1,10 +1,13 @@
 openapi: 3.0.0
+
 info:
   version: 1.0.0
-  title: VibeCar API
+  title: "VibeCar API"
   description: "Esta es la API del servicio de compartición de coche VibeCar."
+
 servers:
   - url: https://localhost:8080/api/v1
+
 paths:
   /usuarios:
     get:
@@ -109,6 +112,8 @@ paths:
                 properties:
                   mensaje:
                     type: string
+
+
 components:
   schemas:
     Usuario:
@@ -123,6 +128,8 @@ components:
         email:
           type: string
         telefono:
+          type: string
+        contrasenia:
           type: string
         link_paypal:
           type: string

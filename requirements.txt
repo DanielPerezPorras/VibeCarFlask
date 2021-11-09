@@ -1,3 +1,4 @@
 Flask==2.0.2
 Flask_Script==2.0.6
 pymongo==3.11.3
+Flask-Cors==3.0.10
