@@ -30,3 +30,23 @@ function locatePlace() {
     }
   )
 }
+
+/*
+<div class="container-lg">
+      <div id="main" role="main">
+    
+        <h1 class="mb-3">Bienvenido a VibeCar</h1>
+
+        <!-- https://asmaloney.com/2014/01/code/creating-an-interactive-map-with-leaflet-and-openstreetmap/ -->
+        <div id="map" class="mb-3" style="height: 440px; border: 1px solid #AAA;"></div>
+
+        <label for="geocode-test" class="form-label">Introduce un lugar</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="geocode-test" placeholder="p. ej. Málaga" />
+          <button class="btn btn-primary" type="submit" onclick="locatePlace()">Geocode!</button>
+        </div>
+
+      </div>
+    </div>
+
+*/

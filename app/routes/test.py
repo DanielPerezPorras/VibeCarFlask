@@ -7,6 +7,4 @@ def inicio():
 
 @app.errorhandler(404)
 def error404(error):
-    return render_template("error.html",
-        codigo=404,
-        descripcion="Página no encontrada"), 404
+    return render_template("404.html"), 404
