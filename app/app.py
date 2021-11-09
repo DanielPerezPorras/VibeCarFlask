@@ -6,3 +6,4 @@ app = Flask(__name__)
 
 from .routes.test import *
 from .rest.user import *
+from .rest.trayecto import *

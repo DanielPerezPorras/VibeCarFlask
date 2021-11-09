@@ -1,14 +1,46 @@
-// Por rellenar
 [
     {
         "_id": 1,
         "id_conductor": 2,
-        "origen": null,
-        "destino": null,
-        "fecha_hora_salida": null,
-        "duracion_estimada": null,
+        "origen": "Granada",
+        "destino": "Malaga",
+        "fecha_hora_salida": "2021-11-09 20:26:48.296115",
+        "duracion_estimada": 120,
         "plazas": 2,
         "precio": 15.00,
+        "permitir_valoraciones": true
+    },
+    {
+        "_id": 2,
+        "id_conductor": 2,
+        "origen": "Malaga",
+        "destino": "Granada",
+        "fecha_hora_salida": "2021-12-09 20:26:48.296115",
+        "duracion_estimada": 120,
+        "plazas": 2,
+        "precio": 15.00,
+        "permitir_valoraciones": true
+    },
+    {
+        "_id": 3,
+        "id_conductor": 3,
+        "origen": "Granada",
+        "destino": "Sevilla",
+        "fecha_hora_salida": "2021-13-10 20:26:48.296115",
+        "duracion_estimada": 120,
+        "plazas": 2,
+        "precio": 12.00,
+        "permitir_valoraciones": false
+    },
+    {
+        "_id": 4,
+        "id_conductor": 2,
+        "origen": "Sevilla",
+        "destino": "Granada",
+        "fecha_hora_salida": "2021-14-10 20:26:48.296115",
+        "duracion_estimada": 120,
+        "plazas": 3,
+        "precio": 10.00,
         "permitir_valoraciones": false
     }
 ]
