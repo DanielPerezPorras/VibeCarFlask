@@ -61,25 +61,29 @@ def updateUsuario(id):
         if request.is_json:
             datos = request.get_json()
 
-            if "nombre" in datos:
-                nuevos_valores["nombre"] = str(datos["nombre"])
-            if "apellidos" in datos:
-                nuevos_valores["apellidos"] = str(datos["apellidos"])
-            if "email" in datos:
-                nuevos_valores["email"] = str(datos["email"])
-            if "telefono" in datos:
-                nuevos_valores["telefono"] = str(datos["telefono"])
-            if "contrasenia" in datos:
-                nuevos_valores["contrasenia"] = str(datos["contrasenia"])
-            if "link_paypal" in datos:
-                nuevos_valores["link_paypal"] = str(datos["link_paypal"])
-            if "url_foto_perfil" in datos:
-                nuevos_valores["url_foto_perfil"] = str(datos["url_foto_perfil"])
-            if "rol" in datos:
-                nuevos_valores["rol"] = int(datos["rol"])
+            try:
+                if "nombre" in datos:
+                    nuevos_valores["nombre"] = str(datos["nombre"])
+                if "apellidos" in datos:
+                    nuevos_valores["apellidos"] = str(datos["apellidos"])
+                if "email" in datos:
+                    nuevos_valores["email"] = str(datos["email"])
+                if "telefono" in datos:
+                    nuevos_valores["telefono"] = str(datos["telefono"])
+                if "contrasenia" in datos:
+                    nuevos_valores["contrasenia"] = str(datos["contrasenia"])
+                if "link_paypal" in datos:
+                    nuevos_valores["link_paypal"] = str(datos["link_paypal"])
+                if "url_foto_perfil" in datos:
+                    nuevos_valores["url_foto_perfil"] = str(datos["url_foto_perfil"])
+                if "rol" in datos:
+                    nuevos_valores["rol"] = int(datos["rol"])
 
-            usuario.update_one({"_id": id}, {"$set": nuevos_valores})
-            return ("", 204)
+                usuario.update_one({"_id": id}, {"$set": nuevos_valores})
+                return ("", 204)
+            except Exception:
+                respuesta = jsonify(msg="Petición no válida, hay campos que no son del tipo correcto")
+                return make_response(respuesta, 400)
 
         else:
             respuesta = jsonify(msg="Petición no válida, se requiere JSON")

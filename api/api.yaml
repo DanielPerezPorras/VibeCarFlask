@@ -35,7 +35,7 @@ paths:
                     type: integer
                     description: "El ID del nuevo usuario."
         "400":
-          description: "Error, la entrada no está en formato JSON."
+          description: "Error, la entrada no está en formato JSON o faltan campos."
           content:
             application/json:
               schema:
@@ -83,7 +83,7 @@ paths:
         "204":
           description: "Éxito, usuario modificado."
         "400":
-          description: "Error, la entrada no está en formato JSON."
+          description: "Error, la entrada no está en formato JSON o faltan campos."
           content:
             application/json:
               schema:
@@ -148,7 +148,7 @@ paths:
                     type: integer
                     description: "El ID del nuevo trayecto."
         "400":
-          description: "Error, la entrada no está en formato JSON."
+          description: "Error, la entrada no está en formato JSON o faltan campos."
           content:
             application/json:
               schema:
@@ -196,7 +196,7 @@ paths:
         "204":
           description: "Éxito, trayecto modificado."
         "400":
-          description: "Error, la entrada no está en formato JSON."
+          description: "Error, la entrada no está en formato JSON o faltan campos."
           content:
             application/json:
               schema:

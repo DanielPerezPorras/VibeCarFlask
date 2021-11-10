@@ -83,28 +83,32 @@ def updateTrayecto(id):
     if trayecto is not None:
         nuevos_valores = {}
         if request.is_json:
-
             datos = request.get_json()
+            try:
 
-            if "id_conductor" in datos:
-                nuevos_valores["id_conductor"] = int(datos["id_conductor"])
-            if "origen" in datos:
-                nuevos_valores["origen"] = str(datos["origen"])
-            if "destino" in datos:
-                nuevos_valores["destino"] = str(datos["destino"])
-            if "fecha_hora_salida" in datos:
-                nuevos_valores["fecha_hora_salida"] = str(datos["fecha_hora_salida"])
-            if "duracion_estimada" in datos:
-                nuevos_valores["duracion_estimada"] = int(datos["duracion_estimada"])
-            if "plazas" in datos:
-                nuevos_valores["plazas"] = int(datos["plazas"])
-            if "precio" in datos:
-                nuevos_valores["precio"] = float(datos["precio"])
-            if "permitir_valoraciones" in datos:
-                nuevos_valores["permitir_valoraciones"] = bool(datos["permitir_valoraciones"])
+                if "id_conductor" in datos:
+                    nuevos_valores["id_conductor"] = int(datos["id_conductor"])
+                if "origen" in datos:
+                    nuevos_valores["origen"] = str(datos["origen"])
+                if "destino" in datos:
+                    nuevos_valores["destino"] = str(datos["destino"])
+                if "fecha_hora_salida" in datos:
+                    nuevos_valores["fecha_hora_salida"] = str(datos["fecha_hora_salida"])
+                if "duracion_estimada" in datos:
+                    nuevos_valores["duracion_estimada"] = int(datos["duracion_estimada"])
+                if "plazas" in datos:
+                    nuevos_valores["plazas"] = int(datos["plazas"])
+                if "precio" in datos:
+                    nuevos_valores["precio"] = float(datos["precio"])
+                if "permitir_valoraciones" in datos:
+                    nuevos_valores["permitir_valoraciones"] = bool(datos["permitir_valoraciones"])
 
-            db.update_one({"_id" : id},{"$set": nuevos_valores})
-            return ("", 204)
+                db.update_one({"_id" : id},{"$set": nuevos_valores})
+                return ("", 204)
+
+            except Exception:
+                respuesta = jsonify(msg="Petición no válida, hay campos que no son del tipo correcto")
+                return make_response(respuesta, 400)
         else:
             respuesta = jsonify(msg="Petición no válida, se requiere JSON")
             return make_response(respuesta, 400)
