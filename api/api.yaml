@@ -35,13 +35,13 @@ paths:
                     type: integer
                     description: "El ID del nuevo usuario."
         "400":
-          description: "Error, faltan campos o la petición no está en formato JSON."
+          description: "Error, la entrada no está en formato JSON."
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  mensaje:
+                  msg:
                     type: string
               
   /usuarios/{id}:
@@ -53,7 +53,7 @@ paths:
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/Usuario'
+            type: integer
       responses:
         "200":
           description: "Éxito, devuelve información del usuario."
@@ -68,13 +68,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  mensaje:
+                  msg:
                     type: string
     put:
       description: "Modifica datos de un usuario."
       parameters:
         - name: id
-          description: "El ID del usuario a eliminar."
+          description: "El ID del usuario a modificar."
           in: path
           required: true
           schema:
@@ -82,6 +82,15 @@ paths:
       responses:
         "204":
           description: "Éxito, usuario modificado."
+        "400":
+          description: "Error, la entrada no está en formato JSON."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
         "404":
           description: "Error, el usuario no existe."
           content:
@@ -89,7 +98,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  mensaje:
+                  msg:
                     type: string
     delete:
       description: "Elimina un usuario."
@@ -110,9 +119,121 @@ paths:
               schema:
                 type: object
                 properties:
-                  mensaje:
+                  msg:
                     type: string
 
+  /trayectos:
+    get:
+      description: "Devuelve todos los trayectos del sistema."
+      responses:
+        "200":
+          description: "Éxito, devuelve todos los trayectos."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trayecto'
+    post:
+      description: "Crea un nuevo trayecto."
+      responses:
+        "200":
+          description: "Éxito, devuelve el ID del nuevo trayecto."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  new_id:
+                    type: integer
+                    description: "El ID del nuevo trayecto."
+        "400":
+          description: "Error, la entrada no está en formato JSON."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /trayectos/{id}:
+    get:
+      description: "Devuelve información de un trayecto dado su ID."
+      parameters:
+        - name: id
+          description: "El ID del trayecto a devolver."
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "Éxito, devuelve información del trayecto."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trayecto'
+        "404":
+          description: "Error, el trayecto no existe."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+    put:
+      description: "Modifica datos de un trayecto."
+      parameters:
+        - name: id
+          description: "El ID del trayecto a modificar."
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: "Éxito, trayecto modificado."
+        "400":
+          description: "Error, la entrada no está en formato JSON."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+        "404":
+          description: "Error, el trayecto no existe."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+    delete:
+      description: "Elimina un trayecto."
+      parameters:
+        - name: id
+          description: "El ID del trayecto a eliminar."
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: "Éxito, trayecto eliminado."
+        "404":
+          description: "Error, el trayecto no existe."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
 
 components:
   schemas:
@@ -147,3 +268,34 @@ components:
         - link_paypal
         - url_foto_perfil
         - rol
+    Trayecto:
+      type: object
+      properties:
+        "_id":
+          type: integer
+        id_conductor:
+          type: integer
+        origen:
+          type: string
+        destino:
+          type: string
+        fecha_hora_salida:
+          type: string
+        duracion_estimada:
+          type: integer
+        plazas:
+          type: integer
+        precio:
+          type: number
+        permitir_valoraciones:
+          type: boolean
+      required:
+        - _id
+        - id_conductor
+        - origen
+        - destino
+        - fecha_hora_salida
+        - duracion_estimada
+        - plazas
+        - precio
+        - permitir_valoraciones

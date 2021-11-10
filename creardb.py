@@ -24,7 +24,7 @@ with open("datasets/usuario.json") as fstream:
     usuario.insert_many(json.load(fstream))
 
 with open("datasets/trayecto.json") as fstream:
-     trayecto.insert_many(json.load(fstream))
+    trayecto.insert_many(json.load(fstream))
 
 # with open("datasets/reserva.json") as fstream:
 #     reserva.insert_many(json.load(fstream))
