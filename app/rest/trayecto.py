@@ -10,19 +10,23 @@ db = mongo.db.trayecto
 @app.route("/api/v1/trayectos", methods=["POST"])
 def createTrayecto():
     if request.is_json:
-        nuevo_id = siguiente_id(trayecto)
-        db.insert({
-            "_id": nuevo_id,
-            "id_conductor": request.json["id_conductor"],
-            "origen": request.json["origen"],
-            "destino": request.json["destino"],
-            "fecha_hora_salida": request.json["fecha_hora_salida"],
-            "duracion_estimada": request.json["duracion_estimada"],
-            "plazas": request.json["plazas"],
-            "precio": request.json["precio"],
-            "permitir_valoraciones": request.json["permitir_valoraciones"]
-        })
-        return jsonify(new_id=nuevo_id)
+        try:
+            nuevo_id = siguiente_id(trayecto)
+            db.insert({
+                "_id": nuevo_id,
+                "id_conductor": request.json["id_conductor"],
+                "origen": request.json["origen"],
+                "destino": request.json["destino"],
+                "fecha_hora_salida": request.json["fecha_hora_salida"],
+                "duracion_estimada": request.json["duracion_estimada"],
+                "plazas": request.json["plazas"],
+                "precio": request.json["precio"],
+                "permitir_valoraciones": request.json["permitir_valoraciones"]
+            })
+            return jsonify(new_id=nuevo_id)
+        except Exception:
+            respuesta = jsonify(msg="Petición no válida, faltan campos o no son del tipo correcto")
+            return make_response(respuesta, 400)
     else:
         respuesta = jsonify(msg="Petición no válida, se requiere JSON")
         return make_response(respuesta, 400)
