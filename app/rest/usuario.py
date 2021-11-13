@@ -1,6 +1,6 @@
 from flask import jsonify, make_response, request
 from ..app import app
-from ..db import usuario
+from ..db import usuario, trayecto
 from .utils import siguiente_id
 
 
@@ -97,6 +97,10 @@ def deleteUsuario(id):
     resultado = usuario.find_one(id)
     if resultado is not None:
         usuario.delete_one({"_id": id})
+
+        # Cascada
+        trayecto.delete_many({"id_conductor": id})
+
         return ("", 204)
     else:
         respuesta = jsonify(msg="No existe ningún usuario con id = %d" % id)
