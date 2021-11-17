@@ -1,14 +1,17 @@
 from flask import jsonify, make_response, request
+from flask_pymongo import PyMongo, ObjectId
 from ..app import app
-from ..db import usuario, trayecto
-from .utils import siguiente_id
 
+mongo = PyMongo(app)
+usuario = mongo.db.usuario
+trayecto = mongo.db.trayecto
 
 @app.route("/api/v1/usuarios", methods=["GET"])
 def getUsuarios():
     cursor = usuario.find()
     resultado = []
     for u in cursor:
+        u["_id"] = str(u["_id"])
         resultado.append(u)
     return jsonify(resultado)
 
@@ -19,11 +22,7 @@ def crearUsuario():
         datos = request.get_json()
         try:
 
-            # Generar siguiente ID
-            sig_id = siguiente_id(usuario)
-
-            usuario.insert_one({
-                "_id": sig_id,
+            res = usuario.insert_one({
                 "nombre": str(datos["nombre"]),
                 "apellidos": str(datos["apellidos"]),
                 "email": str(datos["email"]),
@@ -34,9 +33,9 @@ def crearUsuario():
                 "rol": int(datos["rol"])
             })
 
-            return jsonify(new_id=sig_id)
+            return jsonify(msg="Usuario creado", new_id=str(res.inserted_id))
 
-        except Exception:
+        except:
             respuesta = jsonify(msg="Petición no válida, faltan campos o no son del tipo correcto")
             return make_response(respuesta, 400)
 
@@ -44,18 +43,20 @@ def crearUsuario():
         respuesta = jsonify(msg="Petición no válida, se requiere JSON")
         return make_response(respuesta, 400)
 
-@app.route("/api/v1/usuarios/<int:id>", methods=["GET"])
+@app.route("/api/v1/usuarios/<id>", methods=["GET"])
 def getUsuario(id):
-    resultado = usuario.find_one(id)
+    resultado = usuario.find_one({"_id" : ObjectId(id)})
     if resultado is not None:
+        resultado["_id"] = str(resultado["_id"])
         return jsonify(resultado)
     else:
-        respuesta = jsonify(msg="No existe ningún usuario con id = %d" % id)
+        respuesta = jsonify(msg="No existe ningún usuario con id = %s" % id)
         return make_response(respuesta, 404)
 
-@app.route("/api/v1/usuarios/<int:id>", methods=["PUT"])
+@app.route("/api/v1/usuarios/<id>", methods=["PUT"])
 def updateUsuario(id):
-    resultado = usuario.find_one(id)
+    oid = ObjectId(id)
+    resultado = usuario.find_one({"_id" : oid})
     if resultado is not None:
         nuevos_valores = {}
         if request.is_json:
@@ -79,8 +80,10 @@ def updateUsuario(id):
                 if "rol" in datos:
                     nuevos_valores["rol"] = int(datos["rol"])
 
-                usuario.update_one({"_id": id}, {"$set": nuevos_valores})
-                return ("", 204)
+                usuario.update_one({"_id": oid}, {"$set": nuevos_valores})
+                # actualizar en cada tabla
+
+                return jsonify(msg='Usuario actualizado')
             except Exception:
                 respuesta = jsonify(msg="Petición no válida, hay campos que no son del tipo correcto")
                 return make_response(respuesta, 400)
@@ -89,19 +92,20 @@ def updateUsuario(id):
             respuesta = jsonify(msg="Petición no válida, se requiere JSON")
             return make_response(respuesta, 400)
     else:
-        respuesta = jsonify(msg="No existe ningún usuario con id = %d" % id)
+        respuesta = jsonify(msg="No existe ningún usuario con id = %s" % id)
         return make_response(respuesta, 404)
 
-@app.route("/api/v1/usuarios/<int:id>", methods=["DELETE"])
+@app.route("/api/v1/usuarios/<id>", methods=["DELETE"])
 def deleteUsuario(id):
-    resultado = usuario.find_one(id)
+    oid = ObjectId(id)
+    resultado = usuario.find_one({"_id" : oid})
     if resultado is not None:
-        usuario.delete_one({"_id": id})
+        usuario.delete_one({"_id": oid})
 
         # Cascada
-        trayecto.delete_many({"id_conductor": id})
+        # trayecto.delete_many({"id_conductor": oid})
 
-        return ("", 204)
+        return jsonify(msg='Usuario borrado')
     else:
-        respuesta = jsonify(msg="No existe ningún usuario con id = %d" % id)
+        respuesta = jsonify(msg="No existe ningún usuario con id = %s" % id)
         return make_response(respuesta, 404)

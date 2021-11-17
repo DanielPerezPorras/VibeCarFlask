@@ -1,7 +1,8 @@
 [
     {
+        "ID": 1,
         "conductor": {
-            "id_conductor": "6194e486b437e09ae0aace98",
+            "ID": 2,
             "nombre_conductor": "Haruki",
             "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
         },
@@ -14,8 +15,9 @@
         "permitir_valoraciones": true
     },
     {
+        "ID": 2,
         "conductor": {
-            "id_conductor": "6194e486b437e09ae0aace98",
+            "ID": 2,
             "nombre_conductor": "Haruki",
             "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
         },
@@ -28,8 +30,9 @@
         "permitir_valoraciones": true
     },
     {
+        "ID": 3,
         "conductor": {
-            "id_conductor": "6194e486b437e09ae0aace99",
+            "ID": 3,
             "nombre_conductor": "Daimaru",
             "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
         },
@@ -42,8 +45,9 @@
         "permitir_valoraciones": false
     },
     {
+        "ID": 4,
         "conductor": {
-            "id_conductor": "6194e486b437e09ae0aace98",
+            "ID": 2,
             "nombre_conductor": "Haruki",
             "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
         },
