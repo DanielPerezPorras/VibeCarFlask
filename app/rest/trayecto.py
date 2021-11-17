@@ -1,8 +1,7 @@
 from flask import request, jsonify, make_response
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, ObjectId
 from ..app import app
 from ..db import trayecto
-from .utils import siguiente_id
 
 mongo = PyMongo(app)
 db = mongo.db.trayecto
@@ -11,10 +10,8 @@ db = mongo.db.trayecto
 def createTrayecto():
     if request.is_json:
         try:
-            nuevo_id = siguiente_id(trayecto)
-            db.insert({
-                "_id": nuevo_id,
-                "id_conductor": request.json["id_conductor"],
+            id = db.insert({
+                "conductor": request.json["conductor"],
                 "origen": request.json["origen"],
                 "destino": request.json["destino"],
                 "fecha_hora_salida": request.json["fecha_hora_salida"],
@@ -23,7 +20,7 @@ def createTrayecto():
                 "precio": request.json["precio"],
                 "permitir_valoraciones": request.json["permitir_valoraciones"]
             })
-            return jsonify(new_id=nuevo_id)
+            return jsonify(str(ObjectId(id)))
         except Exception:
             respuesta = jsonify(msg="Petición no válida, faltan campos o no son del tipo correcto")
             return make_response(respuesta, 400)
@@ -36,8 +33,8 @@ def getTrayectos():
     trayectos = []
     for doc in db.find():
         trayectos.append({
-            "_id": doc["_id"],
-            "id_conductor": doc["id_conductor"],
+            "_id": str(ObjectId(doc['_id'])),
+            "conductor": doc["conductor"],
             "origen": doc["origen"],
             "destino": doc["destino"],
             "fecha_hora_salida": doc["fecha_hora_salida"],
@@ -48,13 +45,13 @@ def getTrayectos():
         })
     return jsonify(trayectos)
 
-@app.route("/api/v1/trayectos/<int:id>",methods=["GET"])
+@app.route("/api/v1/trayectos/<id>",methods=["GET"])
 def getTrayecto(id):
-    trayecto = db.find_one({"_id" : id})
+    trayecto = db.find_one({'_id': ObjectId(id)})
     if trayecto is not None:
         return jsonify({
-            "_id": trayecto["_id"],
-            "id_conductor": trayecto["id_conductor"],
+            "_id": str(ObjectId(trayecto['_id'])),
+            "conductor": trayecto["conductor"],
             "origen": trayecto["origen"],
             "destino": trayecto["destino"],
             "fecha_hora_salida": trayecto["fecha_hora_salida"],
@@ -64,30 +61,30 @@ def getTrayecto(id):
             "permitir_valoraciones": trayecto["permitir_valoraciones"]
         })
     else:
-        respuesta = jsonify(msg="No existe ningún trayecto con id = %d" % id)
+        respuesta = jsonify(msg="No existe ningún trayecto con id = %s" % id)
         return make_response(respuesta, 404)
 
-@app.route("/api/v1/trayectos/<int:id>",methods=["DELETE"])
+@app.route("/api/v1/trayectos/<id>",methods=["DELETE"])
 def deleteTrayecto(id):
-    trayecto = db.find_one({"_id" : id})
+    trayecto = db.find_one({'_id' : ObjectId(id)})
     if trayecto is not None:
-        db.delete_one({"_id" : id})
-        return ("", 204)
+        db.delete_one({'_id' : ObjectId(id)})
+        return jsonify({'msg' : 'User deleted'})
     else:
-        respuesta = jsonify(msg="No existe ningún trayecto con id = %d" % id)
+        respuesta = jsonify(msg="No existe ningún trayecto con id = %s" % id)
         return make_response(respuesta, 404)
 
-@app.route("/api/v1/trayectos/<int:id>",methods=["PUT"])
+@app.route("/api/v1/trayectos/<id>",methods=["PUT"])
 def updateTrayecto(id):
-    trayecto = db.find_one({"_id" : id})
+    trayecto = db.find_one({"_id" : ObjectId(id)})
     if trayecto is not None:
         nuevos_valores = {}
         if request.is_json:
             datos = request.get_json()
             try:
 
-                if "id_conductor" in datos:
-                    nuevos_valores["id_conductor"] = int(datos["id_conductor"])
+                if "conductor" in datos:
+                    nuevos_valores["conductor"] = datos["conductor"]
                 if "origen" in datos:
                     nuevos_valores["origen"] = str(datos["origen"])
                 if "destino" in datos:
@@ -103,8 +100,8 @@ def updateTrayecto(id):
                 if "permitir_valoraciones" in datos:
                     nuevos_valores["permitir_valoraciones"] = bool(datos["permitir_valoraciones"])
 
-                db.update_one({"_id" : id},{"$set": nuevos_valores})
-                return ("", 204)
+                db.update_one({'_id' : ObjectId(id)},{"$set": nuevos_valores})
+                return jsonify({'msg' : 'User Updated'})
 
             except Exception:
                 respuesta = jsonify(msg="Petición no válida, hay campos que no son del tipo correcto")
@@ -113,5 +110,5 @@ def updateTrayecto(id):
             respuesta = jsonify(msg="Petición no válida, se requiere JSON")
             return make_response(respuesta, 400)
     else:
-        respuesta = jsonify(msg="No existe ningún trayecto con id = %d" % id)
+        respuesta = jsonify(msg="No existe ningún trayecto con id = %s" % id)
         return make_response(respuesta, 404)

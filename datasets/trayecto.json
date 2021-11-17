@@ -1,7 +1,10 @@
 [
     {
-        "_id": 1,
-        "id_conductor": 2,
+        "conductor": {
+            "id_conductor": "6194e486b437e09ae0aace98",
+            "nombre_conductor": "Haruki",
+            "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
+        },
         "origen": "Granada",
         "destino": "Malaga",
         "fecha_hora_salida": "2021-11-09 20:26:48.296115",
@@ -11,8 +14,11 @@
         "permitir_valoraciones": true
     },
     {
-        "_id": 2,
-        "id_conductor": 2,
+        "conductor": {
+            "id_conductor": "6194e486b437e09ae0aace98",
+            "nombre_conductor": "Haruki",
+            "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
+        },
         "origen": "Malaga",
         "destino": "Granada",
         "fecha_hora_salida": "2021-12-09 20:26:48.296115",
@@ -22,8 +28,11 @@
         "permitir_valoraciones": true
     },
     {
-        "_id": 3,
-        "id_conductor": 3,
+        "conductor": {
+            "id_conductor": "6194e486b437e09ae0aace99",
+            "nombre_conductor": "Daimaru",
+            "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
+        },
         "origen": "Granada",
         "destino": "Sevilla",
         "fecha_hora_salida": "2021-13-10 20:26:48.296115",
@@ -33,8 +42,11 @@
         "permitir_valoraciones": false
     },
     {
-        "_id": 4,
-        "id_conductor": 2,
+        "conductor": {
+            "id_conductor": "6194e486b437e09ae0aace98",
+            "nombre_conductor": "Haruki",
+            "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
+        },
         "origen": "Sevilla",
         "destino": "Granada",
         "fecha_hora_salida": "2021-14-10 20:26:48.296115",

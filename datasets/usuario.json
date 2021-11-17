@@ -1,6 +1,5 @@
 [
     {
-        "_id": 1,
         "nombre": "Admin",
         "apellidos": "Root",
         "email": "soy@admin.com",
@@ -10,7 +9,6 @@
         "url_foto_perfil": "https://static.wikia.nocookie.net/memes-pedia/images/0/04/Soy_admin.jpeg/revision/latest?cb=20210127042455&path-prefix=es",
         "rol": 2
     }, {
-        "_id": 2,
         "nombre": "Haruki",
         "apellidos": "Aimei",
         "email": "haruki@harukisoft.com",
@@ -20,7 +18,6 @@
         "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png",
         "rol": 1
     }, {
-        "_id": 3,
         "nombre": "Daimaru",
         "apellidos": "Tetsuma",
         "email": "daimaru@harukisoft.com",
@@ -30,7 +27,6 @@
         "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/daimaru.png",
         "rol": 1
     }, {
-        "_id": 4,
         "nombre": "Mallory",
         "apellidos": "Sus",
         "email": "impostor@amongus.com",
