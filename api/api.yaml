@@ -11,7 +11,14 @@ servers:
 paths:
   /usuarios:
     get:
-      description: "Devuelve todos los usuarios del sistema."
+      description: "Devuelve todos los usuarios del sistema, o busca usuarios por nombre."
+      parameters:
+        - name: search
+          description: "El término por el que buscar por nombre."
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           description: "Éxito, devuelve todos los usuarios."
@@ -32,7 +39,7 @@ paths:
                 type: object
                 properties:
                   new_id:
-                    type: integer
+                    type: string
                     description: "El ID del nuevo usuario."
         "400":
           description: "Error, la entrada no está en formato JSON o faltan campos."
@@ -53,7 +60,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "200":
           description: "Éxito, devuelve información del usuario."
@@ -78,7 +85,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "204":
           description: "Éxito, usuario modificado."
@@ -108,7 +115,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "204":
           description: "Éxito, usuario eliminado."
@@ -145,7 +152,7 @@ paths:
                 type: object
                 properties:
                   new_id:
-                    type: integer
+                    type: string
                     description: "El ID del nuevo trayecto."
         "400":
           description: "Error, la entrada no está en formato JSON o faltan campos."
@@ -166,7 +173,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "200":
           description: "Éxito, devuelve información del trayecto."
@@ -191,7 +198,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "204":
           description: "Éxito, trayecto modificado."
@@ -221,7 +228,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "204":
           description: "Éxito, trayecto eliminado."
@@ -241,7 +248,7 @@ components:
       type: object
       properties:
         "_id":
-          type: integer
+          type: string
         nombre:
           type: string
         apellidos:
@@ -272,9 +279,20 @@ components:
       type: object
       properties:
         "_id":
-          type: integer
-        id_conductor:
-          type: integer
+          type: string
+        conductor:
+          type: object
+          properties:
+            "_id":
+              type: string
+            nombre:
+              type: string
+            url_foto_perfil:
+              type: string
+          required:
+            - _id
+            - nombre
+            - url_foto_perfil
         origen:
           type: string
         destino:
@@ -291,7 +309,7 @@ components:
           type: boolean
       required:
         - _id
-        - id_conductor
+        - conductor
         - origen
         - destino
         - fecha_hora_salida

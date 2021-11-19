@@ -1,5 +1,6 @@
 from flask import jsonify, make_response, request
 from flask_pymongo import PyMongo, ObjectId
+from regex import Regex
 from ..app import app
 from .trayecto import actualizar_conductor
 
@@ -39,7 +40,23 @@ def create_usuario():
 
 @app.route("/api/v1/usuarios", methods=["GET"])
 def get_usuarios():
-    cursor = usuario.find()
+
+    cursor = None
+    search = request.args.get("search")
+    if search is not None:
+        regex = {
+            "$regex": search.replace("\\", "\\\\"),
+            "$options": "i"
+            }
+        cursor = usuario.find({"$or":
+        [
+            {"nombre": regex},
+            {"apellidos": regex}
+        ]})
+    else:
+        cursor = usuario.find()
+
+
     resultado = []
     for u in cursor:
         u["_id"] = str(u["_id"])
