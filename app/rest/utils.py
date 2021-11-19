@@ -1,9 +1,20 @@
-import pymongo
+from flask_pymongo import PyMongo, ObjectId
+from ..app import app
 
-# Función para calcular el siguiente ID de cualquier colección
-def siguiente_id(coleccion):
-    cursor = coleccion.find(projection={"_id": 1}).sort("_id", pymongo.DESCENDING).limit(1)
-    if coleccion.count_documents(filter={}) > 0:
-        return cursor.next()["_id"] + 1
-    else:
-        return 1
+mongo = PyMongo(app)
+usuario = mongo.db.usuario
+trayecto = mongo.db.trayecto
+
+# Devuelve los datos de un usuario si existe, o None en caso contrario
+def usuario_existe(id, proj):
+    try:
+        return usuario.find_one({"_id": ObjectId(id)}, projection=proj)
+    except:
+        return None
+
+# Devuelve los datos de un trayecto si existe, o None en caso contrario
+def trayecto_existe(id, proj):
+    try:
+        return trayecto.find_one({"_id": ObjectId(id)}, projection=proj)
+    except:
+        return None
