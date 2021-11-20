@@ -48,12 +48,38 @@ def create_trayecto():
 
 @app.route("/api/v1/trayectos", methods=["GET"])
 def get_trayectos():
+    
+    cursor = None
+    origen = request.args.get("origen")
+    destino = request.args.get("destino")
+    
+    if origen is not None and destino is None:
+        regex = {
+            "$regex": origen.replace("\\", "\\\\"),
+            "$options": "i"
+            }
+        cursor = trayecto.find({"$or":
+        [
+            {"origen": regex}
+        ]})
+    elif origen is None and destino is not None:
+        regex = {
+            "$regex": destino.replace("\\", "\\\\"),
+            "$options": "i"
+            }
+        cursor = trayecto.find({"$or":
+        [
+            {"destino": regex}
+        ]})
+    else :
+        cursor = trayecto.find()
+    
     trayectos = []
-    for doc in trayecto.find():
-        doc["_id"] = str(doc["_id"])
-        conductor = doc["conductor"]
+    for u in cursor:
+        u["_id"] = str(u["_id"])
+        conductor = u["conductor"]
         conductor["_id"] = str(conductor["_id"])
-        trayectos.append(doc)
+        trayectos.append(u)
     return jsonify(trayectos)
 
 @app.route("/api/v1/trayectos/<id>",methods=["GET"])
