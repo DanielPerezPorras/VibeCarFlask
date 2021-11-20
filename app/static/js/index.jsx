@@ -4,6 +4,7 @@ const Content = function() {
       <div id="main" role="main">
     
         <h1 className="mb-3">Bienvenido a VibeCar</h1>
+        <UserList />
 
       </div>
     </div>
