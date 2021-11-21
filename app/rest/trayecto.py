@@ -162,8 +162,19 @@ def delete_trayecto(id):
         respuesta = jsonify(msg="No existe ningún trayecto con id = %s" % id)
         return make_response(respuesta, 404)
 
+@app.route("/api/v1/trayectosUsuario/<id>",methods=["GET"])
+def trayectos_Usuario(id):
+    trayectos = []
+    cursor = trayecto.find({"conductor._id":ObjectId(id)})
+    for u in cursor:
+        u["_id"] = str(u["_id"])
+        conductor = u["conductor"]
+        conductor["_id"] = str(conductor["_id"])
+        trayectos.append(u)
 
-
+    return jsonify(trayectos)
+    
+    
 # ----------------------------------------------------------------------------------------
 
 
