@@ -242,6 +242,32 @@ paths:
                   msg:
                     type: string
 
+  /trayectosUsuario/{id}:
+    get:
+      description: "Devuelve los trayectos de un conductor dada su ID."
+      parameters:
+        - name: id
+          description: "El ID del usuario conductor."
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Éxito, devuelve los trayectos."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trayecto'
+        "404":
+          description: "Error, el conductor no existe."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                 
 components:
   schemas:
     Usuario:
