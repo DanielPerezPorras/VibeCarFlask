@@ -1,8 +1,8 @@
 from flask import jsonify, make_response, request
 from flask_pymongo import PyMongo, ObjectId
-from regex import Regex
 from ..app import app
 from .trayecto import actualizar_conductor
+from .utils import escape_regex
 
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
@@ -45,7 +45,7 @@ def get_usuarios():
     search = request.args.get("search")
     if search is not None:
         regex = {
-            "$regex": search.replace("\\", "\\\\"),
+            "$regex": escape_regex(search),
             "$options": "i"
             }
         cursor = usuario.find({"$or":

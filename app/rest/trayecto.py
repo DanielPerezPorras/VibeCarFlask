@@ -1,7 +1,7 @@
 from flask import request, jsonify, make_response
 from flask_pymongo import PyMongo, ObjectId
 from ..app import app
-from .utils import usuario_existe
+from .utils import usuario_existe, escape_regex
 
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
@@ -49,31 +49,28 @@ def create_trayecto():
 @app.route("/api/v1/trayectos", methods=["GET"])
 def get_trayectos():
     
-    cursor = None
     origen = request.args.get("origen")
     destino = request.args.get("destino")
-    
-    if origen is not None and destino is None:
+    condiciones = []
+    selector = {"$and": condiciones}
+
+    if origen is not None:
         regex = {
-            "$regex": origen.replace("\\", "\\\\"),
+            "$regex": escape_regex(origen),
             "$options": "i"
             }
-        cursor = trayecto.find({"$or":
-        [
-            {"origen": regex}
-        ]})
-    elif origen is None and destino is not None:
+        condiciones.append({"origen": regex})
+    if destino is not None:
         regex = {
-            "$regex": destino.replace("\\", "\\\\"),
+            "$regex": escape_regex(destino),
             "$options": "i"
             }
-        cursor = trayecto.find({"$or":
-        [
-            {"destino": regex}
-        ]})
-    else :
-        cursor = trayecto.find()
+        condiciones.append({"destino": regex})
+
+    if len(condiciones) == 0:
+        selector = {}
     
+    cursor = trayecto.find(selector)
     trayectos = []
     for u in cursor:
         u["_id"] = str(u["_id"])
@@ -163,7 +160,7 @@ def delete_trayecto(id):
         return make_response(respuesta, 404)
 
 @app.route("/api/v1/trayectosUsuario/<id>",methods=["GET"])
-def trayectos_Usuario(id):
+def trayectos_usuario(id):
     trayectos = []
     cursor = trayecto.find({"conductor._id":ObjectId(id)})
     for u in cursor:

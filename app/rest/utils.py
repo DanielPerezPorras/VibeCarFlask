@@ -18,3 +18,10 @@ def trayecto_existe(id, proj):
         return trayecto.find_one({"_id": ObjectId(id)}, projection=proj)
     except:
         return None
+
+# Escapa caracteres que tienen un significado especial en expresiones regulares
+_caracteres_especiales = "\\[]^*+?{}|()$."
+def escape_regex(expr):
+    for c in _caracteres_especiales:
+        expr = expr.replace(c, "\\" + c)
+    return expr
