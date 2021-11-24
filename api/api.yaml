@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-11-24T11:52:51.821Z
+__export_date: 2021-11-24T11:58:44.814Z
 __export_source: insomnia.desktop.app:v2021.6.0
 resources:
   - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a4259b4559
@@ -355,7 +355,7 @@ resources:
     _type: cookie_jar
   - _id: spc_6564e7dfae734595af224a4e794f33e4
     parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
-    modified: 1637754654273
+    modified: 1637755102408
     created: 1635674539957
     fileName: A6RESTServer
     contents: >
