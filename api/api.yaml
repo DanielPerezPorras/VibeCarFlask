@@ -1,358 +1,682 @@
-openapi: 3.0.0
+_type: export
+__export_format: 4
+__export_date: 2021-11-24T11:46:20.339Z
+__export_source: insomnia.desktop.app:v2021.6.0
+resources:
+  - _id: req_5657790beb5e436bb869221670e6018e
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637753924251
+    created: 1637752665480
+    url: http://localhost:8080/api/v1/incidencias/{{localidad}}
+    name: /incidencias/{localidad}
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - id: pair_3dcd09a7ec274a1a94806214fd7a0706
+        name: ""
+        value: ""
+        description: ""
+    headers: []
+    authentication: {}
+    metaSortKey: -1637752665480
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    parentId: null
+    modified: 1637752485556
+    created: 1637167845878
+    name: VibeCar API 1.0.0
+    description: Esta es la API del servicio de compartición de coche VibeCar.
+    scope: design
+    _type: workspace
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846550c4d02
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453102
+    created: 1637517453102
+    url: "{{ base_url }}/usuarios"
+    name: /usuarios
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: search
+        disabled: true
+        value: string
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453102
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a88467c402189
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453100
+    created: 1637517453100
+    url: "{{ base_url }}/usuarios"
+    name: /usuarios
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453100
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a88463abc4433
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637752626242
+    created: 1637517453095
+    url: http://localhost:8080/api/v1/usuarios/{{ id }}
+    name: /usuarios/{id}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453095
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846da7563ac
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453092
+    created: 1637517453092
+    url: "{{ base_url }}/usuarios/{{ id }}"
+    name: /usuarios/{id}
+    description: ""
+    method: PUT
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453092
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846ff44cf0f
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453091
+    created: 1637517453091
+    url: "{{ base_url }}/usuarios/{{ id }}"
+    name: /usuarios/{id}
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453091
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a88466b9141c6
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453089
+    created: 1637517453089
+    url: "{{ base_url }}/trayectos"
+    name: /trayectos
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453089
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a884630ab9d03
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453088
+    created: 1637517453088
+    url: "{{ base_url }}/trayectos"
+    name: /trayectos
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453088
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846ad7b3840
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453086
+    created: 1637517453086
+    url: "{{ base_url }}/trayectos/{{ id }}"
+    name: /trayectos/{id}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453086
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846e065837b
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453084
+    created: 1637517453084
+    url: "{{ base_url }}/trayectos/{{ id }}"
+    name: /trayectos/{id}
+    description: ""
+    method: PUT
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453084
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a88469eeb07a3
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453081
+    created: 1637517453081
+    url: "{{ base_url }}/trayectos/{{ id }}"
+    name: /trayectos/{id}
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453081
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a884637b737f1
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453070
+    created: 1637517453070
+    url: "{{ base_url }}/trayectosUsuario/{{ id }}"
+    name: /trayectosUsuario/{id}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517453070
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_ff2c9f9b916dc17cdc37eb9f23dcb054689ca2dc
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637517453107
+    created: 1637167845885
+    name: Base environment
+    data:
+      base_url: "{{ scheme }}://{{ host }}{{ base_path }}"
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1637167845885
+    _type: environment
+  - _id: jar_ff2c9f9b916dc17cdc37eb9f23dcb054689ca2dc
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637167845888
+    created: 1637167845888
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_3437019efdb547c7947cf1b9e41895f4
+    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+    modified: 1637754330476
+    created: 1637167845879
+    fileName: Vibecar.yaml
+    contents: >
+      openapi: 3.0.0
 
-info:
-  version: 1.0.0
-  title: "VibeCar API"
-  description: "Esta es la API del servicio de compartición de coche VibeCar."
 
-servers:
-  - url: http://localhost:8080/api/v1
+      info:
+        version: 1.0.0
+        title: "VibeCar API"
+        description: "Esta es la API del servicio de compartición de coche VibeCar."
 
-paths:
-  /usuarios:
-    get:
-      description: "Devuelve todos los usuarios del sistema."
-      parameters:
-        - name: search
-          description: "Solo devuelve usuarios que coincidan en nombre o apellido con una cadena."
-          in: query
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          description: "Éxito, devuelve todos los usuarios."
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Usuario'
-    post:
-      description: "Crea un nuevo usuario."
-      responses:
-        "200":
-          description: "Éxito, devuelve el ID del nuevo usuario."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  new_id:
-                    type: string
-                    description: "El ID del nuevo usuario."
-        "400":
-          description: "Error, la entrada no está en formato JSON o faltan campos."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-              
-  /usuarios/{id}:
-    get:
-      description: "Devuelve información de un usuario dado su ID."
-      parameters:
-        - name: id
-          description: "El ID del usuario a devolver."
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: "Éxito, devuelve información del usuario."
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Usuario'
-        "404":
-          description: "Error, el usuario no existe."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-    put:
-      description: "Modifica datos de un usuario."
-      parameters:
-        - name: id
-          description: "El ID del usuario a modificar."
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: "Éxito, usuario modificado."
-        "400":
-          description: "Error, la entrada no está en formato JSON o faltan campos."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-        "404":
-          description: "Error, el usuario no existe."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-    delete:
-      description: "Elimina un usuario."
-      parameters:
-        - name: id
-          description: "El ID del usuario a eliminar."
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: "Éxito, usuario eliminado."
-        "404":
-          description: "Error, el usuario no existe."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
+      servers:
+        - url: https://localhost:8080/api/v1
 
-  /trayectos:
-    get:
-      description: "Devuelve todos los trayectos del sistema."
-      parameters:
-        - name: origen
-          description: "Solo devuelve trayectos cuyo origen contenga la cadena especificada."
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: destino
-          description: "Solo devuelve trayectos cuyo destino contenga la cadena especificada."
-          in: query
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          description: "Éxito, devuelve todos los trayectos."
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Trayecto'
-    post:
-      description: "Crea un nuevo trayecto."
-      responses:
-        "200":
-          description: "Éxito, devuelve el ID del nuevo trayecto."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  new_id:
-                    type: string
-                    description: "El ID del nuevo trayecto."
-        "400":
-          description: "Error, la entrada no está en formato JSON o faltan campos."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
+      paths:
+        /usuarios:
+          get:
+            description: "Devuelve todos los usuarios del sistema, o busca usuarios por nombre."
+            parameters:
+              - name: search
+                description: "El término por el que buscar por nombre."
+                in: query
+                required: false
+                schema:
+                  type: string
+            responses:
+              "200":
+                description: "Éxito, devuelve todos los usuarios."
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Usuario'
+          post:
+            description: "Crea un nuevo usuario."
+            responses:
+              "200":
+                description: "Éxito, devuelve el ID del nuevo usuario."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        new_id:
+                          type: string
+                          description: "El ID del nuevo usuario."
+              "400":
+                description: "Error, la entrada no está en formato JSON o faltan campos."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                    
+        /usuarios/{id}:
+          get:
+            description: "Devuelve información de un usuario dado su ID."
+            parameters:
+              - name: id
+                description: "El ID del usuario a devolver."
+                in: path
+                required: true
+                schema:
+                  type: string
+            responses:
+              "200":
+                description: "Éxito, devuelve información del usuario."
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/Usuario'
+              "404":
+                description: "Error, el usuario no existe."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+          put:
+            description: "Modifica datos de un usuario."
+            parameters:
+              - name: id
+                description: "El ID del usuario a modificar."
+                in: path
+                required: true
+                schema:
+                  type: string
+            responses:
+              "204":
+                description: "Éxito, usuario modificado."
+              "400":
+                description: "Error, la entrada no está en formato JSON o faltan campos."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+              "404":
+                description: "Error, el usuario no existe."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+          delete:
+            description: "Elimina un usuario."
+            parameters:
+              - name: id
+                description: "El ID del usuario a eliminar."
+                in: path
+                required: true
+                schema:
+                  type: string
+            responses:
+              "204":
+                description: "Éxito, usuario eliminado."
+              "404":
+                description: "Error, el usuario no existe."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
 
-  /trayectos/{id}:
-    get:
-      description: "Devuelve información de un trayecto dado su ID."
-      parameters:
-        - name: id
-          description: "El ID del trayecto a devolver."
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: "Éxito, devuelve información del trayecto."
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Trayecto'
-        "404":
-          description: "Error, el trayecto no existe."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-    put:
-      description: "Modifica datos de un trayecto."
-      parameters:
-        - name: id
-          description: "El ID del trayecto a modificar."
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: "Éxito, trayecto modificado."
-        "400":
-          description: "Error, la entrada no está en formato JSON o faltan campos."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-        "404":
-          description: "Error, el trayecto no existe."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-    delete:
-      description: "Elimina un trayecto."
-      parameters:
-        - name: id
-          description: "El ID del trayecto a eliminar."
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: "Éxito, trayecto eliminado."
-        "404":
-          description: "Error, el trayecto no existe."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
+        /trayectos:
+          get:
+            description: "Devuelve todos los trayectos del sistema."
+            responses:
+              "200":
+                description: "Éxito, devuelve todos los trayectos."
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Trayecto'
+          post:
+            description: "Crea un nuevo trayecto."
+            responses:
+              "200":
+                description: "Éxito, devuelve el ID del nuevo trayecto."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        new_id:
+                          type: string
+                          description: "El ID del nuevo trayecto."
+              "400":
+                description: "Error, la entrada no está en formato JSON o faltan campos."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
 
-  /trayectosUsuario/{id}:
-    get:
-      description: "Devuelve los trayectos de un conductor dada su ID."
-      parameters:
-        - name: id
-          description: "El ID del usuario conductor."
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: "Éxito, devuelve los trayectos."
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Trayecto'
-        "404":
-          description: "Error, el conductor no existe."
-          content:
-            application/json:
-              schema:
+        /trayectos/{id}:
+          get:
+            description: "Devuelve información de un trayecto dado su ID."
+            parameters:
+              - name: id
+                description: "El ID del trayecto a devolver."
+                in: path
+                required: true
+                schema:
+                  type: string
+            responses:
+              "200":
+                description: "Éxito, devuelve información del trayecto."
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/Trayecto'
+              "404":
+                description: "Error, el trayecto no existe."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+          put:
+            description: "Modifica datos de un trayecto."
+            parameters:
+              - name: id
+                description: "El ID del trayecto a modificar."
+                in: path
+                required: true
+                schema:
+                  type: string
+            responses:
+              "204":
+                description: "Éxito, trayecto modificado."
+              "400":
+                description: "Error, la entrada no está en formato JSON o faltan campos."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+              "404":
+                description: "Error, el trayecto no existe."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+          delete:
+            description: "Elimina un trayecto."
+            parameters:
+              - name: id
+                description: "El ID del trayecto a eliminar."
+                in: path
+                required: true
+                schema:
+                  type: string
+            responses:
+              "204":
+                description: "Éxito, trayecto eliminado."
+              "404":
+                description: "Error, el trayecto no existe."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+
+        /trayectosUsuario/{id}:
+          get:
+            description: "Devuelve los trayectos de un conductor dada su ID."
+            parameters:
+              - name: id
+                description: "El ID del usuario conductor."
+                in: path
+                required: true
+                schema:
+                  type: string
+            responses:
+              "200":
+                description: "Éxito, devuelve los trayectos."
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/Trayecto'
+              "404":
+                description: "Error, el conductor no existe."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          
+        /incidencias/{localidad}:
+          get:
+            description: "Devuelve las incidencias de una localidad dado su nombre."
+            parameters:
+              - name: localidad
+                description: "Nombre de la localidad."
+                in: path
+                required: true
+                schema:
+                  type: string
+            responses:
+              "200":
+                description: "Éxito, devuelve las incidencias."
+              "404":
+                description: "La localidad buscada no contiene incidencias o no existe."
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        msg:
+                          type: string                
+      components:
+        schemas:
+          Usuario:
+            type: object
+            properties:
+              "_id":
+                type: string
+              nombre:
+                type: string
+              apellidos:
+                type: string
+              email:
+                type: string
+              telefono:
+                type: string
+              contrasenia:
+                type: string
+              link_paypal:
+                type: string
+              url_foto_perfil:
+                type: string
+              rol:
+                type: integer
+            required:
+              - _id
+              - nombre
+              - apellidos
+              - email
+              - telefono
+              - contrasenia
+              - link_paypal
+              - url_foto_perfil
+              - rol
+          Trayecto:
+            type: object
+            properties:
+              "_id":
+                type: string
+              conductor:
                 type: object
                 properties:
-                  msg:
-                    type: string                 
-components:
-  schemas:
-    Usuario:
-      type: object
-      properties:
-        "_id":
-          type: string
-        nombre:
-          type: string
-        apellidos:
-          type: string
-        email:
-          type: string
-        telefono:
-          type: string
-        contrasenia:
-          type: string
-        link_paypal:
-          type: string
-        url_foto_perfil:
-          type: string
-        rol:
-          type: integer
-      required:
-        - _id
-        - nombre
-        - apellidos
-        - email
-        - telefono
-        - contrasenia
-        - link_paypal
-        - url_foto_perfil
-        - rol
-    Trayecto:
-      type: object
-      properties:
-        "_id":
-          type: string
-        conductor:
-          type: object
-          properties:
-            "_id":
-              type: string
-            nombre:
-              type: string
-            url_foto_perfil:
-              type: string
-          required:
-            - _id
-            - nombre
-            - url_foto_perfil
-        origen:
-          type: string
-        destino:
-          type: string
-        fecha_hora_salida:
-          type: string
-        duracion_estimada:
-          type: integer
-        plazas:
-          type: integer
-        precio:
-          type: number
-        permitir_valoraciones:
-          type: boolean
-      required:
-        - _id
-        - conductor
-        - origen
-        - destino
-        - fecha_hora_salida
-        - duracion_estimada
-        - plazas
-        - precio
-        - permitir_valoraciones
+                  "_id":
+                    type: string
+                  nombre:
+                    type: string
+                  url_foto_perfil:
+                    type: string
+                required:
+                  - _id
+                  - nombre
+                  - url_foto_perfil
+              origen:
+                type: string
+              destino:
+                type: string
+              fecha_hora_salida:
+                type: string
+              duracion_estimada:
+                type: integer
+              plazas:
+                type: integer
+              precio:
+                type: number
+              permitir_valoraciones:
+                type: boolean
+            required:
+              - _id
+              - conductor
+              - origen
+              - destino
+              - fecha_hora_salida
+              - duracion_estimada
+              - plazas
+              - precio
+              - permitir_valoraciones
+    contentType: yaml
+    _type: api_spec
+  - _id: env_env_ff2c9f9b916dc17cdc37eb9f23dcb054689ca2dc_sub
+    parentId: env_ff2c9f9b916dc17cdc37eb9f23dcb054689ca2dc
+    modified: 1637517453105
+    created: 1637517453105
+    name: OpenAPI env
+    data:
+      scheme: https
+      base_path: /api/v1
+      host: localhost:8080
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1637517453105
+    _type: environment
