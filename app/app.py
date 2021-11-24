@@ -12,7 +12,7 @@ CORS(app)
 app.config["DEBUG"] = True 
 
 # Para Flask-PyMongo
-app.config["MONGO_URI"] = "mongodb://localhost/iweb"
+app.config["MONGO_URI"] = "mongodb://localhost/vibecar"
 
 # Importamos la API REST
 from .rest.usuario import *

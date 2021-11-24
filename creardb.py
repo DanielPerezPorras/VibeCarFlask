@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 import pymongo
 
 _client = pymongo.MongoClient("mongodb://localhost:27017/")
-_db = _client["iweb"]
+_db = _client["vibecar"]
 
 usuario = _db["usuario"]
 trayecto = _db["trayecto"]
