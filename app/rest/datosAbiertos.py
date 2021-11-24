@@ -32,8 +32,11 @@ def getIncidencias(localidad):
 
     datos = []
 
-    for feature in json_data["features"]:
+    for feature in datos_incidencias["features"]:
         if localidad.lower() == feature["properties"]["poblacion"].lower():     
             datos.append(feature)
-
-    return jsonify(datos)
+    
+    if len(datos)==0:
+        return jsonify({'msg' : 'La localidad buscada no contiene incidencias o no existe'})
+    else:
+        return jsonify(datos)
