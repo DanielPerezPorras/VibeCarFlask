@@ -1,25 +1,21 @@
 _type: export
 __export_format: 4
-__export_date: 2021-11-24T11:46:20.339Z
+__export_date: 2021-11-24T11:52:51.821Z
 __export_source: insomnia.desktop.app:v2021.6.0
 resources:
-  - _id: req_5657790beb5e436bb869221670e6018e
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637753924251
-    created: 1637752665480
-    url: http://localhost:8080/api/v1/incidencias/{{localidad}}
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a4259b4559
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637754654238
+    created: 1637754654238
+    url: "{{ base_url }}/incidencias/{{ localidad }}"
     name: /incidencias/{localidad}
     description: ""
     method: GET
     body: {}
-    parameters:
-      - id: pair_3dcd09a7ec274a1a94806214fd7a0706
-        name: ""
-        value: ""
-        description: ""
+    parameters: []
     headers: []
     authentication: {}
-    metaSortKey: -1637752665480
+    metaSortKey: -1637754654238
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -28,18 +24,39 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: wrk_ab08c7d443b64a13a441c3aa4a9a8846
+  - _id: wrk_f6dfef731d924d22b2d88a2b200fb3a4
     parentId: null
-    modified: 1637752485556
-    created: 1637167845878
-    name: VibeCar API 1.0.0
-    description: Esta es la API del servicio de compartición de coche VibeCar.
+    modified: 1635674539956
+    created: 1635674539956
+    name: A6RESTServer
+    description: ""
     scope: design
     _type: workspace
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846550c4d02
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453102
-    created: 1637517453102
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a437b737f1
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637517350785
+    created: 1637517350785
+    url: "{{ base_url }}/trayectosUsuario/{{ id }}"
+    name: /trayectosUsuario/{id}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1637517350785
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a4550c4d02
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637519171508
+    created: 1636189941997
     url: "{{ base_url }}/usuarios"
     name: /usuarios
     description: ""
@@ -51,7 +68,7 @@ resources:
         value: string
     headers: []
     authentication: {}
-    metaSortKey: -1637517453102
+    metaSortKey: -1636195132669
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -60,19 +77,76 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a88467c402189
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453100
-    created: 1637517453100
+  - _id: req_e587cbfa4b73470b807516bc4c0604b3
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637352063901
+    created: 1637351937205
+    url: "{{ base_url }}/usuarios?search=tet"
+    name: /usuarios?search={q}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1636195132656.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a43abc4433
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637347694507
+    created: 1635676945417
+    url: "{{ base_url }}/usuarios/{{ id }}"
+    name: /usuarios/{id}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1636195132644
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a47c402189
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637754673742
+    created: 1636193545105
     url: "{{ base_url }}/usuarios"
     name: /usuarios
     description: ""
     method: POST
-    body: {}
+    body:
+      mimeType: application/json
+      text: >-
+        {
+                "nombre": "Pepe",
+                "apellidos": "Pérez",
+                "email": "pepe@vibemail.com",
+                "telefono": "345678345",
+                "contrasenia": "123",
+                "link_paypal": "#",
+                "url_foto_perfil": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fih1.redbubble.net%2Fimage.1697131682.5598%2Fst%2Csmall%2C507x507-pad%2C600x600%2Cf8f8f8.jpg&f=1&nofb=1",
+                "rol": 1
+        }
     parameters: []
-    headers: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_af45f6e898894f16a06446e3a7063487
     authentication: {}
-    metaSortKey: -1637517453100
+    metaSortKey: -1636195132631.5
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -81,40 +155,27 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a88463abc4433
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637752626242
-    created: 1637517453095
-    url: http://localhost:8080/api/v1/usuarios/{{ id }}
-    name: /usuarios/{id}
-    description: ""
-    method: GET
-    body: {}
-    parameters: []
-    headers: []
-    authentication: {}
-    metaSortKey: -1637517453095
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846da7563ac
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453092
-    created: 1637517453092
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a4da7563ac
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637754673276
+    created: 1636195132619
     url: "{{ base_url }}/usuarios/{{ id }}"
     name: /usuarios/{id}
     description: ""
     method: PUT
-    body: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nombre": "Daimaro"
+        }
     parameters: []
-    headers: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_f4c95665af064df2901797ecc315888d
     authentication: {}
-    metaSortKey: -1637517453092
+    metaSortKey: -1636195132619
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -123,10 +184,10 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846ff44cf0f
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453091
-    created: 1637517453091
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a4ff44cf0f
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637348498138
+    created: 1636194261273
     url: "{{ base_url }}/usuarios/{{ id }}"
     name: /usuarios/{id}
     description: ""
@@ -135,7 +196,7 @@ resources:
     parameters: []
     headers: []
     authentication: {}
-    metaSortKey: -1637517453091
+    metaSortKey: -1636194261273
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -144,10 +205,10 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a88466b9141c6
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453089
-    created: 1637517453089
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a46b9141c6
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1636536041631
+    created: 1636536039793
     url: "{{ base_url }}/trayectos"
     name: /trayectos
     description: ""
@@ -156,7 +217,7 @@ resources:
     parameters: []
     headers: []
     authentication: {}
-    metaSortKey: -1637517453089
+    metaSortKey: -1636194261223
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -165,19 +226,55 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a884630ab9d03
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453088
-    created: 1637517453088
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a4ad7b3840
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637348535099
+    created: 1636536542104
+    url: "{{ base_url }}/trayectos/{{ id }}"
+    name: /trayectos/{id}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1636194261198
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a430ab9d03
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637754669433
+    created: 1636536039788
     url: "{{ base_url }}/trayectos"
     name: /trayectos
     description: ""
     method: POST
-    body: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"conductor": "6197ed8a8329d0968a7fe69f",
+        	"origen": "Fuengirola",
+        	"destino": "Córdoba",
+        	"fecha_hora_salida": "2022-01-09 09:50:00.296115",
+        	"duracion_estimada": 70,
+        	"plazas": 6,
+        	"precio": 10.00,
+        	"permitir_valoraciones": true
+        }
     parameters: []
-    headers: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_2e96d269862044148adbb30e5ef6dda1
     authentication: {}
-    metaSortKey: -1637517453088
+    metaSortKey: -1636194261173
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -186,40 +283,28 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846ad7b3840
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453086
-    created: 1637517453086
-    url: "{{ base_url }}/trayectos/{{ id }}"
-    name: /trayectos/{id}
-    description: ""
-    method: GET
-    body: {}
-    parameters: []
-    headers: []
-    authentication: {}
-    metaSortKey: -1637517453086
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a8846e065837b
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453084
-    created: 1637517453084
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a4e065837b
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637754668850
+    created: 1636536542100
     url: "{{ base_url }}/trayectos/{{ id }}"
     name: /trayectos/{id}
     description: ""
     method: PUT
-    body: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"conductor": "6197ed8a8329d0968a7fe6a1",
+        	"plazas": 3
+        }
     parameters: []
-    headers: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_dceefffbbd05406fb8859aa9450f4633
     authentication: {}
-    metaSortKey: -1637517453084
+    metaSortKey: -1636194261073
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -228,10 +313,10 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a88469eeb07a3
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453081
-    created: 1637517453081
+  - _id: req_wrk_f6dfef731d924d22b2d88a2b200fb3a49eeb07a3
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637348773878
+    created: 1636536542096
     url: "{{ base_url }}/trayectos/{{ id }}"
     name: /trayectos/{id}
     description: ""
@@ -240,7 +325,7 @@ resources:
     parameters: []
     headers: []
     authentication: {}
-    metaSortKey: -1637517453081
+    metaSortKey: -1636194261023
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -249,51 +334,30 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_wrk_ab08c7d443b64a13a441c3aa4a9a884637b737f1
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453070
-    created: 1637517453070
-    url: "{{ base_url }}/trayectosUsuario/{{ id }}"
-    name: /trayectosUsuario/{id}
-    description: ""
-    method: GET
-    body: {}
-    parameters: []
-    headers: []
-    authentication: {}
-    metaSortKey: -1637517453070
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
-  - _id: env_ff2c9f9b916dc17cdc37eb9f23dcb054689ca2dc
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637517453107
-    created: 1637167845885
-    name: Base environment
+  - _id: env_42bb87344ef76ee8c776ef51979338202e439a01
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1635674539964
+    created: 1635674539964
+    name: Base Environment
     data:
       base_url: "{{ scheme }}://{{ host }}{{ base_path }}"
-    dataPropertyOrder: {}
+    dataPropertyOrder: null
     color: null
     isPrivate: false
-    metaSortKey: 1637167845885
+    metaSortKey: 1635674539964
     _type: environment
-  - _id: jar_ff2c9f9b916dc17cdc37eb9f23dcb054689ca2dc
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637167845888
-    created: 1637167845888
+  - _id: jar_42bb87344ef76ee8c776ef51979338202e439a01
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1635674539967
+    created: 1635674539967
     name: Default Jar
     cookies: []
     _type: cookie_jar
-  - _id: spc_3437019efdb547c7947cf1b9e41895f4
-    parentId: wrk_ab08c7d443b64a13a441c3aa4a9a8846
-    modified: 1637754330476
-    created: 1637167845879
-    fileName: Vibecar.yaml
+  - _id: spc_6564e7dfae734595af224a4e794f33e4
+    parentId: wrk_f6dfef731d924d22b2d88a2b200fb3a4
+    modified: 1637754654273
+    created: 1635674539957
+    fileName: A6RESTServer
     contents: >
       openapi: 3.0.0
 
@@ -539,34 +603,6 @@ resources:
                       properties:
                         msg:
                           type: string
-
-        /trayectosUsuario/{id}:
-          get:
-            description: "Devuelve los trayectos de un conductor dada su ID."
-            parameters:
-              - name: id
-                description: "El ID del usuario conductor."
-                in: path
-                required: true
-                schema:
-                  type: string
-            responses:
-              "200":
-                description: "Éxito, devuelve los trayectos."
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/Trayecto'
-              "404":
-                description: "Error, el conductor no existe."
-                content:
-                  application/json:
-                    schema:
-                      type: object
-                      properties:
-                        msg:
-                          type: string
-                          
         /incidencias/{localidad}:
           get:
             description: "Devuelve las incidencias de una localidad dado su nombre."
@@ -588,7 +624,7 @@ resources:
                       type: object
                       properties:
                         msg:
-                          type: string                
+                          type: string    
       components:
         schemas:
           Usuario:
@@ -666,17 +702,21 @@ resources:
               - permitir_valoraciones
     contentType: yaml
     _type: api_spec
-  - _id: env_env_ff2c9f9b916dc17cdc37eb9f23dcb054689ca2dc_sub
-    parentId: env_ff2c9f9b916dc17cdc37eb9f23dcb054689ca2dc
-    modified: 1637517453105
-    created: 1637517453105
+  - _id: env_env_42bb87344ef76ee8c776ef51979338202e439a01_sub
+    parentId: env_42bb87344ef76ee8c776ef51979338202e439a01
+    modified: 1635679185744
+    created: 1635676945423
     name: OpenAPI env
     data:
-      scheme: https
+      scheme: http
       base_path: /api/v1
       host: localhost:8080
-    dataPropertyOrder: null
+    dataPropertyOrder:
+      "&":
+        - scheme
+        - base_path
+        - host
     color: null
     isPrivate: false
-    metaSortKey: 1637517453105
+    metaSortKey: 1635676945424
     _type: environment
