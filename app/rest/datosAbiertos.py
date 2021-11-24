@@ -22,15 +22,18 @@ def getAparcamientos():
 
 @app.route("/api/v1/incidencias/<localidad>", methods=['GET'])
 def getClima(localidad):
+    global datos_incidencias
+    
+    if len(datos_incidencias)==0:
+        response = urlopen(clima_url)
+        data = response.read()
+        json_data = geojson.loads(data)
+        datos_incidencias=json_data
 
-    response = urlopen(clima_url)
-    data = response.read()
-    json_data = geojson.loads(data)
     datos = []
 
     for feature in json_data["features"]:
         if localidad.lower() == feature["properties"]["poblacion"].lower():     
             datos.append(feature)
 
-    datos_incidencias=datos
-    return jsonify(datos_incidencias)
+    return jsonify(datos)
