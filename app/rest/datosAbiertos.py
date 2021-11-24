@@ -21,9 +21,9 @@ def getAparcamientos():
     return "HELLO WORLD"
 
 @app.route("/api/v1/incidencias/<localidad>", methods=['GET'])
-def getClima(localidad):
+def getIncidencias(localidad):
     global datos_incidencias
-    
+
     if len(datos_incidencias)==0:
         response = urlopen(clima_url)
         data = response.read()
