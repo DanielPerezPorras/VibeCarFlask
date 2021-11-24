@@ -10,7 +10,7 @@ db = mongo.db
 
 
 aparcamientos_url = "https://datosabiertos.malaga.eu/recursos/aparcamientos/ocupappublicosmun/ocupappublicosmunfiware.json"
-clima_url = "https://opendata.arcgis.com/datasets/a64659151f0a42c69a38563e9d006c6b_0.geojson"
+incidencias_url = "https://opendata.arcgis.com/datasets/a64659151f0a42c69a38563e9d006c6b_0.geojson"
 
 datos_aparcamientos = []
 datos_incidencias = []
@@ -25,7 +25,7 @@ def getIncidencias(localidad):
     global datos_incidencias
 
     if len(datos_incidencias)==0:
-        response = urlopen(clima_url)
+        response = urlopen(incidencias_url)
         data = response.read()
         json_data = geojson.loads(data)
         datos_incidencias=json_data
