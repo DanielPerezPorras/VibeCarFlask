@@ -3,8 +3,8 @@
         "ID": 1,
         "conductor": {
             "ID": 2,
-            "nombre": "Haruki",
-            "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
+            "nombre": "María",
+            "url_foto_perfil": "#"
         },
         "origen": "Granada",
         "destino": "Malaga",
@@ -18,8 +18,8 @@
         "ID": 2,
         "conductor": {
             "ID": 2,
-            "nombre": "Haruki",
-            "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
+            "nombre": "María",
+            "url_foto_perfil": "#"
         },
         "origen": "Malaga",
         "destino": "Granada",
@@ -33,8 +33,8 @@
         "ID": 3,
         "conductor": {
             "ID": 3,
-            "nombre": "Daimaru",
-            "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/daimaru.png"
+            "nombre": "Juan",
+            "url_foto_perfil": "#"
         },
         "origen": "Granada",
         "destino": "Sevilla",
@@ -48,8 +48,8 @@
         "ID": 4,
         "conductor": {
             "ID": 2,
-            "nombre": "Haruki",
-            "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png"
+            "nombre": "María",
+            "url_foto_perfil": "#"
         },
         "origen": "Sevilla",
         "destino": "Granada",

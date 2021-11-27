@@ -2,42 +2,42 @@
     {
         "ID": 1,
         "nombre": "Admin",
-        "apellidos": "Root",
-        "email": "soy@admin.com",
+        "apellidos": "Pérez",
+        "email": "admin@vibemail.com",
         "telefono": "123456789",
         "contrasenia": "123",
         "link_paypal": "#",
-        "url_foto_perfil": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.memegenerator.es%2Fimagenes%2Fmemes%2Ffull%2F31%2F69%2F31692344.jpg&f=1&nofb=1",
+        "url_foto_perfil": "#",
         "rol": 2
     }, {
         "ID": 2,
-        "nombre": "Haruki",
-        "apellidos": "Aimei",
-        "email": "haruki@harukisoft.com",
+        "nombre": "María",
+        "apellidos": "Porras",
+        "email": "maria@vibemail.com",
         "telefono": "234567890",
         "contrasenia": "123",
         "link_paypal": "#",
-        "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/haruki.png",
+        "url_foto_perfil": "#",
         "rol": 1
     }, {
         "ID": 3,
-        "nombre": "Daimaru",
-        "apellidos": "Tetsuma",
-        "email": "daimaru@harukisoft.com",
+        "nombre": "Juan",
+        "apellidos": "García",
+        "email": "juan@vibemail.com",
         "telefono": "234567891",
         "contrasenia": "123",
         "link_paypal": "#",
-        "url_foto_perfil": "https://raw.githubusercontent.com/DanielSDVG/HarukiNotes/master/_src/daimaru.png",
+        "url_foto_perfil": "#",
         "rol": 1
     }, {
         "ID": 4,
-        "nombre": "Mallory",
-        "apellidos": "Sus",
-        "email": "impostor@amongus.com",
+        "nombre": "Daniel",
+        "apellidos": "Leiva",
+        "email": "daniel@vibemail.com",
         "telefono": "666666666",
         "contrasenia": "123",
         "link_paypal": "#",
-        "url_foto_perfil": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fih1.redbubble.net%2Fimage.1697131682.5598%2Fst%2Csmall%2C507x507-pad%2C600x600%2Cf8f8f8.jpg&f=1&nofb=1",
+        "url_foto_perfil": "#",
         "rol": 1
     }
 ]
