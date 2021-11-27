@@ -8,12 +8,9 @@ import json, geojson
 mongo = PyMongo(app)
 db = mongo.db
 
-
-aparcamientos_url = "https://datosabiertos.malaga.eu/recursos/aparcamientos/ocupappublicosmun/ocupappublicosmunfiware.json"
 incidencias_url = "https://opendata.arcgis.com/datasets/a64659151f0a42c69a38563e9d006c6b_0.geojson"
 gasolineras_url = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
 
-datos_aparcamientos = []
 datos_incidencias = []
 datos_gasolineras = []
 
@@ -21,16 +18,10 @@ listaTiposGasolina = ["Biodiesel","Bioetanol","Gas Natural Comprimido","Gas Natu
                       "Gasoleo B","Gasoleo Premium","Gasolina 95 E10","Gasolina 95 E5","Gasolina 95 E5 Premium","Gasolina 98 E10",
                       "Gasolina 98 E5", "Hidrogeno"]
 
-@app.route("/api/v1/aparcamientos", methods=['GET'])
-def getAparcamientos():
-
-    return "HELLO WORLD"
-
 @app.route("/api/v1/incidencias/search", methods=['GET'])
 def getIncidencias():
 
     global datos_incidenciasprovincia
-
 
     try:
         provincia = request.args['provincia']
@@ -100,7 +91,7 @@ def getAllIncidencias():
     
     return jsonify(datos_incidencias)
     
-@app.route("/api/v1/gasolineras/", methods=['GET']) 
+@app.route("/api/v1/gasolineras", methods=['GET']) 
 def getAllGasolineras():
     global datos_gasolineras   
     
