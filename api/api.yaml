@@ -241,13 +241,13 @@ paths:
                 properties:
                   msg:
                     type: string
-  /incidencias/{localidad}:
+  /incidencias/search:
     get:
       description: "Devuelve las incidencias de una localidad dado su nombre."
       parameters:
         - name: localidad
           description: "Nombre de la localidad."
-          in: path
+          in: query
           required: true
           schema:
             type: string

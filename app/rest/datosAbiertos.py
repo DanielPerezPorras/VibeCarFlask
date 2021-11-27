@@ -20,10 +20,12 @@ def getAparcamientos():
 
     return "HELLO WORLD"
 
-@app.route("/api/v1/incidencias/<localidad>", methods=['GET'])
-def getIncidencias(localidad):
+@app.route("/api/v1/incidencias/search", methods=['GET'])
+def getIncidencias():
     global datos_incidencias
 
+    localidad = request.args['localidad']
+    print(localidad)
     if len(datos_incidencias)==0:
         response = urlopen(incidencias_url)
         data = response.read()
@@ -33,7 +35,9 @@ def getIncidencias(localidad):
     datos = []
 
     for feature in datos_incidencias["features"]:
-        if localidad.lower() == feature["properties"]["poblacion"].lower():     
+        print(feature["properties"]["poblacion"]) 
+        if localidad.lower() == feature["properties"]["poblacion"].lower():
+                
             datos.append(feature)
     
     if len(datos)==0:
