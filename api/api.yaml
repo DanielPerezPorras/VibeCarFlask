@@ -241,6 +241,16 @@ paths:
                 properties:
                   msg:
                     type: string
+
+  /incidencias:
+    get:
+      description: "Devuelve todas las incidencias de España."
+      responses:
+        "200":
+          description: "Éxito, devuelve las incidencias."
+        "404":
+          description: "No se han encontrado incidencias."
+  
   /incidencias/search:
     get:
       description: "Devuelve las incidencias de una localidad dado su nombre."
