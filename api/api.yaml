@@ -241,31 +241,27 @@ paths:
                 properties:
                   msg:
                     type: string
-
-  /incidencias:
-    get:
-      description: "Devuelve todas las incidencias de España."
-      responses:
-        "200":
-          description: "Éxito, devuelve las incidencias."
-        "404":
-          description: "No se han encontrado incidencias."
-  
   /incidencias/search:
     get:
-      description: "Devuelve las incidencias de una localidad dado su nombre."
+      description: "Devuelve las todas las incidencias de carretera o las filtra según localidad o provincia"
       parameters:
         - name: localidad
           description: "Nombre de la localidad."
           in: query
-          required: true
+          required: false
+          schema:
+            type: string
+        - name: provincia
+          description: "Nombre de la provincia."
+          in: query
+          required: false
           schema:
             type: string
       responses:
         "200":
           description: "Éxito, devuelve las incidencias."
         "404":
-          description: "La localidad buscada no contiene incidencias o no existe."
+          description: "No se han encontrado incidencias que cumplan las condiciones."
           content:
             application/json:
               schema:

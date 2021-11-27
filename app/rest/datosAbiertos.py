@@ -14,8 +14,6 @@ incidencias_url = "https://opendata.arcgis.com/datasets/a64659151f0a42c69a38563e
 
 datos_aparcamientos = []
 datos_incidencias = []
-datos_incidenciasprovincia = []
-datos_AllIncidencias = []
 
 @app.route("/api/v1/aparcamientos", methods=['GET'])
 def getAparcamientos():
@@ -25,7 +23,6 @@ def getAparcamientos():
 @app.route("/api/v1/incidencias/search", methods=['GET'])
 def getIncidencias():
 
-    global datos_incidencias
     global datos_incidenciasprovincia
 
 
@@ -39,70 +36,60 @@ def getIncidencias():
     except:
         localidad = None
 
+    datos = []
     if (localidad is not None):
-        print(localidad)
-        if len(datos_incidencias)==0:
-            response = urlopen(incidencias_url)
-            data = response.read()
-            json_data = geojson.loads(data)
-            datos_incidencias=json_data
+        datos = incidenciasLocalidad(localidad)
 
-        datos = []
-
-        for feature in datos_incidencias["features"]:
-            print(feature["properties"]["poblacion"]) 
-            if localidad.lower() == feature["properties"]["poblacion"].lower():
-                    
-                datos.append(feature)
-        
-        if len(datos)==0:
-            return jsonify({'msg' : 'La localidad buscada no contiene incidencias o no existe'})
-        else:
-            return jsonify(datos)
     elif(provincia is not None):
-        if len(datos_incidenciasprovincia)==0:
-            response = urlopen(incidencias_url)
-            data = response.read()
-            #print(data)
-            json_data = geojson.loads(data)
-            datos_incidenciasprovincia=json_data
+        datos = incidenciasProvincia(provincia)
 
-        carreteras = []
-
-        for lugar in datos_incidenciasprovincia["features"]:
-            if provincia.lower() == lugar["properties"]["provincia"].lower():
-                keys_to_extract  = ("carretera", "sentido", "causa")
-                a_subset = {key: lugar["properties"][key] for key in keys_to_extract}
-                print(a_subset)
-                carreteras.append(a_subset)
-                # carretera_string = lugar["properties"]["carretera"]
-                # print(jsonify({'carretera' : carretera_string}))     
-                #carreteras.append(lugar)
-                # carreteras.append(lugar["properties"]["carretera"])
-                # carreteras.append(lugar["properties"]["sentido"])
-                # carreteras.append(lugar["properties"]["causa"])
-
-        if(len(carreteras) == 0):
-            return jsonify({'msg' : 'La provincia no es correcta o ninguna carretera tiene incidencias'})
-        else:
-            return jsonify(carreteras)
     else:
         return jsonify({'msg' : 'No se han introducido parametros de búsqueda'})
 
+    return datos
 
-# @app.route("/api/v1/incidenciasprov/", methods=['GET'])
-# def getProvincias():
+def incidenciasLocalidad(localidad):
+    global datos_incidencias
     
+    getAllIncidencias()
+
+    datos = []
+
+    for feature in datos_incidencias["features"]:
+        if localidad.lower() == feature["properties"]["poblacion"].lower():
+            datos.append(feature)
+    
+    if len(datos)==0:
+        return jsonify({'msg' : 'La localidad buscada no contiene incidencias o no existe'})
+    else:
+        return jsonify(datos)
+
+def incidenciasProvincia(provincia):
+    global datos_incidencias
+    
+    getAllIncidencias()
+
+    carreteras = []
+
+    for lugar in datos_incidencias["features"]:
+        if provincia.lower() == lugar["properties"]["provincia"].lower():
+            keys_to_extract  = ("carretera", "sentido", "causa")
+            a_subset = {key: lugar["properties"][key] for key in keys_to_extract}
+            carreteras.append(a_subset)
+
+    if(len(carreteras) == 0):
+        return jsonify({'msg' : 'La provincia no es correcta o ninguna carretera tiene incidencias'})
+    else:
+        return jsonify(carreteras)
+
 @app.route("/api/v1/incidencias", methods=['GET'])
 def getAllIncidencias():
-    global datos_AllIncidencias
+    global datos_incidencias
 
-    if len(datos_AllIncidencias)==0:
+    if len(datos_incidencias)==0:
         response = urlopen(incidencias_url)
         data = response.read()
-        print(data)
         json_data = geojson.loads(data)
-        datos_AllIncidencias=json_data
+        datos_incidencias=json_data
     
-    return jsonify(datos_AllIncidencias)
-
+    return jsonify(datos_incidencias)
