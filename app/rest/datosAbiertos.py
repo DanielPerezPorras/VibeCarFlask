@@ -15,6 +15,7 @@ incidencias_url = "https://opendata.arcgis.com/datasets/a64659151f0a42c69a38563e
 datos_aparcamientos = []
 datos_incidencias = []
 datos_incidenciasprovincia = []
+datos_AllIncidencias = []
 
 @app.route("/api/v1/aparcamientos", methods=['GET'])
 def getAparcamientos():
@@ -70,4 +71,18 @@ def getControles():
         return jsonify("La provincia no es correcta o ninguna carretera tiene incidencias")
     else:
         return jsonify(carreteras)
+
+
+@app.route("/api/v1/incidencias", methods=['GET'])
+def getAllIncidencias():
+    global datos_AllIncidencias
+
+    if len(datos_AllIncidencias)==0:
+        response = urlopen(incidencias_url)
+        data = response.read()
+        print(data)
+        json_data = geojson.loads(data)
+        datos_incidenciasprovincia=json_data
+    
+    return jsonify(datos_incidenciasprovincia)
 
