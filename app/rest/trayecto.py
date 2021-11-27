@@ -98,8 +98,8 @@ def get_trayecto(id):
 def update_trayecto(id):
     oid = ObjectId(id)
     resultado = trayecto.find_one({"_id" : oid})
+    
     if resultado is not None:
-        
         if request.is_json:
             datos = request.get_json()
             try:
