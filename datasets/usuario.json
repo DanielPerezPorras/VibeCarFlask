@@ -7,7 +7,7 @@
         "telefono": "123456789",
         "contrasenia": "123",
         "link_paypal": "#",
-        "url_foto_perfil": "#",
+        "url_foto_perfil": "https://cdn.discordapp.com/attachments/761121478498058241/914192753955569734/OG-5IJ-JGobzawLSqXblqwvcZ6YJOQqUpaUsbCYiQeLnQA7jeCfjOyOZnWt8KwI1dTxHCijKrzqGZdqrKtUP7y9U2cspYj5MMjxTgaCBM2ZOmlP_XtM53eQFjgRw2sgmB0F_Wq4ojdPBHvwJ.png",
         "rol": 2
     }, {
         "ID": 2,
@@ -17,7 +17,7 @@
         "telefono": "234567890",
         "contrasenia": "123",
         "link_paypal": "#",
-        "url_foto_perfil": "#",
+        "url_foto_perfil": "https://cdn.discordapp.com/attachments/761121478498058241/914193229103108156/tw.png",
         "rol": 1
     }, {
         "ID": 3,
@@ -27,7 +27,7 @@
         "telefono": "234567891",
         "contrasenia": "123",
         "link_paypal": "#",
-        "url_foto_perfil": "#",
+        "url_foto_perfil": "https://purr.objects-us-east-1.dream.io/i/GOie5.jpg",
         "rol": 1
     }, {
         "ID": 4,
@@ -37,7 +37,7 @@
         "telefono": "666666666",
         "contrasenia": "123",
         "link_paypal": "#",
-        "url_foto_perfil": "#",
+        "url_foto_perfil": "https://i.pinimg.com/564x/db/ef/bb/dbefbba44472ef856337fad80c687228.jpg",
         "rol": 1
     }
 ]
