@@ -11,9 +11,16 @@ db = mongo.db
 
 aparcamientos_url = "https://datosabiertos.malaga.eu/recursos/aparcamientos/ocupappublicosmun/ocupappublicosmunfiware.json"
 incidencias_url = "https://opendata.arcgis.com/datasets/a64659151f0a42c69a38563e9d006c6b_0.geojson"
+gasolineras_url = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
 
 datos_aparcamientos = []
 datos_incidencias = []
+datos_gasolineras = []
+
+listaTiposGasolina = ["Biodiesel","Bioetanol","Gas Natural Comprimido","Gas Natural Licuado","Gases licuados del petróleo","Gasoleo A",
+                      "Gasoleo B","Gasoleo Premium","Gasolina 95 E10","Gasolina 95 E5","Gasolina 95 E5 Premium","Gasolina 98 E10",
+                      "Gasolina 98 E5", "Hidrogeno"]
+resultadosGasolineras = 3
 
 @app.route("/api/v1/aparcamientos", methods=['GET'])
 def getAparcamientos():
@@ -63,6 +70,7 @@ def incidenciasLocalidad(localidad):
         return jsonify({'msg' : 'La localidad buscada no contiene incidencias o no existe'})
     else:
         return jsonify(datos)
+<<<<<<< Updated upstream
 
 def incidenciasProvincia(provincia):
     global datos_incidencias
@@ -93,3 +101,39 @@ def getAllIncidencias():
         datos_incidencias=json_data
     
     return jsonify(datos_incidencias)
+=======
+    
+@app.route("/api/v1/gasolineras/<localidad>/<tipo>", methods=['GET'])
+def getGasolineras(localidad, tipo):
+    global datos_gasolineras
+    
+    if len(datos_gasolineras)==0:
+        response = urlopen(gasolineras_url)
+        data = json.loads(response.read())
+        datos_gasolineras=data
+    
+    datos = []
+    
+    for feature in datos_gasolineras["ListaEESSPrecio"]:
+        string = "Precio " + str(listaTiposGasolina[int(tipo)])
+        if localidad.lower() == feature["Localidad"].lower() and feature[string] != "":    
+            datos.append(feature)
+            
+    def precio(json):
+        try:
+            precio = json[string]
+            precioParseado = precio.replace(",",".")
+            return float(precioParseado)
+        except KeyError:
+            return -1.0
+    
+    datos.sort(key=precio)
+    res = []
+    for i in range(resultadosGasolineras):
+        res.append(datos)
+    
+    if len(res)==0:
+        return jsonify({'msg' : 'La localidad buscada no contiene gasolineras del tipo indicado o no existe'})
+    else:
+        return jsonify(res)    
+>>>>>>> Stashed changes
