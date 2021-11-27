@@ -63,17 +63,24 @@ def getIncidencias():
         if len(datos_incidenciasprovincia)==0:
             response = urlopen(incidencias_url)
             data = response.read()
-            print(data)
+            #print(data)
             json_data = geojson.loads(data)
             datos_incidenciasprovincia=json_data
 
         carreteras = []
 
         for lugar in datos_incidenciasprovincia["features"]:
-            if provincia.lower() == lugar["properties"]["provincia"].lower():     
-                carreteras.append(lugar["properties"]["carretera"])
-                carreteras.append(lugar["properties"]["sentido"])
-                carreteras.append(lugar["properties"]["causa"])
+            if provincia.lower() == lugar["properties"]["provincia"].lower():
+                keys_to_extract  = ("carretera", "sentido", "causa")
+                a_subset = {key: lugar["properties"][key] for key in keys_to_extract}
+                print(a_subset)
+                carreteras.append(a_subset)
+                # carretera_string = lugar["properties"]["carretera"]
+                # print(jsonify({'carretera' : carretera_string}))     
+                #carreteras.append(lugar)
+                # carreteras.append(lugar["properties"]["carretera"])
+                # carreteras.append(lugar["properties"]["sentido"])
+                # carreteras.append(lugar["properties"]["causa"])
 
         if(len(carreteras) == 0):
             return jsonify({'msg' : 'La provincia no es correcta o ninguna carretera tiene incidencias'})
