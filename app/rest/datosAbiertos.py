@@ -70,7 +70,6 @@ def incidenciasLocalidad(localidad):
         return jsonify({'msg' : 'La localidad buscada no contiene incidencias o no existe'})
     else:
         return jsonify(datos)
-<<<<<<< Updated upstream
 
 def incidenciasProvincia(provincia):
     global datos_incidencias
@@ -101,12 +100,28 @@ def getAllIncidencias():
         datos_incidencias=json_data
     
     return jsonify(datos_incidencias)
-=======
     
-@app.route("/api/v1/gasolineras/<localidad>/<tipo>", methods=['GET'])
-def getGasolineras(localidad, tipo):
+@app.route("/api/v1/gasolineras/", methods=['GET']) 
+def getAllGasolineras():
+    global datos_gasolineras   
+    
+    if len(datos_gasolineras)==0:
+        response = urlopen(gasolineras_url)
+        data = json.loads(response.read())
+        datos_gasolineras=data
+    
+    return jsonify(datos_gasolineras)
+    
+@app.route("/api/v1/gasolineras/search", methods=['GET'])
+def getGasolineras():
     global datos_gasolineras
     
+    try:
+        localidad = request.args["localidad"]
+        tipo = request.args["tipo"]
+    except:
+        return "No se ha especificado la localidad y el tipo de la query"
+        
     if len(datos_gasolineras)==0:
         response = urlopen(gasolineras_url)
         data = json.loads(response.read())
@@ -130,10 +145,9 @@ def getGasolineras(localidad, tipo):
     datos.sort(key=precio)
     res = []
     for i in range(resultadosGasolineras):
-        res.append(datos)
+        res.append(datos[i])
     
     if len(res)==0:
         return jsonify({'msg' : 'La localidad buscada no contiene gasolineras del tipo indicado o no existe'})
     else:
         return jsonify(res)    
->>>>>>> Stashed changes
