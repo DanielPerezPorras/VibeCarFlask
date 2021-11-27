@@ -268,7 +268,36 @@ paths:
                 type: object
                 properties:
                   msg:
-                    type: string    
+                    type: string 
+  /gasolineras/search:
+    get:
+      description: "Devuelve las todas las gasolineras o las filtra según localidad o tipo"
+      parameters:
+        - name: localidad
+          description: "Nombre de la localidad."
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: tipo
+          description: "Tipo de la gasolina."
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "Éxito, devuelve las gasolineras."
+        "404":
+          description: "No se han encontrado gasolineras que cumplan las condiciones."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string 
+                    
 components:
   schemas:
     Usuario:

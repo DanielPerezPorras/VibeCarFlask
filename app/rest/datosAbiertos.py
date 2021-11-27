@@ -20,7 +20,6 @@ datos_gasolineras = []
 listaTiposGasolina = ["Biodiesel","Bioetanol","Gas Natural Comprimido","Gas Natural Licuado","Gases licuados del petróleo","Gasoleo A",
                       "Gasoleo B","Gasoleo Premium","Gasolina 95 E10","Gasolina 95 E5","Gasolina 95 E5 Premium","Gasolina 98 E10",
                       "Gasolina 98 E5", "Hidrogeno"]
-resultadosGasolineras = 3
 
 @app.route("/api/v1/aparcamientos", methods=['GET'])
 def getAparcamientos():
@@ -120,7 +119,7 @@ def getGasolineras():
         localidad = request.args["localidad"]
         tipo = request.args["tipo"]
     except:
-        return "No se ha especificado la localidad y el tipo de la query"
+        return jsonify({"msg":"No se ha especificado la localidad y el tipo de la query"})
         
     if len(datos_gasolineras)==0:
         response = urlopen(gasolineras_url)
@@ -144,7 +143,7 @@ def getGasolineras():
     
     datos.sort(key=precio)
     res = []
-    for i in range(resultadosGasolineras):
+    for i in range(min(3, len(datos))):
         res.append(datos[i])
     
     if len(res)==0:
