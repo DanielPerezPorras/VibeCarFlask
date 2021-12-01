@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import 'bootswatch/dist/flatly/bootstrap.min.css';
 import App from './App';
+
 import reportWebVitals from './reportWebVitals';
-import 'bootswatch/dist/flatly/bootstrap.min.css'
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,19 +1,25 @@
 // import logo from './logo.svg';
-import './styles/App.css';
-import {BrowserRouter as Router, Routes , Route} from 'react-router-dom' //ahora no es Switch ahora es Routes
-import { Navbar } from "./Components/Navbar";
+import './Styles/App.css';
+import { BrowserRouter as Router, Routes , Route } from 'react-router-dom' //ahora no es Switch ahora es Routes
+import Navbar from "./Components/Navbar";
+import Inicio from "./Pages/Inicio";
+import Login from "./Pages/Login";
+import Registro from "./Pages/Registro";
+import UserListScreen from "./Pages/UserListScreen";
 
 function App() {
   return (
-      <Router>
-        <Navbar/>
-        <div className="container p-2">
-          <Routes>
-            {/* <Route path='/about' element={<About/>} />
-            <Route path='/' element={<Users/>} /> */}
-          </Routes>
-        </div>
-      </Router>
+    <Router>
+      <Navbar />
+      <div className="container-lg p-4">
+        <Routes>
+          <Route path='/' element={<Inicio />} />
+          <Route path='/admin' element={<UserListScreen />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/registro' element={<Registro />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

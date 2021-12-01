@@ -2,19 +2,36 @@ import '../styles/Navbar.css'
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => (
+function Navbar() {
+  return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-lg px-4">
+
         <Link className="navbar-brand" to="/">Vibecar</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+
+        <div className="collapse navbar-collapse" id="main-nav">
+          <ul className="navbar-nav ms-auto">
               
             <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
+              <Link className="nav-link" to="/admin">Lista usuarios</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">Entrar</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/registro">Regístrate</Link>
+            </li>
+
           </ul>
         </div>
-      </nav>
-)
+
+      </div>
+    </nav>
+  )
+}
+
+export default Navbar;
