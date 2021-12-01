@@ -1,4 +1,4 @@
-import '../styles/Navbar.css'
+import '../Styles/Navbar.css'
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -14,6 +14,11 @@ function Navbar() {
         </button>
 
         <div className="collapse navbar-collapse" id="main-nav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/viajes">Próximos viajes</Link>
+            </li>
+          </ul>
           <ul className="navbar-nav ms-auto">
               
             <li className="nav-item">
