@@ -1,24 +1,29 @@
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import Context from "../Components/Contexts"
 
 function Login() {
+
+  const context = useContext(Context);
 
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [contrasenia, setContrasenia] = useState("")
 
-  const validarLogin = function() {
-
+  const validarLogin = async ev => {
+    ev.preventDefault();
     fetch("http://localhost:8080/api/v1/login", {
       method: "POST",
-      body: {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
         "email": email,
         "contrasenia": contrasenia
-      }
+      })
     }).then(
-      (res) => {
+      async (res) => {
         if (res.status === 200) {
-
+          Context.usuario = await res.json();
         } else if (res.status === 404) {
           setError("Usuario o contraseña incorrecto.");
         } else {
@@ -32,25 +37,26 @@ function Login() {
 
   return (
     <div className="row">
-      <div className="offset-3 col-6">
+      <form onSubmit={validarLogin} className="offset-3 col-6">
         <h1>Entrar en Vibecar</h1>
+        <p>{JSON.stringify(context)}</p>
         <div className="mb-3">
           <label htmlFor="campo-email" className="form-label">Correo electrónico</label>
           <input type="email" className="form-control" id="campo-email" value={email}
-          onChange={(ev) => setEmail(ev.target.value)} />
+          onChange={ev => setEmail(ev.target.value)} />
         </div>
         <div className="mb-3">
           <label htmlFor="campo-contrasenia" className="form-label">Contraseña</label>
           <input type="password" className="form-control" id="campo-contrasenia" value={contrasenia}
-          onChange={(ev) => setContrasenia(ev.target.value)} />
+          onChange={ev => setContrasenia(ev.target.value)} />
         </div>
         { error !== "" &&
           <div className="alert alert-danger" role="alert">
             {error}
           </div>
         }
-        <button className="btn btn-primary" onClick={validarLogin}>Iniciar sesión</button>
-      </div>
+        <input type="submit" className="btn btn-primary" value="Iniciar sesión" />
+      </form>
     </div>
   );
 
