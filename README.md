@@ -1,5 +1,5 @@
 # VibeCarServer
-Project developed, using React as frontend, Flask as backend and MongoDB as Database, for the Web Engineering subject of the Software Engineering Degree.🐱‍👓
+Project developed using React as frontend, Flask as backend and MongoDB as Database, for the Web Engineering subject of the Software Engineering Degree.🐱‍👓
 
 ## Index
 
