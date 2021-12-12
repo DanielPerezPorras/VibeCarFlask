@@ -1,11 +1,9 @@
 import '../Styles/Navbar.css'
-import Context from "./Contexts"
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Navbar(props) {
 
-  const context = useContext(Context);
   const [expanded, setExpanded] = useState(false);
 
   function toggle() {
@@ -22,7 +20,7 @@ function Navbar(props) {
       </li>
     </>
   )
-
+  /*
   if (context.usuario) {
     derecha = (
       <>
@@ -32,6 +30,7 @@ function Navbar(props) {
       </>
     )
   }
+  */
 
   return (
     <nav className="navbar navbar-expand-lg navbar-primary bg-primary">

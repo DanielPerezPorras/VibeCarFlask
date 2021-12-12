@@ -1,9 +1,6 @@
-import { useContext, useState } from "react";
-import Context from "../Components/Contexts"
+import { useState } from "react";
 
 function Login() {
-
-  const context = useContext(Context);
 
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
@@ -23,7 +20,7 @@ function Login() {
     }).then(
       async (res) => {
         if (res.status === 200) {
-          Context.usuario = await res.json();
+          console.log(await res.json());
         } else if (res.status === 404) {
           setError("Usuario o contraseña incorrecto.");
         } else {
@@ -39,7 +36,6 @@ function Login() {
     <div className="row">
       <form onSubmit={validarLogin} className="offset-3 col-6">
         <h1>Entrar en Vibecar</h1>
-        <p>{JSON.stringify(context)}</p>
         <div className="mb-3">
           <label htmlFor="campo-email" className="form-label">Correo electrónico</label>
           <input type="email" className="form-control" id="campo-email" value={email}

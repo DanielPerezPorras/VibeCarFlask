@@ -1,8 +1,8 @@
 import React from "react";
 
-function Inicio() {
+function Inicio(props) {
   return (
-    <h1>Bienvenido a Vibecar</h1>
+    <h1>Bienvenido a Vibecar, {props.user}</h1>
   );
 }
 

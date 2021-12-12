@@ -82,8 +82,11 @@ def login():
                 "email": datos["email"],
                 "contrasenia": datos["contrasenia"]
                 })
-            mi_usuario["_id"] = str(mi_usuario["_id"])
-            return jsonify(mi_usuario)
+            if mi_usuario is not None:
+                mi_usuario["_id"] = str(mi_usuario["_id"])
+                return jsonify(mi_usuario)
+            else:
+                return jsonify(msg="Usuario no encontrado"), 404
 
         except:
             respuesta = jsonify(msg="Petición no válida, faltan campos o no son del tipo correcto")
