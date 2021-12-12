@@ -8,6 +8,7 @@ import Viajes from "../Pages/Viajes";
 import Login from "../Pages/Login";
 import Registro from "../Pages/Registro";
 import UserListScreen from "../Pages/UserListScreen";
+import { Mapa } from "../Pages/Mapa";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/admin' element={<UserListScreen />} />
           <Route path='/login' element={<Login />} />
           <Route path='/registro' element={<Registro />} />
+          <Route path='/mapa' element={<Mapa/>} />
         </Routes>
       </div>
     </>

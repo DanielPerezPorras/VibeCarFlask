@@ -3,6 +3,9 @@ from flask_pymongo import PyMongo, ObjectId
 from ..app import app
 from .trayecto import actualizar_conductor
 from .utils import escape_regex
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
@@ -153,3 +156,10 @@ def delete_usuario(id):
     else:
         respuesta = jsonify(msg="No existe ningún usuario con id = %s" % id)
         return make_response(respuesta, 404)
+
+@app.route("/api/v1/imagen",methods=["POST"])
+def uploadImg():
+    img = request.files["img"]
+    res = cloudinary.uploader.upload(img)
+    print(res["url"])
+    return jsonify({"msg":"Imagen Subida a la url " + str(res["url"])})
