@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 import '../Styles/App.css';
+import { useState } from "react";
 import { BrowserRouter as Router, Routes , Route } from 'react-router-dom' //ahora no es Switch ahora es Routes
 import Navbar from "./Navbar";
 import Inicio from "../Pages/Inicio";
@@ -9,6 +10,9 @@ import Registro from "../Pages/Registro";
 import UserListScreen from "../Pages/UserListScreen";
 
 function App() {
+
+  const [currentUser, setCurrentUser] = useState(null);
+
   return (
     <Router>
       <Navbar />
@@ -23,6 +27,7 @@ function App() {
       </div>
     </Router>
   );
+  
 }
 
 export default App;
