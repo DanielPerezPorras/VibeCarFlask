@@ -73,6 +73,26 @@ def get_usuario(id):
         respuesta = jsonify(msg="No existe ningún usuario con id = %s" % id)
         return make_response(respuesta, 404)
 
+@app.route("/api/v1/login", methods=["POST"])
+def login():
+    if request.is_json:
+        datos = request.get_json()
+        try:
+            mi_usuario = usuario.find_one({
+                "email": datos["email"],
+                "contrasenia": datos["contrasenia"]
+                })
+            mi_usuario["_id"] = str(mi_usuario["_id"])
+            return jsonify(mi_usuario)
+
+        except:
+            respuesta = jsonify(msg="Petición no válida, faltan campos o no son del tipo correcto")
+            return make_response(respuesta, 400)
+
+    else:
+        respuesta = jsonify(msg="Petición no válida, se requiere JSON")
+        return make_response(respuesta, 400)
+
 @app.route("/api/v1/usuarios/<id>", methods=["PUT"])
 def update_usuario(id):
     oid = ObjectId(id)
