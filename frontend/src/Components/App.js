@@ -14,7 +14,7 @@ function App() {
   const [usuarioActual, setUsuarioActual] = useState(null);
 
   return (
-    <Router>
+    <>
       <Navbar />
       <div className="container-lg p-4">
         <Routes>
@@ -25,7 +25,7 @@ function App() {
           <Route path='/registro' element={<Registro />} />
         </Routes>
       </div>
-    </Router>
+    </>
   );
 
 }
