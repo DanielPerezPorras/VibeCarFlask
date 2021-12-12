@@ -20,7 +20,7 @@ class Navbar extends React.Component {
   render() {
     const expanded = this.state.expanded;
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-primary bg-primary">
         <div className="container-lg px-4">
 
           <Link className="navbar-brand" to="/">Vibecar</Link>
