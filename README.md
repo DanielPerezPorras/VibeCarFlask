@@ -10,6 +10,7 @@ Project developed using React as frontend, Flask as backend and MongoDB as Datab
    * [Installation](#installation-1)
    * [Folder structure](#folder-structure-1)
 * [Run application](#run-application---)
+* [Team Members](#team-members)
 
 ## React <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a>
 
@@ -67,7 +68,7 @@ Project developed using React as frontend, Flask as backend and MongoDB as Datab
 - **env**: This is your virtual enviroment.  
 
 
-## Run application <a href="https://github.com/GuillermoAguado" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/16272/programming-code.svg" alt="inicio aplicacion" width="40" height="40"/> </a>
+## Run application <img src="https://www.svgrepo.com/show/16272/programming-code.svg" alt="inicio aplicacion" width="40" height="40"/>
 To run the app you can either:  
 - To create the database, launch the command (inside the backend folder):
   ```
@@ -83,4 +84,12 @@ To run the app you can either:
       ```
       npm start
       ```
+
+## Team Members
+This project was made by:
+- <a href="https://github.com/GuillermoAguado" target="_blank">Guillermo Eduardo Aguado Mole&oacute;n</a>
+- <a href="https://github.com/franUma" target="_blank">Francisco Guerrero P&eacute;rez</a>
+- <a href="https://github.com/manuleivaUma" target="_blank">Manuel Leiva G&oacute;mez</a>
+- <a href="https://github.com/DanielPerezPorras" target="_blank">Daniel P&eacute;rez Porras</a>
+- <a href="https://github.com/FranciscoSedeno" target="_blank">Francisco Jos&eacute; Sede&ntilde;o Guerrero</a>
      
