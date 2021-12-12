@@ -1,12 +1,12 @@
 // import logo from './logo.svg';
-import './Styles/App.css';
+import '../Styles/App.css';
 import { BrowserRouter as Router, Routes , Route } from 'react-router-dom' //ahora no es Switch ahora es Routes
-import Navbar from "./Components/Navbar";
-import Inicio from "./Pages/Inicio";
-import Viajes from "./Pages/Viajes";
-import Login from "./Pages/Login";
-import Registro from "./Pages/Registro";
-import UserListScreen from "./Pages/UserListScreen";
+import Navbar from "./Navbar";
+import Inicio from "../Pages/Inicio";
+import Viajes from "../Pages/Viajes";
+import Login from "../Pages/Login";
+import Registro from "../Pages/Registro";
+import UserListScreen from "../Pages/UserListScreen";
 
 function App() {
   return (
