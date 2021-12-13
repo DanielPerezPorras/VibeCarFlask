@@ -46,11 +46,10 @@ export const Mapa = () => {
       <div>
         <form onSubmit={buscaGasolineras} className='card card-body'>
           <div className='col-md-4'>
-            <input type="text" placeholder='localidad' value={localidad} onChange={e => setLocalidad(e.target.value)} class="form-control" />
-          
-            <select placeholder="Tipo" onChange={e => setTipo(e.target.value)} class="form-control">
+            <input type="text" placeholder='localidad' value={localidad} onChange={e => setLocalidad(e.target.value)} className="form-control" />
+            <select placeholder="Tipo" onChange={e => setTipo(e.target.value)} className="form-control">
               {options.map(option => (
-                <option value={option.value} label={option.label}/>
+                <option key={option.value} value={option.value} label={option.label}/>
               ))}
             </select>
 
