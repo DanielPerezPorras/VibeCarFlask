@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import RoutineMachine from "../Components/RoutineMachine";
+import {format} from 'date-fns'
 
 import "../Styles/Mapa.css"
 
+
+
 function Viajes() {
-  const [origen, setOrigen] = useState("")
+    const [origen, setOrigen] = useState("")
     const [destino, setDestino] = useState("")
+    const [precio, setPrecio] = useState("")
+
     const [trayectos, setTrayectos] = useState([])
     const [coord, setCoord] = useState([])
 
@@ -28,11 +33,25 @@ function Viajes() {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const res = await fetch(`http://localhost:8080/api/v1/trayectos?origen=${origen}&?destino=${destino}`)
+        const res = await fetch(`http://localhost:8080/api/v1/trayectos?origen=${origen}&destino=${destino}`)
         const data = await res.json();
-        console.log(data)
-        setTrayectos(data)
+        let dataRes = []
+
+        // Filtramos por precio
+        if (precio !== ""){
+            for (let d in data){
+                if (parseFloat(data[d]["precio"]) <= parseFloat(precio)){
+                    dataRes.push(data[d]);
+                }
+            }
+        } else {
+            dataRes = data;
+        }
+
+        console.log(dataRes)
+        setTrayectos(dataRes)
         
+        // Actualizamos el mapa
         if (origen !== "" && destino !== ""){
             var coords = []
 
@@ -54,8 +73,8 @@ function Viajes() {
     }
 
     return (
-      <div className="pantalla">
-          <title>Próximos viajes</title>
+        <div className="pantalla">
+            <title>Próximos viajes</title>
             <div className="ladoIzq">
                 <div>
                     <form onSubmit={handleSubmit} className="card card-body">
@@ -73,6 +92,12 @@ function Viajes() {
                                 value={destino}
                                 className="form-control"
                                 placeholder="Destino" />
+                            <input
+                                type="number"
+                                onChange={e => setPrecio(e.target.value)}
+                                value={precio}
+                                className="form-control"
+                                placeholder="Precio menor que" />
                         </div>
                         <button className="btn btn-primary btn-block">
                             Buscar trayectos
@@ -97,13 +122,13 @@ function Viajes() {
                         {trayectos.map(t => (
                             <tr key={t._id}>
                                 <td><img src={t.conductor.url_foto_perfil} 
-                                         title={`Imagen de ${t.conductor.nombre}`}
-                                         alt={`Imagen de ${t.conductor.nombre}`}
-                                         width="80"
-                                         height="80"/> {t.conductor.nombre}</td>
+                                            title={`Imagen de ${t.conductor.nombre}`}
+                                            alt={`Imagen de ${t.conductor.nombre}`}
+                                            width="80"
+                                            height="80"/> {t.conductor.nombre}</td>
                                 <td>{t.origen}</td>
                                 <td>{t.destino}</td>
-                                <td>{t.fecha_hora_salida}</td>
+                                <td>{isNaN(Date.parse(t.fecha_hora_salida)) ? "" : format(Date.parse(t.fecha_hora_salida), '[dd/MM] HH:MM')}</td>
                                 <td>{t.duracion_estimada}</td>
                                 <td>{t.plazas}</td>
                                 <td>{t.precio}</td>
