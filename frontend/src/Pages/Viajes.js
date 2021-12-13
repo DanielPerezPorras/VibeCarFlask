@@ -1,33 +1,30 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import RoutineMachine from "../Components/RoutineMachine";
 import {format} from 'date-fns'
 
 import "../Styles/Mapa.css"
 
-
-
 function Viajes() {
     const [origen, setOrigen] = useState("")
     const [destino, setDestino] = useState("")
     const [precio, setPrecio] = useState("")
+    const [plazas, setPlazas] = useState("")
+    const [fecha, setFecha] = useState(new Date().toISOString().split("T")[0])
 
     const [trayectos, setTrayectos] = useState([])
     const [coord, setCoord] = useState([])
 
-    useEffect(() => {
-        getTrayectos(); 
-    }, [])
-
     function LanzaMaquina (){
         return (<RoutineMachine coord={coord} />)
     }
-    
-    const getTrayectos = async () => {
-        const res = await fetch(`http://localhost:8080/api/v1/trayectos`)
-        const data = await res.json();
-        console.log(data)
-        setTrayectos(data)
+
+    const limpiar = () => {
+        setOrigen = ""
+        setDestino = ""
+        setPrecio = ""
+        setFecha = new Date().toISOString().split("T")[0]
+        setTrayectos = []
     }
 
     const handleSubmit = async (e) => {
@@ -35,21 +32,29 @@ function Viajes() {
     
         const res = await fetch(`http://localhost:8080/api/v1/trayectos?origen=${origen}&destino=${destino}`)
         const data = await res.json();
-        let dataRes = []
-
-        // Filtramos por precio
-        if (precio !== ""){
-            for (let d in data){
-                if (parseFloat(data[d]["precio"]) <= parseFloat(precio)){
-                    dataRes.push(data[d]);
-                }
+        
+        let filtroRes = []
+        for (let d in data){
+            // Filtro precio
+            let filtroPrecio = true
+            if (precio !== ""){
+                filtroPrecio = parseFloat(data[d]["precio"]) <= parseFloat(precio)
             }
-        } else {
-            dataRes = data;
-        }
 
-        console.log(dataRes)
-        setTrayectos(dataRes)
+            // Filtro plazas
+            // TODO: Recibir las reservas para calcular el número de plazas restantes
+
+            // Filtro fecha
+            var fechaJson = Date.parse(data[d]["fecha_hora_salida"])
+            var fecha1 = new Date(fechaJson).toISOString().split("T")[0]
+            var fecha2 = (new Date(fecha)).toISOString().split("T")[0]
+            let filtroFecha = fecha1 === fecha2
+            
+            if (filtroFecha && filtroPrecio){
+                filtroRes.push(data[d])
+            }
+        }
+        setTrayectos(filtroRes)
         
         // Actualizamos el mapa
         if (origen !== "" && destino !== ""){
@@ -77,7 +82,7 @@ function Viajes() {
             <title>Próximos viajes</title>
             <div className="ladoIzq">
                 <div>
-                    <form onSubmit={handleSubmit} className="card card-body">
+                    <form className="card card-body">
                         <div className="input-group mb-3">
                             <input
                                 type="text"
@@ -98,9 +103,24 @@ function Viajes() {
                                 value={precio}
                                 className="form-control"
                                 placeholder="Precio menor que" />
+                            <input
+                                type="number"
+                                onChange={e => setPlazas(e.target.value)}
+                                value={plazas}
+                                className="form-control"
+                                placeholder="Número de plazas" />
+                            <input type="date" id="start"
+                                onChange={e => setFecha(e.target.value)}
+                                value={fecha}>
+                            </input>
                         </div>
-                        <button className="btn btn-primary btn-block">
+                        <button className="btn btn-primary btn-block"
+                            onClick={handleSubmit}>
                             Buscar trayectos
+                        </button>
+                        <button className="btn btn-warning btn-block"
+                            onClick={limpiar}>
+                            Limpiar
                         </button>
                     </form>
                 </div>
@@ -112,7 +132,7 @@ function Viajes() {
                                 <th>Conductor</th>
                                 <th>Origen</th>
                                 <th>Destino</th>
-                                <th>Fecha</th>
+                                <th>Fecha [dia/Mes]</th>
                                 <th>Duración</th>
                                 <th>Plazas</th>
                                 <th>Precio</th>
