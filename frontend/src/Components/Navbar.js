@@ -1,8 +1,9 @@
 import '../Styles/Navbar.css'
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import VibecarContext from '../Components/VibecarContext';
 
-function Navbar(props) {
+function Navbar() {
 
   const [expanded, setExpanded] = useState(false);
 
@@ -19,18 +20,17 @@ function Navbar(props) {
         <Link className="nav-link" to="/registro">Regístrate</Link>
       </li>
     </>
-  )
-  /*
-  if (context.usuario) {
+  );
+
+  if (VibecarContext.value.usuarioActual) {
     derecha = (
       <>
         <li className="nav-item">
         <Link className="nav-link" to="/admin">Lista usuarios</Link>
         </li>
-        </>
-        )
-      }
-      */
+      </>
+    )
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-primary bg-primary">

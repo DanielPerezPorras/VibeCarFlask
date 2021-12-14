@@ -1,8 +1,15 @@
 import React from "react";
+import VibecarContext from '../Components/VibecarContext';
 
-function Inicio(props) {
+function Inicio() {
+
+  let nombre = "invitado";
+  if (VibecarContext.value.usuarioActual) {
+    nombre = VibecarContext.value.usuarioActual.nombre
+  }
+
   return (
-    <h1>Bienvenido a Vibecar, {props.user}</h1>
+    <h1>Bienvenido a Vibecar, {nombre}</h1>
   );
 }
 
