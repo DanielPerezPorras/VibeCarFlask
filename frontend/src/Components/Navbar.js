@@ -25,12 +25,12 @@ function Navbar(props) {
     derecha = (
       <>
         <li className="nav-item">
-          <Link className="nav-link" to="/admin">Lista usuarios</Link>
+        <Link className="nav-link" to="/admin">Lista usuarios</Link>
         </li>
-      </>
-    )
-  }
-  */
+        </>
+        )
+      }
+      */
 
   return (
     <nav className="navbar navbar-expand-lg navbar-primary bg-primary">
@@ -47,6 +47,9 @@ function Navbar(props) {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link" to="/viajes">Próximos viajes</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/mapa">Gasolineras Baratas</Link>
             </li>
           </ul>
           <ul className="navbar-nav ms-auto">

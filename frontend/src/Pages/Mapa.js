@@ -40,12 +40,14 @@ export const Mapa = () => {
       }
       
       
-    }  
+    } 
+
+    //estas seguro de que necesitas cargar la funcion al inicio?
 
     return (
       <div>
-        <form onSubmit={buscaGasolineras} className='card card-body'>
-          <div className='col-md-4'>
+        <h5 className='col-md-4' >Introduce localidad y tipo de gasolina para encontrar las gasolineras más baratas en esa localidad</h5>
+        <form onSubmit={buscaGasolineras} className='card card-body col-md-4'>
             <input type="text" placeholder='localidad' value={localidad} onChange={e => setLocalidad(e.target.value)} className="form-control" />
             <select placeholder="Tipo" onChange={e => setTipo(e.target.value)} className="form-control">
               {options.map(option => (
@@ -54,7 +56,6 @@ export const Mapa = () => {
             </select>
 
           <button className='form-control' >Buscar</button>
-          </div>
 
         </form>
         <MapContainer center={[36.7213028,-4.4216366]} zoom={13} scrollWheelZoom={true} whenCreated={setMap} >
