@@ -43,7 +43,7 @@ function Login(props) {
   } else {
     return (
       <div className="row">
-        <form onSubmit={validarLogin} className="offset-3 col-6">
+        <form onSubmit={validarLogin} className="offset-md-2 col-md-8">
           <h1>Entrar en Vibecar</h1>
           <div className="mb-3">
             <label htmlFor="campo-email" className="form-label">Correo electrónico</label>

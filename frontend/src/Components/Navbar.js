@@ -1,5 +1,5 @@
 import '../Styles/Navbar.css'
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import VibecarContext from '../Components/VibecarContext';
 
@@ -27,6 +27,9 @@ function Navbar() {
       <>
         <li className="nav-item">
         <Link className="nav-link" to="/admin">Lista usuarios</Link>
+        </li>
+        <li className="nav-item">
+        <Link className="nav-link" to="/logout">Salir</Link>
         </li>
       </>
     )

@@ -1,11 +1,12 @@
 // import logo from './logo.svg';
 import '../Styles/App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' //ahora no es Switch ahora es Routes
+import { Routes, Route } from 'react-router-dom' //ahora no es Switch ahora es Routes
 import VibecarContext, { useForceUpdate } from './VibecarContext';
 import Navbar from "./Navbar";
 import Inicio from "../Pages/Inicio";
 import Viajes from "../Pages/Viajes";
 import Login from "../Pages/Login";
+import Logout from "../Pages/Logout";
 import Registro from "../Pages/Registro";
 import UserListScreen from "../Pages/UserListScreen";
 import { Mapa } from "../Pages/Mapa";
@@ -23,11 +24,14 @@ function App() {
           <Route path='/viajes' element={<Viajes />} />
           <Route path='/mapa' element={<Mapa/>} />
           { VibecarContext.value.usuarioActual
-          && <Route path='/admin' element={<UserListScreen />} /> }
+          && <>
+            <Route path='/admin' element={<UserListScreen />} />
+            <Route path='/logout' element={<Logout forceAppUpdate={forceUpdate} />} />
+          </> }
           { !VibecarContext.value.usuarioActual
           && <>
             <Route path='/login' element={<Login forceAppUpdate={forceUpdate} />} />
-            <Route path='/registro' element={<Registro />} />
+            <Route path='/registro' element={<Registro forceAppUpdate={forceUpdate} />} />
           </> }
         </Routes>
       </div>

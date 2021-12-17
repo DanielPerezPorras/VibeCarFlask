@@ -76,6 +76,16 @@ def get_usuario(id):
         respuesta = jsonify(msg="No existe ningún usuario con id = %s" % id)
         return make_response(respuesta, 404)
 
+@app.route("/api/v1/usuarios/email/<email>", methods=["GET"])
+def get_usuario_by_email(email):
+    resultado = usuario.find_one({"email" : email})
+    if resultado is not None:
+        resultado["_id"] = str(resultado["_id"])
+        return jsonify(resultado)
+    else:
+        respuesta = jsonify(msg="No existe ningún usuario con email = %s" % email)
+        return make_response(respuesta, 404)
+
 @app.route("/api/v1/login", methods=["POST"])
 def login():
     if request.is_json:
