@@ -5,6 +5,7 @@ import VibecarContext, { useForceUpdate } from './VibecarContext';
 import Navbar from "./Navbar";
 import Inicio from "../Pages/Inicio";
 import Viajes from "../Pages/Viajes";
+import CrearTrayecto from "../Pages/CrearTrayecto";
 import Login from "../Pages/Login";
 import Logout from "../Pages/Logout";
 import Registro from "../Pages/Registro";
@@ -25,6 +26,7 @@ function App() {
           <Route path='/mapa' element={<Mapa/>} />
           { VibecarContext.value.usuarioActual
           && <>
+            <Route path='/crearTrayecto' element={<CrearTrayecto  forceAppUpdate={forceUpdate} />} />
             <Route path='/admin' element={<UserListScreen />} />
             <Route path='/logout' element={<Logout forceAppUpdate={forceUpdate} />} />
           </> }

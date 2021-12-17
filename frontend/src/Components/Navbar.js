@@ -26,6 +26,9 @@ function Navbar() {
     derecha = (
       <>
         <li className="nav-item">
+        <Link className="nav-link" to="/crearTrayecto">Nuevo trayecto</Link>
+        </li>
+        <li className="nav-item">
         <Link className="nav-link" to="/admin">Lista usuarios</Link>
         </li>
         <li className="nav-item">
