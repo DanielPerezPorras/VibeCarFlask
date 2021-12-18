@@ -40,7 +40,9 @@ export const Profile = (props) => {
                     </button>
             </div>
             <div className="content container-right">
-
+                {editing ? 
+                'Update' : 
+                'Create'}
             </div>
         </div>
     )
