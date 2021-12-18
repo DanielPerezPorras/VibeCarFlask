@@ -6,13 +6,13 @@ from .utils import escape_regex
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-import config
+from .config import *
 
 # --- Cloudinary key
 cloudinary.config( 
-  cloud_name = config.cloud_name, 
-  api_key = config.cloud_api_key, 
-  api_secret = config.cloud_api_secret 
+  cloud_name = cloud_name, 
+  api_key = cloud_api_key, 
+  api_secret = cloud_api_secret 
 )
 
 mongo = PyMongo(app)
