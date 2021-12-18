@@ -34,6 +34,7 @@
 {
     border-radius: 50%;
     height: 30vh;
+    border: 3px solid #555;
 }
 
 .profile-name{
@@ -43,6 +44,40 @@
 }
 
 .profile-email{
+    padding-top: 10px;
+    font-size: 20px;
+    line-height: 26px;
+    color:rgba(0, 0, 0, 0.521);
+}
+
+.profile-rol{
+    padding-top: 10px;
+    font-size: 20px;
+    line-height: 26px;
+    color:rgba(0, 0, 0, 0.521);
+}
+
+.profile-number{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 55%;
+    padding-top: 10px;
+    font-size: 20px;
+    line-height: 26px;
+    color:rgba(0, 0, 0, 0.521);
+}
+
+.icono-movil
+{
+    padding-right: 10px;
+}
+
+.profile-paypal{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
     padding-top: 10px;
     padding-bottom: 30px;
     font-size: 20px;
