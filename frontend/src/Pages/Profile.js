@@ -22,8 +22,13 @@ export const Profile = (props) => {
                     <img    className="profile-pic"
                             title={`Imagen de ${nombre} ${apellidos}`}
                             alt={`Imagen de ${nombre} ${apellidos}`}
-                            src="https://avatars.githubusercontent.com/u/62696221?v=4"
+                            src={url_foto_perfil}
                     />
+                    <span className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</span>
+                    <span className='profile-email'>{`${email}`}</span>
+                    <button className="btn btn-primary btn-block btn-edit">
+                        <i class="bi bi-pencil-square"></i> Actualizar
+                    </button>
             </div>
             <div className="content container-right">
 
