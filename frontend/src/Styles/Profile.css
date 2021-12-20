@@ -38,12 +38,14 @@
 }
 
 .profile-name{
+    text-align: center;
     padding-top: 20px;
     font-size: 20px;
     line-height: 26px;
 }
 
 .profile-email{
+    text-align: center;
     padding-top: 10px;
     font-size: 20px;
     line-height: 26px;
@@ -51,6 +53,7 @@
 }
 
 .profile-rol{
+    text-align: center;
     padding-top: 10px;
     font-size: 20px;
     line-height: 26px;
@@ -58,6 +61,7 @@
 }
 
 .profile-number{
+    text-align: center;
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -74,6 +78,7 @@
 }
 
 .profile-paypal{
+    text-align: center;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
