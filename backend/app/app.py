@@ -17,4 +17,5 @@ app.config["MONGO_URI"] = "mongodb://localhost/vibecar"
 # Importamos la API REST
 from .rest.usuario import *
 from .rest.trayecto import *
+from .rest.reserva import *
 from .rest.datosAbiertos import *

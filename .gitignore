@@ -1,6 +1,7 @@
 **/__pycache__
 .vscode
 /backend/env
+/env
 
 # dependencies
 frontend/node_modules

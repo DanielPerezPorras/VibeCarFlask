@@ -83,36 +83,57 @@ function Viajes() {
             <div className="ladoIzq">
                 <div>
                     <form className="card card-body">
-                        <div className="input-group mb-3">
+                        <div className="mb-3">
+                            <label htmlFor="campo-origen" className="form-label">Origen</label>
                             <input
+                                id="campo-origen"
                                 type="text"
                                 onChange={e => setOrigen(e.target.value)}
                                 value={origen}
                                 autoFocus
-                                className="form-control"
-                                placeholder="Origen" />
+                                className="form-control" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="campo-destino" className="form-label">Destino</label>
                             <input
+                                id="campo-destino"
                                 type="text"
                                 onChange={e => setDestino(e.target.value)}
                                 value={destino}
-                                className="form-control"
-                                placeholder="Destino" />
-                            <input
-                                type="number"
-                                onChange={e => setPrecio(e.target.value)}
-                                value={precio}
-                                className="form-control"
-                                placeholder="Precio menor que" />
-                            <input
-                                type="number"
-                                onChange={e => setPlazas(e.target.value)}
-                                value={plazas}
-                                className="form-control"
-                                placeholder="Número de plazas" />
-                            <input type="date" id="start"
-                                onChange={e => setFecha(e.target.value)}
-                                value={fecha}>
-                            </input>
+                                className="form-control" />
+                        </div>
+                        <div className="row">
+
+                            <div className="col-md-4 mb-3">
+                                <label htmlFor="campo-precio" className="form-label">Precio máximo</label>
+                                <div className="input-group">
+                                    <input
+                                        id="campo-precio"
+                                        type="number"
+                                        onChange={e => setPrecio(e.target.value)}
+                                        value={precio}
+                                        className="form-control" />
+                                    <span className="input-group-text">€</span>
+                                </div>
+                            </div>
+
+                            <div className="col-md-4 mb-3">
+                                <label htmlFor="campo-precio" className="form-label">N.º de plazas</label>
+                                <input
+                                    type="number"
+                                    onChange={e => setPlazas(e.target.value)}
+                                    value={plazas}
+                                    className="form-control" />
+                            </div>
+
+                            <div className="col-md-4 mb-3">
+                                <label htmlFor="campo-precio" className="form-label">Fecha de salida</label>
+                                <input className="form-control" type="date" id="start"
+                                    onChange={e => setFecha(e.target.value)}
+                                    value={fecha}>
+                                </input>
+                            </div>
+
                         </div>
                         <button className="btn btn-primary btn-block"
                             onClick={handleSubmit}>

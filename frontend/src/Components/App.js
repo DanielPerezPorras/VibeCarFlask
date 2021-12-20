@@ -23,7 +23,6 @@ function App() {
       <Navbar />
       <div className="container-lg p-4">
         <Routes>
-          <Route path='/' element={<Inicio />} />
           <Route path='/viajes' element={<Viajes />} />
           <Route path='/mapa' element={<Mapa/>} />
           <Route path='/incidencias' element={<Incidencias/>} />
@@ -36,6 +35,7 @@ function App() {
           </> }
           { !VibecarContext.value.usuarioActual
           && <>
+            <Route path='/' element={<Inicio />} />
             <Route path='/login' element={<Login forceAppUpdate={forceUpdate} />} />
             <Route path='/registro' element={<Registro forceAppUpdate={forceUpdate} />} />
           </> }

@@ -85,6 +85,15 @@
     color:rgba(0, 0, 0, 0.521);
 }
 
+.btn-actualizar
+{
+    padding-top: 10px;
+}
+
 .btn-edit{
     width: 100%;
+}
+
+.form-update{
+    padding-left: 20px;
 }

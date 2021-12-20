@@ -45,7 +45,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-primary bg-primary">
       <div className="container-lg px-4">
 
-        <Link className="navbar-brand" to="/">Vibecar</Link>
+        <Link className="navbar-brand" to={VibecarContext.value.usuarioActual ? "/myProfile" : "/"}>Vibecar</Link>
         
         <button className="navbar-toggler" type="button" aria-controls="main-nav" aria-expanded={expanded}
         aria-label="Toggle navigation" onClick={() => toggle()}>

@@ -243,7 +243,7 @@ paths:
                     type: string
   /incidencias/search:
     get:
-      description: "Devuelve las todas las incidencias de carretera o las filtra según localidad o provincia"
+      description: "Devuelve todas las incidencias de carretera o las filtra según localidad o provincia"
       parameters:
         - name: localidad
           description: "Nombre de la localidad."
@@ -296,7 +296,184 @@ paths:
                 type: object
                 properties:
                   msg:
+                    type: string
+ /trayectosUsuario/{id}:
+ get:
+      description: "Devuelve todos los trayectos pertenecientes a un Usuario"
+      parameters:
+        - name: id
+          description: "El ID del usuario."
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Éxito, devuelve los trayectos."
+        "404":
+          description: "No se han encontrado trayectos que cumplan las condiciones."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
                     type: string 
+ /reservas:
+    get:
+      description: "Devuelve todas las reservas del sistema."
+      responses:
+        "200":
+          description: "Éxito, devuelve todas las reservas."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reserva'
+    post:
+      description: "Crea una nueva reserva"
+      responses:
+        "200":
+          description: "Éxito, devuelve el ID de la nueva reserva."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  new_id:
+                    type: string
+                    description: "El ID de la nueva reserva."
+        "400":
+          description: "Error, la entrada no está en formato JSON o faltan campos."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+  /reservas/{id}:
+    get:
+      description: "Devuelve información de una reserva dada su ID."
+      parameters:
+        - name: id
+          description: "El ID de la reserva a devolver."
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Éxito, devuelve información de la reserva."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reserva'
+        "404":
+          description: "Error, la reserva no existe."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+    put:
+      description: "Modifica datos de una reserva."
+      parameters:
+        - name: id
+          description: "El ID de la reserva a modificar."
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: "Éxito, reserva modificada."
+        "400":
+          description: "Error, la entrada no está en formato JSON o faltan campos."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+        "404":
+          description: "Error, la reserva no existe."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+    delete:
+      description: "Elimina una reserva."
+      parameters:
+        - name: id
+          description: "El ID de la reserva a eliminar."
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: "Éxito, reserva eliminada."
+        "404":
+          description: "Error, la reserva no existe."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+  /reservasCliente/{id}:
+  get:
+      description: "Devuelve todas las reservas pertenecientes a un Usuario"
+      parameters:
+        - name: id
+          description: "El ID del usuario."
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Éxito, devuelve las reservas."
+        "404":
+          description: "No se han encontrado reservas que cumplan las condiciones."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+  /reservasTrayecto/{id}:
+  get:
+      description: "Devuelve todas las reservas pertenecientes a un Trayecto"
+      parameters:
+        - name: id
+          description: "El ID del trayecto."
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Éxito, devuelve las reservas."
+        "404":
+          description: "No se han encontrado reservas que cumplan las condiciones."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
                     
 components:
   schemas:
@@ -373,3 +550,47 @@ components:
         - plazas
         - precio
         - permitir_valoraciones
+    Reserva:
+      type: object
+      properties:
+        "_id":
+          type: string
+        trayecto:
+          type: object
+          properties:
+            "_id":
+              type: string
+            destino:
+              type: string
+            origen:
+              type: string
+          required:
+            - _id
+            - destino
+            - origen
+        cliente:
+          type: object
+          properties:
+            "_id":
+              type: string
+            nombre:
+              type: string
+            url_foto_perfil:
+              type: string
+          required:
+            - _id
+            - nombre
+            - url_foto_perfil
+        estado:
+          type: string
+        pasajeros:
+          type: integer
+        fecha_hora_salida:
+          type: string
+      required:
+        - _id
+        - trayecto
+        - cliente
+        - estado
+        - pasajeros
+        - fecha_hora_salida
