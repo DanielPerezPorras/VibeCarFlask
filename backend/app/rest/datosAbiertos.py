@@ -52,7 +52,7 @@ def incidenciasLocalidad(localidad):
 
     datos = []
 
-    for feature in datos_incidencias["features"]:
+    for feature in datos_incidencias:
         if localidad.lower() == feature["properties"]["poblacion"].lower():
             datos.append(feature)
     
@@ -68,11 +68,12 @@ def incidenciasProvincia(provincia):
 
     carreteras = []
 
-    for lugar in datos_incidencias["features"]:
+    for lugar in datos_incidencias:
         if provincia.lower() == lugar["properties"]["provincia"].lower():
-            keys_to_extract  = ("carretera", "sentido", "causa")
+            keys_to_extract  = ("carretera", "sentido", "causa", "FID", "nivel")
             a_subset = {key: lugar["properties"][key] for key in keys_to_extract}
-            carreteras.append(a_subset)
+            res = {"properties":a_subset, "geometry":lugar["geometry"]}
+            carreteras.append(res)
 
     if(len(carreteras) == 0):
         return jsonify({'msg' : 'La provincia no es correcta o ninguna carretera tiene incidencias'})
@@ -87,7 +88,7 @@ def getAllIncidencias():
         response = urlopen(incidencias_url)
         data = response.read()
         json_data = geojson.loads(data)
-        datos_incidencias=json_data
+        datos_incidencias=json_data['features']
     
     return jsonify(datos_incidencias)
     

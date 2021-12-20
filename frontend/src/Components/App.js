@@ -12,6 +12,7 @@ import Registro from "../Pages/Registro";
 import UserListScreen from "../Pages/UserListScreen";
 import { Mapa } from "../Pages/Mapa";
 import { Profile } from '../Pages/Profile';
+import { Incidencias } from '../Pages/Incidencias';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/' element={<Inicio />} />
           <Route path='/viajes' element={<Viajes />} />
           <Route path='/mapa' element={<Mapa/>} />
+          <Route path='/incidencias' element={<Incidencias/>} />
           { VibecarContext.value.usuarioActual
           && <>
             <Route path='/crearTrayecto' element={<CrearTrayecto  forceAppUpdate={forceUpdate} />} />
