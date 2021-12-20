@@ -14,6 +14,8 @@ import { Mapa } from "../Pages/Mapa";
 import { Profile } from '../Pages/Profile';
 import { Incidencias } from '../Pages/Incidencias';
 
+const API ='http://localhost:8080';
+
 function App() {
 
   const forceUpdate = useForceUpdate();
@@ -31,7 +33,7 @@ function App() {
             <Route path='/crearTrayecto' element={<CrearTrayecto  forceAppUpdate={forceUpdate} />} />
             <Route path='/admin' element={<UserListScreen />} />
             <Route path='/logout' element={<Logout forceAppUpdate={forceUpdate} />} />
-            <Route path='/myprofile' element={<Profile usuarioActual={VibecarContext.value.usuarioActual} />} />
+            <Route path='/myprofile' element={<Profile usuarioActual={VibecarContext.value.usuarioActual} API={API}/>} />
           </> }
           { !VibecarContext.value.usuarioActual
           && <>

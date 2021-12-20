@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../Styles/Profile.css'
 
 export const Profile = (props) => {
-    const {usuarioActual} = props
+    const {usuarioActual, API} = props
     console.log(usuarioActual)    
     const [id, setId] = useState(usuarioActual._id)
     const [nombre, setNombre] = useState(usuarioActual.nombre)
@@ -23,7 +23,7 @@ export const Profile = (props) => {
     const actualizarUsuario = async (e) => {
         e.preventDefault();
         setEditing(false);
-        const respuesta = await fetch(`${props.API}/api/v1/usuarios/${id}`, {
+        const respuesta = await fetch(`${API}/api/v1/usuarios/${id}`, {
             method: 'PUT',
             headers:{
                 'Content-Type' : 'application/json'
@@ -68,7 +68,7 @@ export const Profile = (props) => {
                     <form onSubmit={handleSubmit}>
                     
                         <button className="btn btn-primary btn-block btn-edit">
-                            <i class="bi bi-pencil-square"></i> Actualizar
+                            <i className="bi bi-pencil-square"></i> Actualizar
                         </button>
                     
                     </form>
@@ -137,7 +137,7 @@ export const Profile = (props) => {
                         </div>
                         <div className="btn-actualizar mb-2">
                             <button type="submit" className="btn btn-primary">
-                                <i class="bi bi-pencil-square"></i> Actualizar mis datos
+                                <i className="bi bi-pencil-square"></i> Actualizar mis datos
                             </button>
                         </div>
                     </form>
