@@ -39,7 +39,7 @@ function Login(props) {
   }
 
   if (ok) {
-    return <Navigate to="/" />
+    return <Navigate to="/myprofile" />
   } else {
     return (
       <div className="row">
