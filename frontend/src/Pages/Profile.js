@@ -20,6 +20,10 @@ export const Profile = (props) => {
         setEditing(true);
     }
 
+    const cambiarFoto = async() => {
+        setEditing(false);
+    }
+
     const actualizarUsuario = async (e) => {
         e.preventDefault();
         setEditing(false);
@@ -52,7 +56,7 @@ export const Profile = (props) => {
                             alt={`Imagen de ${nombre} ${apellidos}`}
                             src={url_foto_perfil}
                     />
-                {!editing &&
+                {!editing ?
                     <>
                     <span className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</span>
                     <span className='profile-email'>{`${email}`}</span>
@@ -73,6 +77,16 @@ export const Profile = (props) => {
                     
                     </form>
                     </>
+                    :
+                    <div class="custom-file input-file mb-2">
+                        <input type="file" className="custom-file-input input-button" id="archivoFoto" accept="image/png, image/jpeg"/>
+                        <button 
+                            className="btn btn-primary"
+                            onClick={() => cambiarFoto()}
+                            >
+                            Poner foto de perfil
+                        </button>
+                    </div>
                 }
             </div>
             <div className="content container-right">

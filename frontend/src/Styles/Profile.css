@@ -102,3 +102,15 @@
 .form-update{
     padding-left: 20px;
 }
+
+.input-file{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.input-button{
+    width: 90%;
+    padding-bottom: 10px;
+}
