@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
+import L from 'leaflet';
 
 
 export const Incidencias = () => {
@@ -8,10 +9,46 @@ export const Incidencias = () => {
     const [incidencias, setIncidencias] = useState([])
     const [map,setMap] = useState(null)
 
+    var greenIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });    
+    
+    var redIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });    
+    
+    var yellowIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+    
+    var blackIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+    const iconos = {"VERDE":greenIcon, "AMARILLO":yellowIcon, "ROJO":redIcon, "NEGRO":blackIcon }
+
 
     const buscaIncidencias = async (e) => {
         e.preventDefault();
-        const res = [];
         if (localidad === "" && provincia === "") {
             alert("No se ha especificado ningún lugar")
         } else {
@@ -76,7 +113,7 @@ export const Incidencias = () => {
                 />
                 {incidencias.map( incidencia => (
                     <div key={incidencia.properties.FID}>
-                        <Marker position={[incidencia.geometry.coordinates[1],incidencia.geometry.coordinates[0]]}>
+                        <Marker icon={iconos[incidencia.properties.nivel]} position={[incidencia.geometry.coordinates[1],incidencia.geometry.coordinates[0]]}>
                         <Popup>
                             <div className='Map-Marker'>
                                 Carretera: {incidencia.properties.carretera} <br/>
