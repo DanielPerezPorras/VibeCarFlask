@@ -14,6 +14,11 @@ cloudinary.config(
   api_key = cloud_api_key, 
   api_secret = cloud_api_secret 
 )
+# cloudinary.config( 
+#   cloud_name = "guilleam", 
+#   api_key = "429639181274534", 
+#   api_secret = "QNtgVHsTChTCib43gAVHssfkcvs" 
+# )
 
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
@@ -181,3 +186,20 @@ def uploadImg():
     res = cloudinary.uploader.upload(img)
     print(res["url"])
     return jsonify({"msg":"Imagen Subida a la url " + str(res["url"])})
+
+@app.route("/api/v1/usuarios/image/<id>", methods=["PUT"])
+def uploadProfilePic(id):
+    print(cloud_name)
+    oid = ObjectId(id)
+    img = request.files['file']
+    print(img)
+    # print(img.filename)
+    if True: # (img.filename).endswith(".jpg", ".png"):
+        res = cloudinary.uploader.upload(img)
+        nuevos_valores = {}
+        nuevos_valores["url_foto_perfil"] = str(res["url"])
+        usuario.update_one({"_id": oid}, {"$set": nuevos_valores})
+
+        return jsonify({"msg":str(res["url"])})
+    else:
+        return({"msg":"El archivo no es una imagen"})
