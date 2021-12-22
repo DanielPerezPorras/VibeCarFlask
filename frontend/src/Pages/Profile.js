@@ -179,7 +179,7 @@ export const Profile = (props) => {
                         </div>
                     </form>
                     </div> : 
-                'Create'}
+                <></>}
             </div>
         </div>
     )
