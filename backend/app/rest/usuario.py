@@ -14,11 +14,6 @@ cloudinary.config(
   api_key = cloud_api_key, 
   api_secret = cloud_api_secret 
 )
-# cloudinary.config( 
-#   cloud_name = "guilleam", 
-#   api_key = "429639181274534", 
-#   api_secret = "QNtgVHsTChTCib43gAVHssfkcvs" 
-# )
 
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
