@@ -34,9 +34,10 @@ export const Profile = (props) => {
         console.log(data)
         if (data.msg == "El archivo no es una imagen")
         {
-
+            alert("El archivo no es una imagen")
         }else{
-            alert()
+            alert("Tu imagen se ha subido")
+            setUrl_Foto_Perfil(data.msg)
         }
     }
 
