@@ -10,6 +10,7 @@ import Login from "../Pages/Login";
 import Logout from "../Pages/Logout";
 import Registro from "../Pages/Registro";
 import UserListScreen from "../Pages/UserListScreen";
+import { Reservas } from "../Pages/Reservas";
 import { Mapa } from "../Pages/Mapa";
 import { Profile } from '../Pages/Profile';
 import { Incidencias } from '../Pages/Incidencias';
@@ -31,6 +32,7 @@ function App() {
           { VibecarContext.value.usuarioActual
           && <>
             <Route path='/crearTrayecto' element={<CrearTrayecto  forceAppUpdate={forceUpdate} />} />
+            <Route path='/reservas' element={<Reservas usuarioActual={VibecarContext.value.usuarioActual} API={API} />} /> 
             <Route path='/admin' element={<UserListScreen />} />
             <Route path='/logout' element={<Logout forceAppUpdate={forceUpdate} />} />
             <Route path='/myprofile' element={<Profile usuarioActual={VibecarContext.value.usuarioActual} API={API}/>} />

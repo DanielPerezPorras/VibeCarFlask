@@ -29,6 +29,9 @@ function Navbar() {
         <Link className="nav-link" to="/crearTrayecto">Nuevo trayecto</Link>
         </li>
         <li className="nav-item">
+        <Link className="nav-link" to="/reservas">Mis reservas</Link>
+        </li>
+        <li className="nav-item">
         <Link className="nav-link" to="/admin">Lista usuarios</Link>
         </li>
         <li className="nav-item">
