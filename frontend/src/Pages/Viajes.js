@@ -4,6 +4,7 @@ import RoutineMachine from "../Components/RoutineMachine";
 import {format} from 'date-fns'
 
 import "../Styles/Mapa.css"
+import VibecarContext from "../Components/VibecarContext";
 
 function Viajes() {
     const [origen, setOrigen] = useState("")
@@ -32,34 +33,50 @@ function Viajes() {
     
         const res = await fetch(`http://localhost:8080/api/v1/trayectos?origen=${origen}&destino=${destino}`)
         const data = await res.json();
-        
-        let filtroRes = []
-        for (let d in data){
-            // Filtro precio
-            let filtroPrecio = true
-            if (precio !== ""){
-                filtroPrecio = parseFloat(data[d]["precio"]) <= parseFloat(precio)
-            }
 
-            // Filtro plazas
-            // TODO: Recibir las reservas para calcular el número de plazas restantes
+        const reservas = await fetch(`http://localhost:8080/api/v1/reservas`);
+        const dataReservas = await reservas.json();
 
-            // Filtro fecha
-            var fechaJson = Date.parse(data[d]["fecha_hora_salida"])
-            var fecha1 = new Date(fechaJson).toISOString().split("T")[0]
-            var fecha2 = (new Date(fecha)).toISOString().split("T")[0]
-            let filtroFecha = fecha1 === fecha2
-            
-            if (filtroFecha && filtroPrecio){
-                filtroRes.push(data[d])
-            }
-        }
-        setTrayectos(filtroRes)
-        
-        // Actualizamos el mapa
+        var coords = []
         if (origen !== "" && destino !== ""){
-            var coords = []
+            let filtroRes = []
+            for (let d in data){
+                // Filtro precio
+                let filtroPrecio = true
+                if (precio !== ""){
+                    filtroPrecio = parseFloat(data[d]["precio"]) <= parseFloat(precio)
+                }
 
+                // Filtro plazas
+                let filtroPlaza = true
+                let plazasOcupadas = 0;
+                for (let r in dataReservas){
+                    if (dataReservas[r]["trayecto"]["_id"] === data[d]["_id"]){
+                        plazasOcupadas = plazasOcupadas + (dataReservas[r]["pasajeros"])
+                    }
+                }
+                console.log(data[d])
+                console.log("plazas ocupadas: " + String(plazasOcupadas))
+                console.log("plazas originales: " + parseInt(data[d]["plazas"]))
+                if (plazasOcupadas + (plazas === "" ? 1 : parseInt(plazas)) <= parseInt(data[d]["plazas"])){
+                    data[d]["plazas"] = parseInt(data[d]["plazas"]) - plazasOcupadas
+                } else {
+                    filtroPlaza = false
+                }
+
+                // Filtro fecha
+                var fechaJson = Date.parse(data[d]["fecha_hora_salida"])
+                var fecha1 = new Date(fechaJson).toISOString().split("T")[0]
+                var fecha2 = (new Date(fecha)).toISOString().split("T")[0]
+                let filtroFecha = fecha1 === fecha2
+                
+                if (filtroFecha && filtroPrecio && filtroPlaza){
+                    filtroRes.push(data[d])
+                }
+            }
+            setTrayectos(filtroRes)
+            
+            // Actualizamos el mapa
             const res1 = await fetch(`https://nominatim.openstreetmap.org/search?city=${origen}&country=Spain&format=json`)
             const data1 = await res1.json();
             const data1Res = data1[0]
@@ -71,9 +88,35 @@ function Viajes() {
             const data2Res = data2[0]
             coords.push(parseFloat(data2Res["lat"]))
             coords.push(parseFloat(data2Res["lon"]))
-            setCoord(coords)
+            setCoord(coords) 
         } else {
             setCoord([])
+        }
+    }
+
+    // Crear la reserva
+    const reservar = async (id) => {
+        if (VibecarContext.value["usuarioActual"] == null){
+            alert("Debes iniciar sesión antes de reservar un trayecto")
+        } else {
+            const datos = {
+                "trayecto": id,
+                "cliente": VibecarContext.value["usuarioActual"]["_id"],
+                "fecha_hora_salida": fecha,
+                "pasajeros": plazas === "" ? 1 : plazas,
+                "estado": "disponible"
+            };
+            console.log(datos)
+            const res = await fetch("http://localhost:8080/api/v1/reservas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datos)
+            })
+            const data = await res.json();
+            console.log(data)
+            alert("Reserva realizada")
         }
     }
 
@@ -128,7 +171,7 @@ function Viajes() {
 
                             <div className="col-md-4 mb-3">
                                 <label htmlFor="campo-precio" className="form-label">Fecha de salida</label>
-                                <input className="form-control" type="date" id="start"
+                                <input className="form-control" type="date" min={new Date().toISOString().split("T")[0]} id="start"
                                     onChange={e => setFecha(e.target.value)}
                                     value={fecha}>
                                 </input>
@@ -173,7 +216,7 @@ function Viajes() {
                                 <td>{t.duracion_estimada}</td>
                                 <td>{t.plazas}</td>
                                 <td>{t.precio}</td>
-                                <td><button className="btn btn-warning btn-sm btn-block">Reservar</button></td>
+                                <td><button onClick={() => reservar(t._id)} className="btn btn-warning btn-sm btn-block">Reservar</button></td>
                             </tr>
                         ))}
                         </tbody>
@@ -185,7 +228,7 @@ function Viajes() {
                     doubleClickZoom={false}
                     id="mapId"
                     zoom={12}
-                    center={[36.7213028, -4.4216366]}
+                    center={[36.7213028,-4.4216366]}
                 >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -13,7 +13,7 @@
         },
         "fecha_hora_salida": "12-10-2021 20:26:48.296115",
         "estado": "Disponible",
-        "plazas": 2
+        "pasajeros": 2
     },
     {
         "ID": 2,
@@ -29,7 +29,7 @@
         },
         "fecha_hora_salida": "12-29-2021 20:26:48.296115",
         "estado": "Disponible",
-        "plazas": 2
+        "pasajeros": 2
     },
     {
         "ID": 3,
@@ -45,7 +45,7 @@
         },
         "fecha_hora_salida": "12-30-2021 20:26:48.296115",
         "estado": "Disponible",
-        "plazas": 3
+        "pasajeros": 3
     },
     {
         "ID": 4,
@@ -61,7 +61,7 @@
         },
         "fecha_hora_salida": "12-29-2021 20:26:48.296115",
         "estado": "Disponible",
-        "plazas": 3
+        "pasajeros": 3
     },
     {
         "ID": 5,
@@ -77,7 +77,7 @@
         },
         "fecha_hora_salida": "12-30-2021 20:26:48.296115",
         "estado": "Disponible",
-        "plazas": 3
+        "pasajeros": 3
     }
 
 ]
