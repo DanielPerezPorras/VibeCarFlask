@@ -90,22 +90,6 @@ export const Incidencias = () => {
                     </div>
                 </div>
             </form>
-            
-            <div className="col-md-6">
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>Operations</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-            </div>
             <MapContainer center={[36.7213028,-4.4216366]} zoom={12} scrollWheelZoom={true} whenCreated={setMap} >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -181,3 +181,20 @@ def uploadImg():
     res = cloudinary.uploader.upload(img)
     print(res["url"])
     return jsonify({"msg":"Imagen Subida a la url " + str(res["url"])})
+
+@app.route("/api/v1/usuarios/image/<id>", methods=["PUT"])
+def uploadProfilePic(id):
+    print(cloud_name)
+    oid = ObjectId(id)
+    img = request.files['file']
+    print(img)
+    # print(img.filename)
+    if True: # (img.filename).endswith(".jpg", ".png"):
+        res = cloudinary.uploader.upload(img)
+        nuevos_valores = {}
+        nuevos_valores["url_foto_perfil"] = str(res["url"])
+        usuario.update_one({"_id": oid}, {"$set": nuevos_valores})
+
+        return jsonify({"msg":str(res["url"])})
+    else:
+        return({"msg":"El archivo no es una imagen"})
