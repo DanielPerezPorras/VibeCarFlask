@@ -24,6 +24,7 @@ mensaje.drop()
 # Mapping de IDs de los JSON a ObjectIds
 usuario_ids = {}
 trayecto_ids = {}
+reserva_ids = {}
 
 with open("datasets/usuario.json") as fstream:
     json_usuarios = json.load(fstream)
@@ -49,6 +50,26 @@ with open("datasets/trayecto.json") as fstream:
         conductor.pop("ID")
 
     trayecto.insert_many(json_trayectos)
+
+with open("datasets/reserva.json") as fstream:
+    json_reservas = json.load(fstream)
+    for t in json_reservas:
+        oid = ObjectId()
+        reserva_ids[t["ID"]] = oid
+        t.pop("ID")
+        t["_id"] = oid
+
+        # Remplazar IDs de clientes por sus ObjectIds
+        cliente = t["cliente"]
+        cliente["_id"] = usuario_ids[cliente["ID"]]
+        cliente.pop("ID")
+
+        # Remplazar IDs de trayectos por sus ObjectIds
+        trayecto = t["trayecto"]
+        trayecto["_id"] = trayecto_ids[trayecto["ID"]]
+        trayecto.pop("ID")
+
+    reserva.insert_many(json_reservas)
 
 # with open("datasets/reserva.json") as fstream:
 #     reserva.insert_many(json.load(fstream))
