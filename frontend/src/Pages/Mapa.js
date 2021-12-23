@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 export const Mapa = () => {
 
     const [localidad, setLocalidad] = useState("")
-    const [tipo,setTipo] = useState("")
+    const [tipo,setTipo] = useState("1")
     const [gasolineras,setGasolineras] = useState([])
     const [map,setMap] = useState(null)
     
