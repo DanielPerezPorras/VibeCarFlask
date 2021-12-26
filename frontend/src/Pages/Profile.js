@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import '../Styles/Profile.css'
+import VibecarContext from '../Components/VibecarContext';
+
 
 export const Profile = (props) => {
     const {usuarioActual, API} = props
@@ -61,6 +63,18 @@ export const Profile = (props) => {
             })
         })
         const data = await respuesta.json();
+        VibecarContext.value.usuarioActual = {
+            "_id" : id,
+            "nombre": nombre,
+            "apellidos": apellidos,
+            "email": email,
+            "telefono": telefono,
+            "contrasenia": contrasenia,
+            "link_paypal": link_paypal,
+            "url_foto_perfil": url_foto_perfil,
+            "rol": rol
+    }
+        props.forceAppUpdate();
         console.log(data)
     }
 
@@ -164,7 +178,7 @@ export const Profile = (props) => {
                             placeholder="Su contras&ntilde;a..."/> 
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="link_paypal">Correo</label>
+                            <label htmlFor="link_paypal">Link de Paypal</label>
                             <input type="url"
                             id="link_paypal" 
                             onChange={e => setLink_Paypal(e.target.value)} 
