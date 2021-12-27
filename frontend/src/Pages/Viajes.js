@@ -3,6 +3,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import RoutineMachine from "../Components/RoutineMachine";
 import {format} from 'date-fns'
 import {importarFechaDeBD, importarFechaDeFormulario, parteFechaIgual} from '../Utilities/dates';
+import {recortarDireccion} from '../Utilities/direcciones'
 
 import "../Styles/Mapa.css"
 import VibecarContext from "../Components/VibecarContext";
@@ -199,39 +200,37 @@ function Viajes() {
                             </button>
                         </form>
                     </div>
-                    <br/>
-                    <div className="table-responsive">
-                        <table className="table table-striped align-middle">
-                            <thead>
-                                <tr>
-                                    <th>Conductor</th>
-                                    <th>Origen</th>
-                                    <th>Destino</th>
-                                    <th>Fecha [dia/Mes]</th>
-                                    <th>Duración</th>
-                                    <th>Plazas</th>
-                                    <th>Precio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {trayectos.map(t => (
-                                <tr key={t._id}>
-                                    <td><img src={t.conductor.url_foto_perfil} 
+                    <div>
+                    {trayectos.map(t => (
+                        <div className="mt-3 card" key={t._id}>
+                            <div className="card-body">
+                            
+                                <div className="fs-5 mb-3">{recortarDireccion(t.origen)}</div>
+                                <div className="fs-5 mb-3">&#8594; {recortarDireccion(t.destino)}</div>
+
+                                <div className="mb-3">
+                                    <div className="float-start me-3">
+                                        <img src={t.conductor.url_foto_perfil} 
+                                                className="rounded-circle"
                                                 title={`Imagen de ${t.conductor.nombre}`}
                                                 alt={`Imagen de ${t.conductor.nombre}`}
                                                 width="80"
-                                                height="80"/> {t.conductor.nombre}</td>
-                                    <td>{t.origen}</td>
-                                    <td>{t.destino}</td>
-                                    <td>{isNaN(Date.parse(t.fecha_hora_salida)) ? "" : format(Date.parse(t.fecha_hora_salida), '[dd/MM] HH:MM')}</td>
-                                    <td>{t.duracion_estimada}</td>
-                                    <td>{t.plazas}</td>
-                                    <td>{t.precio}</td>
-                                    <td><button onClick={() => reservar(t._id)} className="btn btn-warning btn-sm btn-block">Reservar</button></td>
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
+                                                height="80"/><br />{t.conductor.nombre}
+                                    </div>
+
+                                    <b>Fecha y hora de salida: </b>{isNaN(Date.parse(t.fecha_hora_salida)) ? "" : format(Date.parse(t.fecha_hora_salida), 'dd/MM HH:mm')}<br />
+                                    <b>Duración: </b>{t.duracion_estimada} min<br />
+                                    <b>Plazas: </b>{t.plazas}<br />
+                                    <b>Precio: </b>{t.precio} €
+
+                                </div>
+
+                                
+
+                                <button onClick={() => reservar(t._id)} className="btn btn-warning btn-sm col-12">Reservar</button>
+                            </div>
+                        </div>
+                    ))}
                     </div>
                 </div>
                 <div className="col-12 col-md-4">
