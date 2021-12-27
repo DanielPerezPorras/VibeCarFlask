@@ -1,11 +1,40 @@
+.content
+{
+    background-color: #fff;
+    border-color: #ebebeb;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 5px 10px 10px;
+    position: relative;
+}
+.container-full
+{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.container-left
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 30vw;
+}
+
+.container-right
+{
+    padding-left: 8px;
+    vertical-align: top;
+    width: 70vw;
+}
 
 .profile-pic
 {
-    display: block;
     border-radius: 50%;
     height: 30vh;
     border: 3px solid #555;
-    margin: auto;
 }
 
 .profile-name{
@@ -33,6 +62,10 @@
 
 .profile-number{
     text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 55%;
     padding-top: 10px;
     font-size: 20px;
     line-height: 26px;
