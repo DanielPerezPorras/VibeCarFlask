@@ -79,8 +79,8 @@ export const Profile = (props) => {
     }
 
     return (
-        <div className='container-full'>
-            <div className="content container-left">
+        <div className='row'>
+            <div className="col-12 col-md-4">
                 
                     <img    className="profile-pic"
                             title={`Imagen de ${nombre} ${apellidos}`}
@@ -89,16 +89,16 @@ export const Profile = (props) => {
                     />
                 {!editing ?
                     <>
-                    <span className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</span>
-                    <span className='profile-email'>{`${email}`}</span>
-                    <div className='profile-number'><i className="bi bi-telephone icono-movil"></i><div>{telefono}</div></div>
+                    <div className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</div>
+                    <div className='profile-email'>{`${email}`}</div>
+                    <div className='profile-number'><i className="bi bi-telephone icono-movil"></i>{telefono}</div>
                     <div className='profile-rol'>
                         {rol > 1 &&
                             <div><i clasName="bi bi-sunglasses">Admin</i></div>
                         }
                     </div>
                     <div className='profile-paypal'>
-                        <a href={link_paypal} className="btn btn-outline-info"><i className="bi bi-paypal"></i>{`Paypal de ${nombre} ${apellidos}`}</a>
+                        <a href={link_paypal} className="btn btn-outline-info"><i className="bi bi-paypal"></i>{` PayPal de ${nombre} ${apellidos}`}</a>
                     </div>
                     <form onSubmit={handleSubmit}>
                     
@@ -115,18 +115,18 @@ export const Profile = (props) => {
                             <input type="file"
                                 id="file" 
                                 onChange={(e) => setFile(e.target.files[0])}
-                                className="custom-file-input file-button"
+                                className="custom-file-input form-control mb-3"
                                 accept="image/png, image/jpeg"
                                 placeholder="Imagen en .png o .jpg"/> 
-                            
-                                <button type="submit" className="btn btn-primary">
-                                    <i className="bi bi-pencil-square"></i> Guardar foto
-                                </button>
+
+                            <button type="submit" className="btn btn-primary ">
+                                <i className="bi bi-pencil-square"></i> Guardar foto
+                            </button>
                         </form>
                     </div>
                 }
             </div>
-            <div className="content container-right">
+            <div className="col-12 col-md-8">
                 {editing ?
                     <div className='form-update'>
                     <h2>Mis detalles</h2> 
