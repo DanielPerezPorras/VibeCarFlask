@@ -13,7 +13,7 @@ export function prepararFechaParaBD(fecha) {
     + "-" + meterCeros(fecha.getDate(), 2)
     + " " + meterCeros(fecha.getHours(), 2)
     + ":" + meterCeros(fecha.getMinutes(), 2)
-    + ":" + meterCeros(fecha.getSeconds(), 6)
+    + ":" + meterCeros(fecha.getSeconds(), 2)
     + ".000000";
 
 }
@@ -21,11 +21,15 @@ export function prepararFechaParaBD(fecha) {
 export function importarFechaDeBD(str) {
   const regex = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\.(\d{6})$/;
   const matches = str.match(regex);
-  const fecha = new Date(
-    parseInt(matches[1]), parseInt(matches[2]) - 1, parseInt(matches[3]),
-    parseInt(matches[4]), parseInt(matches[5]), parseInt(matches[6]));
-  if (fecha instanceof Date && !isNaN(fecha.valueOf())) {
-    return fecha
+  if (matches !== null) {
+    const fecha = new Date(
+      parseInt(matches[1]), parseInt(matches[2]) - 1, parseInt(matches[3]),
+      parseInt(matches[4]), parseInt(matches[5]), parseInt(matches[6]));
+    if (fecha instanceof Date && !isNaN(fecha.valueOf())) {
+      return fecha
+    } else {
+      return null;
+    }
   } else {
     return null;
   }
@@ -37,7 +41,6 @@ export function importarFechaDeFormulario(str) {
   if (matches !== null) {
 
     let fecha = null;
-
     if (matches[4] !== undefined) {
       fecha = new Date(
         parseInt(matches[1]), parseInt(matches[2]) - 1, parseInt(matches[3]),
