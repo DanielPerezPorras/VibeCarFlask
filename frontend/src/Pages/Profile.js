@@ -81,12 +81,13 @@ export const Profile = (props) => {
     return (
         <div className='container-full'>
             <div className="content container-left">
-                
-                    <img    className="profile-pic"
-                            title={`Imagen de ${nombre} ${apellidos}`}
-                            alt={`Imagen de ${nombre} ${apellidos}`}
-                            src={url_foto_perfil}
-                    />
+                    <div className='circular-div'>
+                        <img    className="profile-pic"
+                                title={`Imagen de ${nombre} ${apellidos}`}
+                                alt={`Imagen de ${nombre} ${apellidos}`}
+                                src={url_foto_perfil}
+                        />
+                    </div>
                 {!editing ?
                     <>
                     <span className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</span>
