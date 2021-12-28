@@ -1,4 +1,4 @@
-import L from "leaflet";
+import L, { bind } from "leaflet";
 import { createControlComponent } from "@react-leaflet/core";
 import "leaflet-routing-machine";
 
@@ -10,6 +10,11 @@ const createRoutineMachineLayer = (props) => {
       L.latLng(coord[0], coord[1]),
       L.latLng(coord[2], coord[3])
     ],
+    createMarker: function(i, wp){
+      return L.marker(wp.latLng)
+        .bindPopup(coord[i+4]);
+    }
+    ,
     lineOptions: {
       styles: [{ color: "#6FA1EC", weight: 4 }]
     },

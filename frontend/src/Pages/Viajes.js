@@ -23,11 +23,11 @@ function Viajes() {
     }
 
     const limpiar = () => {
-        setOrigen = ""
-        setDestino = ""
-        setPrecio = ""
-        setFecha = new Date().toISOString().split("T")[0]
-        setTrayectos = []
+        setOrigen("")
+        setDestino("")
+        setPrecio("")
+        setFecha(new Date().toISOString().split("T")[0])
+        setTrayectos([])
     }
 
     const handleSubmit = async (e) => {
@@ -39,70 +39,55 @@ function Viajes() {
         const reservas = await fetch(`http://localhost:8080/api/v1/reservas`);
         const dataReservas = await reservas.json();
 
-        // Aplicar filtros
-        let filtroRes = []
-        for (let d in data) {
+        if (origen !== "" && destino !== ""){
+            // Aplicar filtros
+            let filtroRes = []
+            for (let d in data) {
+                console.log(data[d])
 
-            // Filtro precio
-            let filtroPrecio = true
-            if (precio !== "") {
-                filtroPrecio = parseFloat(data[d]["precio"]) <= parseFloat(precio)
-            }
+                // Filtro precio
+                let filtroPrecio = true
+                if (precio !== "") {
+                    filtroPrecio = parseFloat(data[d]["precio"]) <= parseFloat(precio)
+                }
 
-            // Filtro plazas
-            let filtroPlaza = true
-            let plazasOcupadas = 0;
-            for (let r in dataReservas){
-                if (dataReservas[r]["trayecto"]["_id"] === data[d]["_id"]){
-                    plazasOcupadas = plazasOcupadas + (dataReservas[r]["pasajeros"])
+                // Filtro plazas
+                let filtroPlaza = true
+                let plazasOcupadas = 0;
+                for (let r in dataReservas){
+                    if (dataReservas[r]["trayecto"]["_id"] === data[d]["_id"]){
+                        plazasOcupadas = plazasOcupadas + (dataReservas[r]["pasajeros"])
+                    }
+                }
+
+                console.log("plazas ocupadas: " + String(plazasOcupadas))
+                console.log("plazas originales: " + parseInt(data[d]["plazas"]))
+                if (plazasOcupadas + (plazas === "" ? 1 : parseInt(plazas)) <= parseInt(data[d]["plazas"])){
+                    data[d]["plazas"] = parseInt(data[d]["plazas"]) - plazasOcupadas
+                } else {
+                    filtroPlaza = false
+                }
+
+                // Filtro fecha
+                let filtroFecha = true;
+                var fechaForm = importarFechaDeFormulario(fecha);
+                if (fechaForm !== null) {
+                    var fechaJson = importarFechaDeBD(data[d]["fecha_hora_salida"]);
+                    console.log(fechaForm)
+                    console.log(fechaJson)
+                    filtroFecha = parteFechaIgual(fechaJson, fechaForm);
+                }
+                console.log(fechaForm)
+                console.log(fechaJson)
+                console.log(filtroFecha + ", " + filtroPrecio + ", " + filtroPlaza);
+                
+                if (filtroFecha && filtroPrecio && filtroPlaza){
+                    filtroRes.push(data[d])
                 }
             }
-
-            console.log("plazas ocupadas: " + String(plazasOcupadas))
-            console.log("plazas originales: " + parseInt(data[d]["plazas"]))
-            if (plazasOcupadas + (plazas === "" ? 1 : parseInt(plazas)) <= parseInt(data[d]["plazas"])){
-                data[d]["plazas"] = parseInt(data[d]["plazas"]) - plazasOcupadas
-            } else {
-                filtroPlaza = false
-            }
-
-            // Filtro fecha
-            let filtroFecha = true;
-            var fechaForm = importarFechaDeFormulario(fecha);
-            if (fechaForm !== null) {
-                var fechaJson = importarFechaDeBD(data[d]["fecha_hora_salida"]);
-                filtroFecha = parteFechaIgual(fechaJson, fechaForm);
-            }
-            console.log(filtroFecha + ", " + filtroPrecio + ", " + filtroPlaza);
-            
-            if (filtroFecha && filtroPrecio && filtroPlaza){
-                filtroRes.push(data[d])
-            }
-        }
-        setTrayectos(filtroRes)
-
-        // Mapa
-        var coords = []
-        if (origen !== "" && destino !== ""){
-            // Actualizamos el mapa
-            const res1 = await fetch(`https://nominatim.openstreetmap.org/search?city=${origen}&country=Spain&format=json`)
-            const data1 = await res1.json();
-            const res2 = await fetch(`https://nominatim.openstreetmap.org/search?city=${destino}&country=Spain&format=json`)
-            const data2 = await res2.json();
-            const data1Res = data1[0]
-            const data2Res = data2[0]
-
-            if (data1[0] !== undefined && data2[0] !== undefined) {
-                coords.push(parseFloat(data1Res["lat"]))
-                coords.push(parseFloat(data1Res["lon"]))
-                coords.push(parseFloat(data2Res["lat"]))
-                coords.push(parseFloat(data2Res["lon"]))
-                setCoord(coords) 
-            } else {
-                setCoord([])
-            }
+            setTrayectos(filtroRes)
         } else {
-            setCoord([])
+            alert("Debes indicar un lugar de Origen y Destino para buscar trayectos")
         }
     }
 
@@ -132,10 +117,38 @@ function Viajes() {
         }
     }
 
+    const actualizarMapa = async (origen, destino) => {
+        // Mapa
+        var coords = []
+        if (origen !== "" && destino !== ""){
+            // Actualizamos el mapa
+            const res1 = await fetch(`https://nominatim.openstreetmap.org/search?q=${origen}&country=Spain&format=json`)
+            const data1 = await res1.json();
+            const res2 = await fetch(`https://nominatim.openstreetmap.org/search?q=${destino}&country=Spain&format=json`)
+            const data2 = await res2.json();
+            const data1Res = data1[0]
+            const data2Res = data2[0]
+
+            if (data1[0] !== undefined && data2[0] !== undefined) {
+                coords.push(parseFloat(data1Res["lat"]))
+                coords.push(parseFloat(data1Res["lon"]))
+                coords.push(parseFloat(data2Res["lat"]))
+                coords.push(parseFloat(data2Res["lon"]))
+                coords.push(origen)
+                coords.push(destino)
+                setCoord(coords) 
+            } else {
+                setCoord([])
+            }
+        } else {
+            setCoord([])
+        }
+    }
+
     return (
         <>
             <div className="row">
-                <div className="col-12 col-md-8">
+                <div className="col-12 col-md-8" >
                     <div>
                         <form className="card card-body">
                             <div className="mb-3">
@@ -200,7 +213,7 @@ function Viajes() {
                             </button>
                         </form>
                     </div>
-                    <div>
+                    <div style={{height:"200px", overflowY:"auto"}} > 
                     {trayectos.map(t => (
                         <div className="mt-3 card" key={t._id}>
                             <div className="card-body">
@@ -224,10 +237,8 @@ function Viajes() {
                                     <b>Precio: </b>{t.precio} €
 
                                 </div>
-
-                                
-
-                                <button onClick={() => reservar(t._id)} className="btn btn-warning btn-sm col-12">Reservar</button>
+                                <button onClick={() => reservar(t._id)} className="btn btn-primary btn-sm col-12">Reservar</button>
+                                <button onClick={() => actualizarMapa(t.origen, t.destino)} className="btn btn-warning btn-sm col-12">Ver Mapa</button>
                             </div>
                         </div>
                     ))}
