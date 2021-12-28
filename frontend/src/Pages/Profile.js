@@ -34,7 +34,7 @@ export const Profile = (props) => {
         })
         const data = await respuesta.json();
         console.log(data)
-        if (data.msg == "El archivo no es una imagen")
+        if (data.msg === "El archivo no es una imagen")
         {
             alert("El archivo no es una imagen")
         }else{
