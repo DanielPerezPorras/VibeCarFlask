@@ -53,21 +53,25 @@ export const Incidencias = () => {
             alert("No se ha especificado ningún lugar")
         } else {
             let str = ``
+            let param = localidad
             if (localidad !== "" && provincia !== "") {
                 str = `http://localhost:8080/api/v1/incidencias/search?localidad=${localidad}&provincia=${provincia}`;
             } else if (localidad !== "") {
                 str = `http://localhost:8080/api/v1/incidencias/search?localidad=${localidad}`
             } else if(provincia !=="") {
                 str = `http://localhost:8080/api/v1/incidencias/search?provincia=${provincia}`
+                param = provincia
             }
             const res = await fetch(str);
             const data = await res.json();
             console.log(data)
             if (data["msg"]===undefined) {
                 setIncidencias(data);
-                
-                const pos = data[0].geometry.coordinates
-                map.setView([pos[1],pos[0]], map.getZoom())
+                const zona = await fetch(`https://nominatim.openstreetmap.org/search?city=${param}&country=Spain&format=json`)
+                const data1 = await zona.json();
+                const pos = data1[0]
+                map.setView([pos["lat"],pos["lon"]], map.getZoom())
+        
               
             } else {
                 alert("No se han encontrado incidencias en la localidad indicada")
@@ -78,16 +82,16 @@ export const Incidencias = () => {
     return (
         <div>
             <form onSubmit={buscaIncidencias} className="card card-body">
-                <div className="col-md-4">
-                    <div className="form-group">
-                        Localidad: <input value={localidad} onChange={e => setLocalidad(e.target.value)} className="form-control" type="text"/>
-                    </div>
-                    <div className="form-group">
-                        Provincia: <input value={provincia} onChange={e => setProvincia(e.target.value)} className="form-control" type="text"/>
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary btn-block form-control">Buscar Incidencias</button>
-                    </div>
+                <h4>Especifica localidad, provincia o ambas a la vez para buscar las incidencias en la zona</h4>
+                <div className="form-group">
+                    Localidad: <input value={localidad} placeholder="Localidad" onChange={e => setLocalidad(e.target.value)} className="form-control" type="text"/>
+                </div>
+                <div className="form-group">
+                    Provincia: <input value={provincia} placeholder="Provincia" onChange={e => setProvincia(e.target.value)} className="form-control" type="text"/>
+                </div>
+                <br/>
+                <div className="form-group">
+                    <button className="btn btn-primary btn-block form-control">Buscar Incidencias</button>
                 </div>
             </form>
             <MapContainer center={[36.7213028,-4.4216366]} zoom={12} scrollWheelZoom={true} whenCreated={setMap} >

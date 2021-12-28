@@ -11,7 +11,7 @@ import Logout from "../Pages/Logout";
 import Registro from "../Pages/Registro";
 import UserListScreen from "../Pages/UserListScreen";
 import { Reservas } from "../Pages/Reservas";
-import { Mapa } from "../Pages/Mapa";
+import { Gasolineras } from "../Pages/Gasolineras";
 import { Profile } from '../Pages/Profile';
 import { Incidencias } from '../Pages/Incidencias';
 
@@ -27,7 +27,7 @@ function App() {
       <div className="container-lg p-4">
         <Routes>
           <Route path='/viajes' element={<Viajes />} />
-          <Route path='/mapa' element={<Mapa/>} />
+          <Route path='/gasolineras' element={<Gasolineras/>} />
           <Route path='/incidencias' element={<Incidencias/>} />
           { VibecarContext.value.usuarioActual
           && <>

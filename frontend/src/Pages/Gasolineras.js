@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import React, { useState } from 'react'
 
-export const Mapa = () => {
+export const Gasolineras = () => {
 
     const [localidad, setLocalidad] = useState("")
     const [tipo,setTipo] = useState("1")
@@ -31,9 +31,11 @@ export const Mapa = () => {
       const data = await res.json();
       if (data["msg"]===undefined) {
         setGasolineras(data);
-        var lat = parseFloat(data[0].Latitud.replace(',', '.'))
-        var lon = parseFloat(data[0]["Longitud (WGS84)"].replace(',', '.'))
-        map.setView([lat,lon], map.getZoom())
+
+        const zona = await fetch(`https://nominatim.openstreetmap.org/search?city=${localidad}&country=Spain&format=json`)
+        const data1 = await zona.json();
+        const pos = data1[0]
+        map.setView([pos["lat"],pos["lon"]], map.getZoom())
       
       } else {
         alert("No se han encontrado gasolineras del tipo indicado en la localidad indicada")
@@ -41,21 +43,18 @@ export const Mapa = () => {
       
       
     } 
-
-    //estas seguro de que necesitas cargar la funcion al inicio?
-
     return (
       <div>
-        <h5 className='col-md-4' >Introduce localidad y tipo de gasolina para encontrar las gasolineras más baratas en esa localidad</h5>
-        <form onSubmit={buscaGasolineras} className='card card-body col-md-4'>
-            <input type="text" placeholder='localidad' value={localidad} onChange={e => setLocalidad(e.target.value)} className="form-control" />
-            <select placeholder="Tipo" onChange={e => setTipo(e.target.value)} className="form-control">
+        <form onSubmit={buscaGasolineras} className='card card-body'>
+            <h4>Introduce localidad y tipo de gasolina para encontrar las gasolineras más baratas en esa localidad</h4>
+            Localidad: <input type="text" placeholder='localidad' value={localidad} onChange={e => setLocalidad(e.target.value)} className="form-control" />
+            Tipo de gasolina: <select placeholder="Tipo" onChange={e => setTipo(e.target.value)} className="form-control">
               {options.map(option => (
                 <option key={option.value} value={option.value} label={option.label}/>
               ))}
             </select>
-
-          <button className='form-control' >Buscar</button>
+          <br/>
+          <button className='form-control btn btn-primary btn-block' >Buscar</button>
 
         </form>
         <MapContainer center={[36.7213028,-4.4216366]} zoom={13} scrollWheelZoom={true} whenCreated={setMap} >

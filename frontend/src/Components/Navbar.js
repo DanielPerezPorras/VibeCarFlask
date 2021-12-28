@@ -61,7 +61,7 @@ function Navbar() {
               <Link className="nav-link" to="/viajes">Próximos viajes</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/mapa">Gasolineras Baratas</Link>
+              <Link className="nav-link" to="/gasolineras">Gasolineras Baratas</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/incidencias">Incidencias en carretera</Link>
