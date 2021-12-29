@@ -2,7 +2,7 @@
 ## Script para crear y poblar la base de datos
 ##
 import json
-from bson.objectid import ObjectId
+from bson import json_util
 import pymongo
 
 _client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -21,61 +21,17 @@ reserva.drop()
 opinion.drop()
 mensaje.drop()
 
-# Mapping de IDs de los JSON a ObjectIds
-usuario_ids = {}
-trayecto_ids = {}
-reserva_ids = {}
+with open("datasets/usuario.json", encoding="utf-8") as fstream:
+    usuario.insert_many(json_util.loads(fstream.read()))
 
-with open("datasets/usuario.json") as fstream:
-    json_usuarios = json.load(fstream)
-    for u in json_usuarios:
-        oid = ObjectId()
-        usuario_ids[u["ID"]] = oid
-        u.pop("ID")
-        u["_id"] = oid
+with open("datasets/trayecto.json", encoding="utf-8") as fstream:
+    trayecto.insert_many(json_util.loads(fstream.read()))
 
-    usuario.insert_many(json_usuarios)
+with open("datasets/reserva.json", encoding="utf-8") as fstream:
+    reserva.insert_many(json_util.loads(fstream.read()))
 
-with open("datasets/trayecto.json") as fstream:
-    json_trayectos = json.load(fstream)
-    for t in json_trayectos:
-        oid = ObjectId()
-        trayecto_ids[t["ID"]] = oid
-        t.pop("ID")
-        t["_id"] = oid
+# with open("datasets/opinion.json", encoding="utf-8") as fstream:
+#     opinion.insert_many(json_util.loads(fstream.read()))
 
-        # Remplazar IDs de conductores por sus ObjectIds
-        conductor = t["conductor"]
-        conductor["_id"] = usuario_ids[conductor["ID"]]
-        conductor.pop("ID")
-
-    trayecto.insert_many(json_trayectos)
-
-with open("datasets/reserva.json") as fstream:
-    json_reservas = json.load(fstream)
-    for t in json_reservas:
-        oid = ObjectId()
-        reserva_ids[t["ID"]] = oid
-        t.pop("ID")
-        t["_id"] = oid
-
-        # Remplazar IDs de clientes por sus ObjectIds
-        cliente = t["cliente"]
-        cliente["_id"] = usuario_ids[cliente["ID"]]
-        cliente.pop("ID")
-
-        # Remplazar IDs de trayectos por sus ObjectIds
-        trayecto = t["trayecto"]
-        trayecto["_id"] = trayecto_ids[trayecto["ID"]]
-        trayecto.pop("ID")
-
-    reserva.insert_many(json_reservas)
-
-# with open("datasets/reserva.json") as fstream:
-#     reserva.insert_many(json.load(fstream))
-
-# with open("datasets/opinion.json") as fstream:
-#     opinion.insert_many(json.load(fstream))
-
-# with open("datasets/mensaje.json") as fstream:
-#     mensaje.insert_many(json.load(fstream))
+# with open("datasets/mensaje.json", encoding="utf-8") as fstream:
+#     mensaje.insert_many(json_util.loads(fstream.read()))

@@ -1,63 +1,73 @@
-[
-    {
-        "ID": 1,
-        "nombre": "Admin",
-        "apellidos": "Pérez",
-        "email": "admin@vibemail.com",
-        "telefono": "123456789",
-        "contrasenia": "123",
-        "link_paypal": "#",
-        "url_foto_perfil": "https://cdn.discordapp.com/attachments/761121478498058241/914192753955569734/OG-5IJ-JGobzawLSqXblqwvcZ6YJOQqUpaUsbCYiQeLnQA7jeCfjOyOZnWt8KwI1dTxHCijKrzqGZdqrKtUP7y9U2cspYj5MMjxTgaCBM2ZOmlP_XtM53eQFjgRw2sgmB0F_Wq4ojdPBHvwJ.png",
-        "rol": 2
-    }, {
-        "ID": 2,
-        "nombre": "María",
-        "apellidos": "Porras",
-        "email": "maria@vibemail.com",
-        "telefono": "234567890",
-        "contrasenia": "123",
-        "link_paypal": "#",
-        "url_foto_perfil": "https://cdn.discordapp.com/attachments/761121478498058241/914193229103108156/tw.png",
-        "rol": 1
-    }, {
-        "ID": 3,
-        "nombre": "Juan",
-        "apellidos": "García",
-        "email": "juan@vibemail.com",
-        "telefono": "234567891",
-        "contrasenia": "123",
-        "link_paypal": "#",
-        "url_foto_perfil": "https://purr.objects-us-east-1.dream.io/i/GOie5.jpg",
-        "rol": 1
-    }, {
-        "ID": 4,
-        "nombre": "Daniel",
-        "apellidos": "Leiva",
-        "email": "daniel@vibemail.com",
-        "telefono": "666666666",
-        "contrasenia": "123",
-        "link_paypal": "#",
-        "url_foto_perfil": "https://i.pinimg.com/564x/db/ef/bb/dbefbba44472ef856337fad80c687228.jpg",
-        "rol": 1
-    }, {
-        "ID": 5,
-        "nombre": "Fran",
-        "apellidos": "Guerrero",
-        "email": "fran@gmail.com",
-        "telefono": "666666666",
-        "contrasenia": "123",
-        "link_paypal": "#",
-        "url_foto_perfil": "https://pbs.twimg.com/profile_images/1195269024738885633/DSqqyRNr_400x400.jpg",
-        "rol": 1
-    }, {
-        "ID": 6,
-        "nombre": "Hielito",
-        "apellidos": "Congelado",
-        "email": "fresquito@freeze.com",
-        "telefono": "666666666",
-        "contrasenia": "123",
-        "link_paypal": "#",
-        "url_foto_perfil": "https://cattime.com/assets/uploads/2020/01/can-cats-eat-ice-2.jpg",
-        "rol": 1
-    }
-]
+[{
+  "_id": {
+    "$oid": "61cc3d69d1da1306fd8f0965"
+  },
+  "nombre": "Admin",
+  "apellidos": "Pérez",
+  "email": "admin@vibemail.com",
+  "telefono": "123456789",
+  "contrasenia": "123",
+  "link_paypal": "https://paypal.me/admin",
+  "url_foto_perfil": "https://cdn.discordapp.com/attachments/761121478498058241/914192753955569734/OG-5IJ-JGobzawLSqXblqwvcZ6YJOQqUpaUsbCYiQeLnQA7jeCfjOyOZnWt8KwI1dTxHCijKrzqGZdqrKtUP7y9U2cspYj5MMjxTgaCBM2ZOmlP_XtM53eQFjgRw2sgmB0F_Wq4ojdPBHvwJ.png",
+  "rol": 2
+},{
+  "_id": {
+    "$oid": "61cc3d69d1da1306fd8f0966"
+  },
+  "nombre": "María",
+  "apellidos": "Porras",
+  "email": "maria@vibemail.com",
+  "telefono": "234567890",
+  "contrasenia": "123",
+  "link_paypal": "https://paypal.me/maria",
+  "url_foto_perfil": "https://cdn.discordapp.com/attachments/761121478498058241/914193229103108156/tw.png",
+  "rol": 1
+},{
+  "_id": {
+    "$oid": "61cc3d69d1da1306fd8f0967"
+  },
+  "nombre": "Juan",
+  "apellidos": "García",
+  "email": "juan@vibemail.com",
+  "telefono": "234567891",
+  "contrasenia": "123",
+  "link_paypal": "https://paypal.me/juan",
+  "url_foto_perfil": "https://purr.objects-us-east-1.dream.io/i/GOie5.jpg",
+  "rol": 1
+},{
+  "_id": {
+    "$oid": "61cc3d69d1da1306fd8f0968"
+  },
+  "nombre": "Daniel",
+  "apellidos": "Leiva",
+  "email": "daniel@vibemail.com",
+  "telefono": "666666666",
+  "contrasenia": "123",
+  "link_paypal": "https://paypal.me/daniel",
+  "url_foto_perfil": "https://i.pinimg.com/564x/db/ef/bb/dbefbba44472ef856337fad80c687228.jpg",
+  "rol": 1
+},{
+  "_id": {
+    "$oid": "61cc3d69d1da1306fd8f0969"
+  },
+  "nombre": "Fran",
+  "apellidos": "Guerrero",
+  "email": "fran@gmail.com",
+  "telefono": "666666667",
+  "contrasenia": "123",
+  "link_paypal": "https://paypal.me/fran",
+  "url_foto_perfil": "https://pbs.twimg.com/profile_images/1195269024738885633/DSqqyRNr_400x400.jpg",
+  "rol": 1
+},{
+  "_id": {
+    "$oid": "61cc3d69d1da1306fd8f096a"
+  },
+  "nombre": "Hielito",
+  "apellidos": "Congelado",
+  "email": "fresquito@freeze.com",
+  "telefono": "666666668",
+  "contrasenia": "123",
+  "link_paypal": "https://paypal.me/hielito",
+  "url_foto_perfil": "https://cattime.com/assets/uploads/2020/01/can-cats-eat-ice-2.jpg",
+  "rol": 1
+}]

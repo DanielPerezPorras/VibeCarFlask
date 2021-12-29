@@ -1,83 +1,22 @@
-[
-    {
-        "ID": 1,
-        "cliente": {
-            "ID": 3,
-            "nombre": "Juan",
-            "url_foto_perfil": "https://purr.objects-us-east-1.dream.io/i/GOie5.jpg"
-        },
-        "trayecto": {
-            "ID": 1,
-            "origen": "Granada",
-            "destino": "Malaga"
-        },
-        "fecha_hora_salida": "12-10-2021 20:26:48.296115",
-        "estado": "Disponible",
-        "pasajeros": 2
+[{
+  "_id": {
+    "$oid": "61cc41e4146cb7685e539d6d"
+  },
+  "trayecto": {
+    "_id": {
+      "$oid": "61cc3e8f146cb7685e539d67"
     },
-    {
-        "ID": 2,
-        "cliente": {
-            "ID": 3,
-            "nombre": "Juan",
-            "url_foto_perfil": "https://purr.objects-us-east-1.dream.io/i/GOie5.jpg"
-        },
-        "trayecto": {
-            "ID": 2,
-            "origen": "Malaga",
-            "destino": "Granada"
-        },
-        "fecha_hora_salida": "12-29-2021 20:26:48.296115",
-        "estado": "Disponible",
-        "pasajeros": 2
+    "origen": "Delegación de Hacienda, 2, Avenida Andalucía, El Perchel, Perchel Norte, Centro, Málaga, Málaga-Costa del Sol, Málaga, Andalucía, 29002, España",
+    "destino": "Calle Severo Ochoa, Estación de Cártama, Cártama, Valle del Guadalhorce, Málaga, Andalucía, 29580, España"
+  },
+  "cliente": {
+    "_id": {
+      "$oid": "61cc3d69d1da1306fd8f0966"
     },
-    {
-        "ID": 3,
-        "cliente": {
-            "ID": 5,
-            "nombre": "Fran",
-            "url_foto_perfil": "https://pbs.twimg.com/profile_images/1195269024738885633/DSqqyRNr_400x400.jpg"
-        },
-        "trayecto": {
-            "ID": 10,
-            "origen": "Granada",
-            "destino": "Malaga"
-        },
-        "fecha_hora_salida": "12-30-2021 20:26:48.296115",
-        "estado": "Disponible",
-        "pasajeros": 3
-    },
-    {
-        "ID": 4,
-        "cliente": {
-            "ID": 4,
-            "nombre": "Daniel",
-            "url_foto_perfil": "https://i.pinimg.com/564x/db/ef/bb/dbefbba44472ef856337fad80c687228.jpg"
-        },
-        "trayecto": {
-            "ID": 6,
-            "origen": "Malaga",
-            "destino": "Fuengirola"
-        },
-        "fecha_hora_salida": "12-29-2021 20:26:48.296115",
-        "estado": "Disponible",
-        "pasajeros": 3
-    },
-    {
-        "ID": 5,
-        "cliente": {
-            "ID": 6,
-            "nombre": "Hielito",
-            "url_foto_perfil": "https://cattime.com/assets/uploads/2020/01/can-cats-eat-ice-2.jpg"
-        },
-        "trayecto": {
-            "ID": 7,
-            "origen": "Malaga",
-            "destino": "Granada"
-        },
-        "fecha_hora_salida": "12-30-2021 20:26:48.296115",
-        "estado": "Disponible",
-        "pasajeros": 3
-    }
-
-]
+    "nombre": "María",
+    "url_foto_perfil": "https://cdn.discordapp.com/attachments/761121478498058241/914193229103108156/tw.png"
+  },
+  "fecha_hora_salida": "",
+  "pasajeros": 1,
+  "estado": "disponible"
+}]
