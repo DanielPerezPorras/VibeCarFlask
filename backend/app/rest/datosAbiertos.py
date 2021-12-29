@@ -4,6 +4,7 @@ from ..app import app
 from .utils import usuario_existe, escape_regex
 from urllib.request import urlopen
 import json, geojson
+import unidecode
 
 mongo = PyMongo(app)
 db = mongo.db
@@ -108,7 +109,7 @@ def getGasolineras():
     global datos_gasolineras
     
     try:
-        localidad = request.args["localidad"]
+        localidad = unidecode.unidecode(request.args["localidad"])
         tipo = request.args["tipo"]
     except:
         return jsonify({"msg":"No se ha especificado la localidad y el tipo de la query"})
