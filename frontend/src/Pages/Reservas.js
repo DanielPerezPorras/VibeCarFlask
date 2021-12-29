@@ -1,19 +1,18 @@
-import React, {useState, useEffect,Fragment} from 'react';
+import React, {useState, useEffect} from 'react';
 
 
 export const Reservas = (props) => {
     const {usuarioActual,API} = props
     const [reservas, setReservas] = useState([])
 
-    const getReservas = async () => {
-        const res = await fetch(`${API}/api/v1/reservasCliente/${usuarioActual._id}`)
-        const data = await res.json();
-        setReservas(data)
-    }
-
     useEffect(() => {
+        const getReservas = async () => {
+            const res = await fetch(`${API}/api/v1/reservasCliente/${usuarioActual._id}`)
+            const data = await res.json();
+            setReservas(data)
+        }
         getReservas();
-    }, [])
+    }, [API , usuarioActual._id])
 
     return(
     <div className="col-md-6">
@@ -23,7 +22,6 @@ export const Reservas = (props) => {
                 <th>Origen</th>
                 <th>Destino</th>
                 <th>Dia y hora de salida</th>
-                <th>Plazas</th>
                 <th>Estado</th>
             </tr>
         </thead>
@@ -33,7 +31,6 @@ export const Reservas = (props) => {
                         <td>{reserva.trayecto.origen}</td>
                         <td>{reserva.trayecto.destino}</td>
                         <td>{reserva.fecha_hora_salida}</td>
-                        <td>{reserva.plazas}</td>
                         <td>{reserva.estado}</td>
                 </tr>
             ))}
