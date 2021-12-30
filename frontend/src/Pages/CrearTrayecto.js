@@ -227,7 +227,7 @@ function CrearTrayecto(props) {
   }
   
   if (ok) {
-    return <Navigate to="/" />
+    return <Navigate to="/myprofile" />
   } else {
     return (
 

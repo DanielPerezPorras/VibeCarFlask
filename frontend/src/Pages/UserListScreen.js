@@ -67,7 +67,6 @@ function UserListScreen() {
   return (
     <>
       <h1>Lista de Usuarios</h1>
-      <p>En el futuro esto podría ser la pantalla del Admin</p>
       <UserList />
     </>
   );
