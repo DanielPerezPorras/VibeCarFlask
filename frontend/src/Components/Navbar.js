@@ -45,7 +45,7 @@ function Navbar() {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-primary bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-lg px-4">
 
         <Link className="navbar-brand" to={VibecarContext.value.usuarioActual ? "/myProfile" : "/"}>Vibecar</Link>
