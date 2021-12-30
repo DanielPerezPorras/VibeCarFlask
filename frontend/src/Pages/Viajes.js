@@ -86,6 +86,9 @@ function Viajes() {
                 }
             }
             setTrayectos(filtroRes)
+            if (filtroRes.length === 0) {
+                alert("No se han encontrado trayectos.")
+            }
         } else {
             alert("Debes indicar un lugar de Origen y Destino para buscar trayectos")
         }
@@ -136,7 +139,7 @@ function Viajes() {
                 coords.push(parseFloat(data2Res["lon"]))
                 coords.push(origen)
                 coords.push(destino)
-                setCoord(coords) 
+                setCoord(coords)
             } else {
                 setCoord([])
             }

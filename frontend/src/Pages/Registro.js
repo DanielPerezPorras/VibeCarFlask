@@ -215,7 +215,7 @@ function Registro(props) {
           </div>
           <div className="mb-3">
             <label htmlFor="campo-link-paypal" className="form-label">Enlace de PayPal en el que recibirás los pagos</label>
-            <input type="text" className={clasesCampo(errorLinkPaypal)} id="campo-link-paypal" value={linkPaypal}
+            <input type="url" className={clasesCampo(errorLinkPaypal)} id="campo-link-paypal" value={linkPaypal}
             onChange={ev => setLinkPaypal(ev.target.value)} disabled={checking} />
             {infoCampo(errorLinkPaypal)}
           </div>

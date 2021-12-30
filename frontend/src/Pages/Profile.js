@@ -95,7 +95,7 @@ export const Profile = (props) => {
                     <div className='profile-number'><i className="bi bi-telephone icono-movil"></i><div>{telefono}</div></div>
                     <div className='profile-rol'>
                         {rol > 1 &&
-                            <div><i clasName="bi bi-sunglasses">Admin</i></div>
+                            <div><i className="bi bi-sunglasses">Admin</i></div>
                         }
                     </div>
                     <div className='profile-paypal'>
