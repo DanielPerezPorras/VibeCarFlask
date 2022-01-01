@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import RoutineMachine from "../Components/RoutineMachine";
 import {format} from 'date-fns'
+import { useNavigate } from "react-router-dom";
 import {importarFechaDeBD, importarFechaDeFormulario, parteFechaIgual} from '../Utilities/dates';
 import {recortarDireccion} from '../Utilities/direcciones'
 
@@ -18,8 +19,14 @@ function Viajes() {
     const [trayectos, setTrayectos] = useState([])
     const [coord, setCoord] = useState([])
 
+    let navigate = useNavigate();
+    
     function LanzaMaquina (){
         return (<RoutineMachine coord={coord} />)
+    }
+
+    function Redirect() {
+        navigate("/reservas")
     }
 
     const limpiar = () => {
@@ -116,6 +123,7 @@ function Viajes() {
             })
             const data = await res.json();
             console.log(data)
+            Redirect();
             alert("Reserva realizada")
         }
     }

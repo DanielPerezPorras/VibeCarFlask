@@ -22,6 +22,7 @@ export const Reservas = (props) => {
                 <th>Origen</th>
                 <th>Destino</th>
                 <th>Dia y hora de salida</th>
+                <th>Pasajeros</th>
                 <th>Estado</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@ export const Reservas = (props) => {
                         <td>{reserva.trayecto.origen}</td>
                         <td>{reserva.trayecto.destino}</td>
                         <td>{reserva.fecha_hora_salida}</td>
+                        <td>{reserva.pasajeros}</td>
                         <td>{reserva.estado}</td>
                 </tr>
             ))}
