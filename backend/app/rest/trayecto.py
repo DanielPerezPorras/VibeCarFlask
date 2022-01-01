@@ -1,7 +1,7 @@
 from flask import request, jsonify, make_response
 from flask_pymongo import PyMongo, ObjectId
 from ..app import app
-from .utils import usuario_existe, escape_regex
+from .utils import usuario_existe, procesar_regex
 
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
@@ -56,13 +56,13 @@ def get_trayectos():
 
     if origen is not None:
         regex = {
-            "$regex": escape_regex(origen),
+            "$regex": procesar_regex(origen),
             "$options": "i"
             }
         condiciones.append({"origen": regex})
     if destino is not None:
         regex = {
-            "$regex": escape_regex(destino),
+            "$regex": procesar_regex(destino),
             "$options": "i"
             }
         condiciones.append({"destino": regex})

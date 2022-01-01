@@ -25,3 +25,29 @@ def escape_regex(expr):
     for c in _caracteres_especiales:
         expr = expr.replace(c, "\\" + c)
     return expr
+
+reglas_diacriticos = {
+    "A": "[aá]",
+    "a": "[aá]",
+    "E": "[eé]",
+    "e": "[eé]",
+    "I": "[ií]",
+    "i": "[ií]",
+    "O": "[oó]",
+    "o": "[oó]",
+    "U": "[uúü]",
+    "u": "[uúü]",
+    "Ü": "[uúü]",
+    "ü": "[uúü]"
+}
+def convertir_diacriticos_regex(expr):
+    resultado = ""
+    for c in expr:
+        if c in reglas_diacriticos:
+            resultado += reglas_diacriticos[c]
+        else:
+            resultado += c
+    return resultado
+
+def procesar_regex(expr):
+    return convertir_diacriticos_regex(escape_regex(expr))

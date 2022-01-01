@@ -25,12 +25,12 @@ def getIncidencias():
     global datos_incidenciasprovincia
 
     try:
-        provincia = request.args['provincia']
+        provincia = unidecode.unidecode(request.args['provincia'])
     except:
         provincia = None
 
     try:    
-        localidad = request.args['localidad']
+        localidad = unidecode.unidecode(request.args['localidad'])
     except:
         localidad = None
 
