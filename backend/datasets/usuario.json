@@ -2,10 +2,10 @@
   "_id": {
     "$oid": "61cc3d69d1da1306fd8f0965"
   },
-  "nombre": "Admin",
-  "apellidos": "Pérez",
-  "email": "admin@vibemail.com",
-  "telefono": "123456789",
+  "nombre": "Carlos",
+  "apellidos": "Canal",
+  "email": "pruebaparaingweb@gmail.com",
+  "telefono": "777777777",
   "contrasenia": "123",
   "link_paypal": "https://paypal.me/admin",
   "url_foto_perfil": "https://cdn.discordapp.com/attachments/761121478498058241/914192753955569734/OG-5IJ-JGobzawLSqXblqwvcZ6YJOQqUpaUsbCYiQeLnQA7jeCfjOyOZnWt8KwI1dTxHCijKrzqGZdqrKtUP7y9U2cspYj5MMjxTgaCBM2ZOmlP_XtM53eQFjgRw2sgmB0F_Wq4ojdPBHvwJ.png",

@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-
+from .rest.config import mongodb_connection_string
 
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ CORS(app)
 app.config["DEBUG"] = True 
 
 # Para Flask-PyMongo
-app.config["MONGO_URI"] = "mongodb://localhost/vibecar"
+app.config["MONGO_URI"] = mongodb_connection_string + "/vibecar"
 
 # Importamos la API REST
 from .rest.usuario import *
