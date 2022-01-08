@@ -16,7 +16,7 @@ try:
         api_key = cloud_api_key, 
         api_secret = cloud_api_secret 
     )
-except ImportError:
+except ModuleNotFoundError:
     # Fichero de configuración no encontrado - consultamos variables de entorno
     cloudinary.config( 
         cloud_name = os.environ["CLOUD_NAME"], 

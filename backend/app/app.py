@@ -17,7 +17,7 @@ try:
     # Fichero de configuración encontrado - lo usamos
     from .rest.config import mongodb_connection_string
     app.config["MONGO_URI"] = mongodb_connection_string
-except ImportError:
+except ModuleNotFoundError:
     # Fichero de configuración no encontrado - consultamos variables de entorno
     app.config["MONGO_URI"] = os.environ["MONGO_URI"]
 
