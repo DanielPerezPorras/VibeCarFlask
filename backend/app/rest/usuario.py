@@ -1,3 +1,4 @@
+import os
 from flask import jsonify, make_response, request
 from flask_pymongo import PyMongo, ObjectId
 from ..app import app
@@ -6,14 +7,22 @@ from .utils import escape_regex
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-from .config import *
 
-# --- Cloudinary key
-cloudinary.config( 
-  cloud_name = cloud_name, 
-  api_key = cloud_api_key, 
-  api_secret = cloud_api_secret 
-)
+try:
+    # Fichero de configuración encontrado - lo usamos
+    from .config import *
+    cloudinary.config( 
+        cloud_name = cloud_name, 
+        api_key = cloud_api_key, 
+        api_secret = cloud_api_secret 
+    )
+except ImportError:
+    # Fichero de configuración no encontrado - consultamos variables de entorno
+    cloudinary.config( 
+        cloud_name = os.environ["CLOUD_NAME"], 
+        api_key = os.environ["CLOUD_API_KEY"], 
+        api_secret = os.environ["CLOUD_API_SECRET"] 
+    )
 
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
@@ -184,10 +193,8 @@ def uploadImg():
 
 @app.route("/api/v1/usuarios/image/<id>", methods=["PUT"])
 def uploadProfilePic(id):
-    print(cloud_name)
     oid = ObjectId(id)
     img = request.files['file']
-    print(img)
     # print(img.filename)
     if True: # (img.filename).endswith(".jpg", ".png"):
         res = cloudinary.uploader.upload(img)
