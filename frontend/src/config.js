@@ -1,4 +1,4 @@
-let API = process.env.REACT_APP_.API;
+let API = process.env.REACT_APP_API;
 if (API === undefined) {
   API = 'http://localhost:8080'
 }
