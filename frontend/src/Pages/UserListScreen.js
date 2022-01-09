@@ -1,4 +1,5 @@
 import React from "react";
+import { API } from "../config";
 
 class UserList extends React.Component {
 
@@ -54,7 +55,7 @@ class UserList extends React.Component {
 }
 
 async function fetchUserList() {
-  let response = await fetch("http://localhost:8080/api/v1/usuarios")
+  let response = await fetch(API + "/api/v1/usuarios")
   if (response.ok) {
     let json = await response.json();
     return json;

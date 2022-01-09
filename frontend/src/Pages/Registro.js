@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import VibecarContext from '../Components/VibecarContext';
+import { API } from "../config";
 
 function Registro(props) {
 
@@ -28,7 +29,7 @@ function Registro(props) {
 
   const emailEnUso = async email => {
     let result = true;
-    const res = await fetch("http://localhost:8080/api/v1/usuarios/email/" + email);
+    const res = await fetch(API + "/api/v1/usuarios/email/" + email);
     if (res.status === 200) {
       setErrorEmail("Dirección en uso por otro usuario. Elige otra.");
     } else if (res.status === 404) {
@@ -116,7 +117,7 @@ function Registro(props) {
         "url_foto_perfil": "/defaultpfp.png",
         "rol": 1
       };
-      fetch("http://localhost:8080/api/v1/usuarios", {
+      fetch(API + "/api/v1/usuarios", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

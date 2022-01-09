@@ -3,8 +3,7 @@ import { Navigate } from "react-router-dom";
 import VibecarContext from '../Components/VibecarContext';
 import { MapContainer, TileLayer, Marker, useMapEvents, Popup } from 'react-leaflet';
 import { prepararFechaParaBD } from "../Utilities/dates";
-
-//   `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
+import { API } from "../config";
 
 function CrearTrayecto(props) {
 
@@ -164,7 +163,7 @@ function CrearTrayecto(props) {
         "permitir_valoraciones": false,
         "conductor": usuarioActual["_id"]
       };
-      fetch("http://localhost:8080/api/v1/trayectos", {
+      fetch(API + "/api/v1/trayectos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

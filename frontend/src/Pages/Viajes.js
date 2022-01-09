@@ -4,7 +4,8 @@ import RoutineMachine from "../Components/RoutineMachine";
 import {format} from 'date-fns'
 import { useNavigate } from "react-router-dom";
 import {importarFechaDeBD, importarFechaDeFormulario, parteFechaIgual} from '../Utilities/dates';
-import {recortarDireccion} from '../Utilities/direcciones'
+import {recortarDireccion} from '../Utilities/direcciones';
+import { API } from "../config";
 
 import "../Styles/Mapa.css"
 import VibecarContext from "../Components/VibecarContext";
@@ -40,10 +41,10 @@ function Viajes() {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const res = await fetch(`http://localhost:8080/api/v1/trayectos?origen=${origen}&destino=${destino}`)
+        const res = await fetch(`${API}/api/v1/trayectos?origen=${origen}&destino=${destino}`)
         const data = await res.json();
 
-        const reservas = await fetch(`http://localhost:8080/api/v1/reservas`);
+        const reservas = await fetch(`${API}/api/v1/reservas`);
         const dataReservas = await reservas.json();
 
         if (origen !== "" && destino !== ""){
@@ -114,7 +115,7 @@ function Viajes() {
                 "estado": "disponible"
             };
             console.log(datos)
-            const res = await fetch("http://localhost:8080/api/v1/reservas", {
+            const res = await fetch(API + "/api/v1/reservas", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

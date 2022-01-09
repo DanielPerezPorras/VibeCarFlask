@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import React, { useState } from 'react'
+import { API } from "../config";
 
 export const Gasolineras = () => {
 
@@ -27,7 +28,7 @@ export const Gasolineras = () => {
     
     const buscaGasolineras = async (e) => {
       e.preventDefault()
-      const res = await fetch(`http://localhost:8080/api/v1/gasolineras/search?localidad=${localidad}&tipo=${tipo}`)
+      const res = await fetch(`${API}/api/v1/gasolineras/search?localidad=${localidad}&tipo=${tipo}`)
       const data = await res.json();
       if (data["msg"]===undefined) {
         setGasolineras(data);

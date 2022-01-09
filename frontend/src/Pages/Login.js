@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import VibecarContext from '../Components/VibecarContext';
+import { API } from "../config";
 
 function Login(props) {
 
@@ -11,7 +12,7 @@ function Login(props) {
 
   const validarLogin = async ev => {
     ev.preventDefault();
-    fetch("http://localhost:8080/api/v1/login", {
+    fetch(API + "/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

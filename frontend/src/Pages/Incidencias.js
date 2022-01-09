@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet';
-
+import { API } from "../config";
 
 export const Incidencias = () => {
     const [localidad, setLocalidad] = useState("")
@@ -55,11 +55,11 @@ export const Incidencias = () => {
             let str = ``
             let param = localidad
             if (localidad !== "" && provincia !== "") {
-                str = `http://localhost:8080/api/v1/incidencias/search?localidad=${localidad}&provincia=${provincia}`;
+                str = `${API}/api/v1/incidencias/search?localidad=${localidad}&provincia=${provincia}`;
             } else if (localidad !== "") {
-                str = `http://localhost:8080/api/v1/incidencias/search?localidad=${localidad}`
+                str = `${API}/api/v1/incidencias/search?localidad=${localidad}`
             } else if(provincia !=="") {
-                str = `http://localhost:8080/api/v1/incidencias/search?provincia=${provincia}`
+                str = `${API}/api/v1/incidencias/search?provincia=${provincia}`
                 param = provincia
             }
             const res = await fetch(str);

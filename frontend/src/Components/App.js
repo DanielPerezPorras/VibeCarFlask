@@ -10,12 +10,11 @@ import Login from "../Pages/Login";
 import Logout from "../Pages/Logout";
 import Registro from "../Pages/Registro";
 import UserListScreen from "../Pages/UserListScreen";
+import { API } from "../config";
 import { Reservas } from "../Pages/Reservas";
 import { Gasolineras } from "../Pages/Gasolineras";
 import { Profile } from '../Pages/Profile';
 import { Incidencias } from '../Pages/Incidencias';
-
-const API ='http://localhost:8080';
 
 function App() {
 
