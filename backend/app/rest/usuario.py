@@ -1,6 +1,8 @@
 import os
 from flask import jsonify, make_response, request
 from flask_pymongo import PyMongo, ObjectId
+from google.oauth2 import id_token
+from google.auth.transport import requests
 from ..app import app
 from .trayecto import actualizar_conductor
 from .utils import escape_regex
@@ -43,7 +45,6 @@ def create_usuario():
                 "apellidos": str(datos["apellidos"]),
                 "email": str(datos["email"]),
                 "telefono": str(datos["telefono"]),
-                "contrasenia": str(datos["contrasenia"]),
                 "link_paypal": str(datos["link_paypal"]),
                 "url_foto_perfil": str(datos["url_foto_perfil"]),
                 "rol": int(datos["rol"])
@@ -107,18 +108,22 @@ def get_usuario_by_email(email):
 def login():
     if request.is_json:
         datos = request.get_json()
-        try:
-            mi_usuario = usuario.find_one({
-                "email": datos["email"],
-                "contrasenia": datos["contrasenia"]
-                })
-            if mi_usuario is not None:
-                mi_usuario["_id"] = str(mi_usuario["_id"])
-                return jsonify(mi_usuario)
-            else:
-                return jsonify(msg="Usuario no encontrado"), 404
+        if "token" in datos:
+            try:
+                token = id_token.verify_oauth2_token(datos["token"],
+                    requests.Request(), google_oauth_client_id, 10)
 
-        except:
+                mi_usuario = usuario.find_one({ "email": token["email"] })
+                if mi_usuario is not None:
+                    mi_usuario["_id"] = str(mi_usuario["_id"])
+                    return jsonify(mi_usuario)
+                else:
+                    return jsonify(msg="Usuario no encontrado"), 404
+
+            except:
+                respuesta = jsonify(msg="Token no válido")
+                return make_response(respuesta, 406)
+        else:
             respuesta = jsonify(msg="Petición no válida, faltan campos o no son del tipo correcto")
             return make_response(respuesta, 400)
 
@@ -143,8 +148,6 @@ def update_usuario(id):
                     nuevos_valores["email"] = str(datos["email"])
                 if "telefono" in datos:
                     nuevos_valores["telefono"] = str(datos["telefono"])
-                if "contrasenia" in datos:
-                    nuevos_valores["contrasenia"] = str(datos["contrasenia"])
                 if "link_paypal" in datos:
                     nuevos_valores["link_paypal"] = str(datos["link_paypal"])
                 if "url_foto_perfil" in datos:

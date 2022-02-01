@@ -1,35 +1,46 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import GoogleLogin from "react-google-login";
 import VibecarContext from '../Components/VibecarContext';
 import { API } from "../config";
+import { GoogleClientId } from "../secrets";
+import Registro from "./Registro";
 
 function Login(props) {
 
-  const [ok, setOk] = useState(false);
-  const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
-  const [contrasenia, setContrasenia] = useState("");
+  const [ok, setOk] = useState("unlogged");
+  const [error, setError] = useState(null);
+  const [registerData, setRegisterData] = useState(null);
 
-  const validarLogin = async ev => {
-    ev.preventDefault();
+  function handleLogin(googleData) {
     fetch(API + "/api/v1/login", {
-      method: "POST",
+      "method": "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "email": email,
-        "contrasenia": contrasenia
+        "token": googleData.tokenId
       })
     }).then(
       async (res) => {
         if (res.status === 200) {
           const datos = await res.json()
           VibecarContext.value.usuarioActual = datos;
-          setOk(true);
+          setOk("logged");
           props.forceAppUpdate();
         } else if (res.status === 404) {
-          setError("Usuario o contraseña incorrecto.");
+          let lastName = ""
+          if (googleData.profileObj.familyName) {
+            lastName = googleData.profileObj.familyName;
+          }
+          setRegisterData({
+            firstName: googleData.profileObj.givenName,
+            lastName: lastName,
+            email: googleData.profileObj.email
+          })
+          setOk("registering");
+        } else if (res.status === 406) {
+          setError("Token de autenticación no válido.");
         } else {
           setError("Error del servidor. Vuelve a intentarlo más tarde.");
         }
@@ -39,32 +50,40 @@ function Login(props) {
     )
   }
 
-  if (ok) {
-    return <Navigate to="/myprofile" />
-  } else {
-    return (
-      <div className="row">
-        <form onSubmit={validarLogin} className="offset-md-2 col-md-8">
-          <h1>Entrar en Vibecar</h1>
-          <div className="mb-3">
-            <label htmlFor="campo-email" className="form-label">Correo electrónico</label>
-            <input type="email" className="form-control" id="campo-email" value={email}
-            onChange={ev => setEmail(ev.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="campo-contrasenia" className="form-label">Contraseña</label>
-            <input type="password" className="form-control" id="campo-contrasenia" value={contrasenia}
-            onChange={ev => setContrasenia(ev.target.value)} />
-          </div>
-          { error !== "" &&
-            <div className="alert alert-danger" role="alert">
-              {error}
-            </div>
+  function handleFailure(result) {
+    switch (result.error) {
+      case "popup_closed_by_user":
+        break;
+
+      default:
+        setError("No se pudo iniciar sesión. Vuelve a intentarlo más tarde.");
+    }
+    
+  }
+
+  switch (ok) {
+
+    case "logged":
+      return <Navigate to="/myprofile" />;
+
+    case "registering":
+      return <Registro forceAppUpdate={props.forceAppUpdate}
+      initialFirstName={registerData.firstName} initialLastName={registerData.lastName}
+      email={registerData.email} />;
+
+    default:
+      return (
+        <div className="text-center">
+          <h1>Tu viaje ideal al mejor precio</h1>
+          <p>Únete a Vibecar para compartir coche con otras personas y viajar de forma económica y sostenible</p>
+          <GoogleLogin clientId={GoogleClientId} buttonText="Iniciar sesión con Google"
+          onSuccess={handleLogin} onFailure={handleFailure} cookiePolicy="single_host_origin" />
+          { error &&
+            <div className="alert alert-danger mt-2">{error}</div>
           }
-          <input type="submit" className="btn btn-primary" value="Iniciar sesión" />
-        </form>
-      </div>
-    );
+        </div>
+      );
+
   }
 }
 

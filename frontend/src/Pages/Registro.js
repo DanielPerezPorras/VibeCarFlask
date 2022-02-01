@@ -7,39 +7,19 @@ function Registro(props) {
 
   let [ok, setOk] = useState(false);
 
-  let [nombre, setNombre] = useState("");
-  let [apellidos, setApellidos] = useState("");
-  let [email, setEmail] = useState("");
+  let [nombre, setNombre] = useState(props.initialFirstName);
+  let [apellidos, setApellidos] = useState(props.initialLastName);
   let [telefono, setTelefono] = useState("");
-  let [contrasenia1, setContrasenia1] = useState("");
-  let [contrasenia2, setContrasenia2] = useState("");
   let [linkPaypal, setLinkPaypal] = useState("");
 
   let [errorNombre, setErrorNombre] = useState(null);
   let [errorApellidos, setErrorApellidos] = useState(null);
-  let [errorEmail, setErrorEmail] = useState(null);
   let [errorTelefono, setErrorTelefono] = useState(null);
-  let [errorContrasenia1, setErrorContrasenia1] = useState(null);
-  let [errorContrasenia2, setErrorContrasenia2] = useState(null);
   let [errorLinkPaypal, setErrorLinkPaypal] = useState(null);
 
   let [errorServidor, setErrorServidor] = useState(null);
 
   let [checking, setChecking] = useState(false);
-
-  const emailEnUso = async email => {
-    let result = true;
-    const res = await fetch(API + "/api/v1/usuarios/email/" + email);
-    if (res.status === 200) {
-      setErrorEmail("Dirección en uso por otro usuario. Elige otra.");
-    } else if (res.status === 404) {
-      result = false;
-    } else {
-      setErrorEmail(null);
-      setErrorServidor("Error del servidor. Vuelve a intentarlo más tarde.");
-    }
-    return result;
-  }
 
   const validarRegistro = async ev => {
     ev.preventDefault();
@@ -66,29 +46,6 @@ function Registro(props) {
     } else {
       setErrorTelefono("");
     }
-
-    if (contrasenia1.length > 0 && contrasenia2.length > 0) {
-      if (contrasenia1 !== contrasenia2) {
-        setErrorContrasenia1("Las contraseñas no coinciden.");
-        setErrorContrasenia2("Las contraseñas no coinciden.");
-        ok = false;
-      } else {
-        setErrorContrasenia1("");
-        setErrorContrasenia2("");
-      }
-    } else {
-      ok = false
-      if (contrasenia1.length === 0) {
-        setErrorContrasenia1("Este campo está vacío.");
-      } else {
-        setErrorContrasenia1("");
-      }
-      if (contrasenia2.length === 0) {
-        setErrorContrasenia2("Este campo está vacío.");
-      } else {
-        setErrorContrasenia2("");
-      }
-    }
     
     if (linkPaypal.trim().length === 0) {
       setErrorLinkPaypal("El enlace de PayPal está vacío.");
@@ -97,22 +54,12 @@ function Registro(props) {
       setErrorLinkPaypal("");
     }
 
-    if (email.trim().length === 0) {
-      setErrorEmail("El correo electrónico está vacío");
-      ok = false;
-    } else if (await emailEnUso(email)) {
-      ok = false;
-    } else {
-      setErrorEmail("");
-    }
-
     if (ok) {
       const datos = {
         "nombre": nombre,
         "apellidos": apellidos,
-        "email": email,
+        "email": props.email,
         "telefono": telefono,
-        "contrasenia": contrasenia1,
         "link_paypal": linkPaypal,
         "url_foto_perfil": "/defaultpfp.png",
         "rol": 1
@@ -191,9 +138,8 @@ function Registro(props) {
           <div className="row">
             <div className="col-12 col-md-8 mb-3">
               <label htmlFor="campo-email" className="form-label">Correo electrónico</label>
-              <input type="email" className={clasesCampo(errorEmail)} id="campo-email" value={email}
-              onChange={ev => setEmail(ev.target.value)} disabled={checking} />
-              {infoCampo(errorEmail)}
+              <input type="email" className="form-control" id="campo-email" value={props.email}
+              readOnly />
             </div>
             <div className="col-12 col-md-4 mb-3">
               <label htmlFor="campo-telefono" className="form-label">Teléfono</label>
@@ -201,18 +147,6 @@ function Registro(props) {
               onChange={ev => setTelefono(ev.target.value)} disabled={checking} />
               {infoCampo(errorTelefono)}
             </div>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="campo-contrasenia-1" className="form-label">Contraseña</label>
-            <input type="password" className={clasesCampo(errorContrasenia1)} id="campo-contrasenia-1" value={contrasenia1}
-            onChange={ev => setContrasenia1(ev.target.value)} disabled={checking} />
-            {infoCampo(errorContrasenia1)}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="campo-contrasenia-2" className="form-label">Confirma tu contraseña</label>
-            <input type="password" className={clasesCampo(errorContrasenia2)} id="campo-contrasenia-2" value={contrasenia2}
-            onChange={ev => setContrasenia2(ev.target.value)} disabled={checking} />
-            {infoCampo(errorContrasenia2)}
           </div>
           <div className="mb-3">
             <label htmlFor="campo-link-paypal" className="form-label">Enlace de PayPal en el que recibirás los pagos</label>

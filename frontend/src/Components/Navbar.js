@@ -12,14 +12,7 @@ function Navbar() {
   }
 
   let derecha = (
-    <>
-      <li className="nav-item">
-        <Link className="nav-link" to="/login">Entrar</Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/registro">Regístrate</Link>
-      </li>
-    </>
+    <></>
   );
 
   if (VibecarContext.value.usuarioActual) {

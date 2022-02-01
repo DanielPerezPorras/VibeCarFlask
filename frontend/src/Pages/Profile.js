@@ -170,15 +170,6 @@ export const Profile = (props) => {
                             placeholder="Su tel&eacute;fono..."/> 
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="contrasena">Contrase&ntilde;a</label>
-                            <input type="password"
-                            id="contrasena" 
-                            onChange={e => setContrasenia(e.target.value)} 
-                            value={contrasenia}
-                            className="form-control"
-                            placeholder="Su contras&ntilde;a..."/> 
-                        </div>
-                        <div className="form-group mb-2">
                             <label htmlFor="link_paypal">Link de Paypal</label>
                             <input type="url"
                             id="link_paypal" 

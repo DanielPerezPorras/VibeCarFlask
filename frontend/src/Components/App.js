@@ -3,12 +3,10 @@ import '../Styles/App.css';
 import { Routes, Route } from 'react-router-dom' //ahora no es Switch ahora es Routes
 import VibecarContext, { useForceUpdate } from './VibecarContext';
 import Navbar from "./Navbar";
-import Inicio from "../Pages/Inicio";
 import Viajes from "../Pages/Viajes";
 import CrearTrayecto from "../Pages/CrearTrayecto";
 import Login from "../Pages/Login";
 import Logout from "../Pages/Logout";
-import Registro from "../Pages/Registro";
 import UserListScreen from "../Pages/UserListScreen";
 import { API } from "../config";
 import { Reservas } from "../Pages/Reservas";
@@ -38,9 +36,7 @@ function App() {
           </> }
           { !VibecarContext.value.usuarioActual
           && <>
-            <Route path='/' element={<Inicio />} />
-            <Route path='/login' element={<Login forceAppUpdate={forceUpdate} />} />
-            <Route path='/registro' element={<Registro forceAppUpdate={forceUpdate} />} />
+            <Route path='/' element={<Login forceAppUpdate={forceUpdate} />} />
           </> }
         </Routes>
       </div>
