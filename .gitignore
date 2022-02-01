@@ -27,4 +27,4 @@ yarn-error.log*
 
 # config for api keys
 backend/app/rest/config.py
-frontend/src/secrets.js
+frontend/openfrontend.bat
