@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import VibecarContext from '../Components/VibecarContext';
-import { API } from "../config";
-import { GoogleClientId } from "../secrets";
+import { API, GoogleClientId } from "../config";
 import Registro from "./Registro";
 
 function Login(props) {
