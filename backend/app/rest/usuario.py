@@ -25,6 +25,7 @@ except ModuleNotFoundError:
         api_key = os.environ["CLOUD_API_KEY"], 
         api_secret = os.environ["CLOUD_API_SECRET"] 
     )
+    google_oauth_client_id = os.environ["GOOGLE_OAUTH_CLIENT_ID"]
 
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
