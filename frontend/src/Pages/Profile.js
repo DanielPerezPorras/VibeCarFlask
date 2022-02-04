@@ -1,23 +1,34 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import '../Styles/Profile.css'
 import VibecarContext from '../Components/VibecarContext';
 
 
 export const Profile = (props) => {
     const {usuarioActual, API} = props
-    console.log(usuarioActual)    
     const [id, setId] = useState(usuarioActual._id)
     const [nombre, setNombre] = useState(usuarioActual.nombre)
     const [apellidos, setApellidos] = useState(usuarioActual.apellidos)
     const [email, setEmail] = useState(usuarioActual.email)
     const [telefono, setTelefono] = useState(usuarioActual.telefono)
-    const [contrasenia, setContrasenia] = useState(usuarioActual.contrasenia)
     const [link_paypal, setLink_Paypal] = useState(usuarioActual.link_paypal)
     const [url_foto_perfil, setUrl_Foto_Perfil] = useState(usuarioActual.url_foto_perfil)
     const [rol, setRol] = useState(usuarioActual.rol)
     const [editing, setEditing] = useState(false)
+    const [valoraciones, setValoraciones] = useState([])
+    const [media, setMedia] = useState([])
     const [file, setFile] = useState("");
     
+    const getValoraciones = async () => {
+        const respuesta = await fetch(`${API}/api/v1/valoraciones/${id}`)
+        const data = await respuesta.json();
+        setValoraciones(data.valoraciones);
+        setMedia(data.media);
+    }
+    
+    useEffect(() => {
+        getValoraciones();
+    }, []) //[] para que se ejecuta nada más abrir la pagina
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setEditing(true);
@@ -27,13 +38,11 @@ export const Profile = (props) => {
         e.preventDefault();
         let formData = new FormData();
         formData.append('file', file);
-        console.log(`${API}/api/v1/usuarios/${id}`)
         const respuesta = await fetch(`${props.API}/api/v1/usuarios/image/${id}`, {
             method: 'PUT',
             body: formData
         })
         const data = await respuesta.json();
-        console.log(data)
         if (data.msg === "El archivo no es una imagen")
         {
             alert("El archivo no es una imagen")
@@ -56,7 +65,6 @@ export const Profile = (props) => {
                 apellidos: apellidos,
                 email: email,
                 telefono: telefono,
-                contrasenia: contrasenia,
                 link_paypal: link_paypal,
                 url_foto_perfil: url_foto_perfil,
                 rol: rol
@@ -69,13 +77,11 @@ export const Profile = (props) => {
             "apellidos": apellidos,
             "email": email,
             "telefono": telefono,
-            "contrasenia": contrasenia,
             "link_paypal": link_paypal,
             "url_foto_perfil": url_foto_perfil,
             "rol": rol
     }
         props.forceAppUpdate();
-        console.log(data)
     }
 
     return (
