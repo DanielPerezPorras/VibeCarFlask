@@ -1,4 +1,3 @@
-import os
 from flask import jsonify, make_response, request
 from flask_pymongo import PyMongo, ObjectId
 from ..app import app
@@ -59,3 +58,17 @@ def getValoracionesPorUsuario(id):
     if media > 0: 
         media = int(media/len(res))
     return jsonify({ 'media' : media, 'valoraciones' : res})
+
+@app.route("/api/v1/valoraciones/<uValorado>/<uValora>/<idViaje>", methods=["GET"])
+def getValoracion(uValorado,uValora,idViaje):
+
+    res = valoraciones.find_one({
+        'idviaje' : ObjectId(idViaje),
+        'usuarioQueValora' : ObjectId(uValora),
+        'usuarioValorado' : ObjectId(uValorado)})
+    print(res)
+    if (res is not None):
+        return jsonify({ "msg": str(res["_id"])})
+    else:
+        return jsonify("null")
+
