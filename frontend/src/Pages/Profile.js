@@ -5,14 +5,14 @@ import VibecarContext from '../Components/VibecarContext';
 
 export const Profile = (props) => {
     const {usuarioActual, API} = props
-    const [id, setId] = useState(usuarioActual._id)
+    const id = usuarioActual._id
     const [nombre, setNombre] = useState(usuarioActual.nombre)
     const [apellidos, setApellidos] = useState(usuarioActual.apellidos)
     const [email, setEmail] = useState(usuarioActual.email)
     const [telefono, setTelefono] = useState(usuarioActual.telefono)
     const [link_paypal, setLink_Paypal] = useState(usuarioActual.link_paypal)
     const [url_foto_perfil, setUrl_Foto_Perfil] = useState(usuarioActual.url_foto_perfil)
-    const [rol, setRol] = useState(usuarioActual.rol)
+    const rol = usuarioActual.rol
     const [editing, setEditing] = useState(false)
     const [valoraciones, setValoraciones] = useState([])
     const [media, setMedia] = useState([])
@@ -27,6 +27,7 @@ export const Profile = (props) => {
     
     useEffect(() => {
         getValoraciones();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []) //[] para que se ejecuta nada más abrir la pagina
 
     const handleSubmit = async (e) => {
@@ -55,7 +56,7 @@ export const Profile = (props) => {
     const actualizarUsuario = async (e) => {
         e.preventDefault();
         setEditing(false);
-        const respuesta = await fetch(`${API}/api/v1/usuarios/${id}`, {
+        await fetch(`${API}/api/v1/usuarios/${id}`, {
             method: 'PUT',
             headers:{
                 'Content-Type' : 'application/json'
@@ -70,7 +71,6 @@ export const Profile = (props) => {
                 rol: rol
             })
         })
-        const data = await respuesta.json();
         VibecarContext.value.usuarioActual = {
             "_id" : id,
             "nombre": nombre,
