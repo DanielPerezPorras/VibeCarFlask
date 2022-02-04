@@ -1,23 +1,35 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import '../Styles/Profile.css'
 import VibecarContext from '../Components/VibecarContext';
 
 
 export const Profile = (props) => {
     const {usuarioActual, API} = props
-    console.log(usuarioActual)    
-    const [id, setId] = useState(usuarioActual._id)
+    const id = usuarioActual._id
     const [nombre, setNombre] = useState(usuarioActual.nombre)
     const [apellidos, setApellidos] = useState(usuarioActual.apellidos)
     const [email, setEmail] = useState(usuarioActual.email)
     const [telefono, setTelefono] = useState(usuarioActual.telefono)
-    const [contrasenia, setContrasenia] = useState(usuarioActual.contrasenia)
     const [link_paypal, setLink_Paypal] = useState(usuarioActual.link_paypal)
     const [url_foto_perfil, setUrl_Foto_Perfil] = useState(usuarioActual.url_foto_perfil)
-    const [rol, setRol] = useState(usuarioActual.rol)
+    const rol = usuarioActual.rol
     const [editing, setEditing] = useState(false)
+    const [valoraciones, setValoraciones] = useState([])
+    const [media, setMedia] = useState([])
     const [file, setFile] = useState("");
     
+    const getValoraciones = async () => {
+        const respuesta = await fetch(`${API}/api/v1/valoraciones/${id}`)
+        const data = await respuesta.json();
+        setValoraciones(data.valoraciones);
+        setMedia(data.media);
+    }
+    
+    useEffect(() => {
+        getValoraciones();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []) //[] para que se ejecuta nada más abrir la pagina
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setEditing(true);
@@ -27,13 +39,11 @@ export const Profile = (props) => {
         e.preventDefault();
         let formData = new FormData();
         formData.append('file', file);
-        console.log(`${API}/api/v1/usuarios/${id}`)
         const respuesta = await fetch(`${props.API}/api/v1/usuarios/image/${id}`, {
             method: 'PUT',
             body: formData
         })
         const data = await respuesta.json();
-        console.log(data)
         if (data.msg === "El archivo no es una imagen")
         {
             alert("El archivo no es una imagen")
@@ -46,7 +56,7 @@ export const Profile = (props) => {
     const actualizarUsuario = async (e) => {
         e.preventDefault();
         setEditing(false);
-        const respuesta = await fetch(`${API}/api/v1/usuarios/${id}`, {
+        await fetch(`${API}/api/v1/usuarios/${id}`, {
             method: 'PUT',
             headers:{
                 'Content-Type' : 'application/json'
@@ -56,26 +66,59 @@ export const Profile = (props) => {
                 apellidos: apellidos,
                 email: email,
                 telefono: telefono,
-                contrasenia: contrasenia,
                 link_paypal: link_paypal,
                 url_foto_perfil: url_foto_perfil,
                 rol: rol
             })
         })
-        const data = await respuesta.json();
         VibecarContext.value.usuarioActual = {
             "_id" : id,
             "nombre": nombre,
             "apellidos": apellidos,
             "email": email,
             "telefono": telefono,
-            "contrasenia": contrasenia,
             "link_paypal": link_paypal,
             "url_foto_perfil": url_foto_perfil,
             "rol": rol
     }
         props.forceAppUpdate();
-        console.log(data)
+    }
+
+    const switchMedia = (mediaAux) => {
+        switch(mediaAux) {
+  
+          case 1:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i></div>;
+          case 2:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i></div>;
+          case 3:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i></div>;
+          case 4:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star checked"></i></div>;
+          case 5:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i></div>;
+  
+          default:      return <div><i className="bi bi-star checked"></i>
+                                    <i className="bi bi-star checked"></i>
+                                    <i className="bi bi-star checked"></i>
+                                    <i className="bi bi-star checked"></i>
+                                    <i className="bi bi-star checked"></i></div>;
+        }
     }
 
     return (
@@ -92,6 +135,7 @@ export const Profile = (props) => {
                     <>
                     <span className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</span>
                     <span className='profile-email'>{`${email}`}</span>
+                    <span className='profile-media'>{ switchMedia(media) }</span>
                     <div className='profile-number'><i className="bi bi-telephone icono-movil"></i><div>{telefono}</div></div>
                     <div className='profile-rol'>
                         {rol > 1 &&
@@ -134,7 +178,7 @@ export const Profile = (props) => {
                     <form onSubmit={actualizarUsuario}>
                         <div className="form-group mb-2">
                             <label htmlFor="email">Correo</label>
-                            <input type="email"
+                            <input type="email" disabled
                             id="email" 
                             onChange={e => setEmail(e.target.value)} 
                             value={email}
@@ -184,8 +228,34 @@ export const Profile = (props) => {
                             </button>
                         </div>
                     </form>
-                    </div> : 
-                <></>}
+                    </div> 
+                    :
+                    <div className='form-comentarios'>
+                        <h2>Valoraciones</h2>
+                        <div className='comentarios'>
+                        {valoraciones.map(valoracion => (
+                            <div className='comentario' key={valoracion._id}>
+                                <div className='foto-grid'>
+                                    <div className='circular-div comentario-pic'>
+                                        <img    className="profile-pic"
+                                                title={`Imagen de ${valoracion.nombre} ${valoracion.apellidos}`}
+                                                alt={`Imagen de ${valoracion.nombre} ${valoracion.apellidos}`}
+                                                src={valoracion.url_foto_perfil}
+                                        />
+                                    </div>
+                                </div>
+                                <div className='comentario-grid'>
+                                    <span className='comentario-name'>{` ${valoracion.nombre} ${valoracion.apellidos}`}</span>
+                                    <span className='comentario-texto'>{` ${valoracion.descripcion}`}</span>
+                                </div>
+                                <div className='estrellas-grid'>
+                                    {switchMedia(Number(valoracion.nota))}
+                                </div>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     )
