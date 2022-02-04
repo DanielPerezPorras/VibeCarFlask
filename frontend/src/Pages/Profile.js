@@ -178,7 +178,7 @@ export const Profile = (props) => {
                     <form onSubmit={actualizarUsuario}>
                         <div className="form-group mb-2">
                             <label htmlFor="email">Correo</label>
-                            <input type="email"
+                            <input type="email" disabled
                             id="email" 
                             onChange={e => setEmail(e.target.value)} 
                             value={email}
