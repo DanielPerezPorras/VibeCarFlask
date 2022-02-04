@@ -84,8 +84,8 @@ export const Profile = (props) => {
         props.forceAppUpdate();
     }
 
-    const switchMedia = () => {
-        switch(media) {
+    const switchMedia = (mediaAux) => {
+        switch(mediaAux) {
   
           case 1:   return <div><i className="bi bi-star-fill checked"></i>
                                 <i className="bi bi-star checked"></i>
@@ -135,7 +135,7 @@ export const Profile = (props) => {
                     <>
                     <span className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</span>
                     <span className='profile-email'>{`${email}`}</span>
-                    <span className='profile-media'>{ switchMedia() }</span>
+                    <span className='profile-media'>{ switchMedia(media) }</span>
                     <div className='profile-number'><i className="bi bi-telephone icono-movil"></i><div>{telefono}</div></div>
                     <div className='profile-rol'>
                         {rol > 1 &&
@@ -228,8 +228,34 @@ export const Profile = (props) => {
                             </button>
                         </div>
                     </form>
-                    </div> : 
-                <></>}
+                    </div> 
+                    :
+                    <div className='form-comentarios'>
+                        <h2>Valoraciones</h2>
+                        <div className='comentarios'>
+                        {valoraciones.map(valoracion => (
+                            <div className='comentario' key={valoracion._id}>
+                                <div className='foto-grid'>
+                                    <div className='circular-div comentario-pic'>
+                                        <img    className="profile-pic"
+                                                title={`Imagen de ${valoracion.nombre} ${valoracion.apellidos}`}
+                                                alt={`Imagen de ${valoracion.nombre} ${valoracion.apellidos}`}
+                                                src={valoracion.url_foto_perfil}
+                                        />
+                                    </div>
+                                </div>
+                                <div className='comentario-grid'>
+                                    <span className='comentario-name'>{` ${valoracion.nombre} ${valoracion.apellidos}`}</span>
+                                    <span className='comentario-texto'>{` ${valoracion.descripcion}`}</span>
+                                </div>
+                                <div className='estrellas-grid'>
+                                    {switchMedia(Number(valoracion.nota))}
+                                </div>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     )
