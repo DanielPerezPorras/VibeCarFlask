@@ -113,9 +113,13 @@ export const Profile = (props) => {
                                 <i className="bi bi-star-fill checked"></i>
                                 <i className="bi bi-star-fill checked"></i></div>;
   
-          default:      return <h1>No project match</h1>
+          default:      return <div><i className="bi bi-star checked"></i>
+                                    <i className="bi bi-star checked"></i>
+                                    <i className="bi bi-star checked"></i>
+                                    <i className="bi bi-star checked"></i>
+                                    <i className="bi bi-star checked"></i></div>;
         }
-      }
+    }
 
     return (
         <div className='container-full'>
