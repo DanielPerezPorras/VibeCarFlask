@@ -84,6 +84,39 @@ export const Profile = (props) => {
         props.forceAppUpdate();
     }
 
+    const switchMedia = () => {
+        switch(media) {
+  
+          case 1:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i></div>;
+          case 2:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i></div>;
+          case 3:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star checked"></i>
+                                <i className="bi bi-star checked"></i></div>;
+          case 4:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star checked"></i></div>;
+          case 5:   return <div><i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i>
+                                <i className="bi bi-star-fill checked"></i></div>;
+  
+          default:      return <h1>No project match</h1>
+        }
+      }
+
     return (
         <div className='container-full'>
             <div className="content container-left">
@@ -98,6 +131,7 @@ export const Profile = (props) => {
                     <>
                     <span className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</span>
                     <span className='profile-email'>{`${email}`}</span>
+                    <span className='profile-media'>{ switchMedia() }</span>
                     <div className='profile-number'><i className="bi bi-telephone icono-movil"></i><div>{telefono}</div></div>
                     <div className='profile-rol'>
                         {rol > 1 &&
