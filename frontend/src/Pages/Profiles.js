@@ -110,28 +110,33 @@ export const Profiles = (props) => {
             <div className="content container-right">
                     <div className='form-comentarios'>
                         <h2>Valoraciones</h2>
-                        <div className='comentarios'>
-                        {valoraciones.map(valoracion => (
-                            <div className='comentario' key={valoracion._id}>
-                                <div className='foto-grid'>
-                                    <div className='circular-div comentario-pic'>
-                                        <img    className="profile-pic"
-                                                title={`Imagen de ${valoracion.nombre} ${valoracion.apellidos}`}
-                                                alt={`Imagen de ${valoracion.nombre} ${valoracion.apellidos}`}
-                                                src={valoracion.url_foto_perfil}
-                                        />
+                        {
+                            (valoraciones.length < 1) ?
+                            <h3>Vaya, no hay valoraciones😕</h3>
+                            :
+                            <div className='comentarios'>
+                            {valoraciones.map(valoracion => (
+                                <div className='comentario' key={valoracion._id}>
+                                    <div className='foto-grid'>
+                                        <div className='circular-div comentario-pic'>
+                                            <img    className="profile-pic"
+                                                    title={`Imagen de ${valoracion.nombre} ${valoracion.apellidos}`}
+                                                    alt={`Imagen de ${valoracion.nombre} ${valoracion.apellidos}`}
+                                                    src={valoracion.url_foto_perfil}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className='comentario-grid'>
+                                        <span className='comentario-name'>{` ${valoracion.nombre} ${valoracion.apellidos}`}</span>
+                                        <span className='comentario-texto'>{` ${valoracion.descripcion}`}</span>
+                                    </div>
+                                    <div className='estrellas-grid'>
+                                        {switchMedia(Number(valoracion.nota))}
                                     </div>
                                 </div>
-                                <div className='comentario-grid'>
-                                    <span className='comentario-name'>{` ${valoracion.nombre} ${valoracion.apellidos}`}</span>
-                                    <span className='comentario-texto'>{` ${valoracion.descripcion}`}</span>
-                                </div>
-                                <div className='estrellas-grid'>
-                                    {switchMedia(Number(valoracion.nota))}
-                                </div>
+                            ))}
                             </div>
-                        ))}
-                        </div>
+                        }
                     </div>
             </div>
         </div>
