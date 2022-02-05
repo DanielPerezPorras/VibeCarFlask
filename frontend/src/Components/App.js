@@ -12,6 +12,7 @@ import { API } from "../config";
 import { Reservas } from "../Pages/Reservas";
 import { Gasolineras } from "../Pages/Gasolineras";
 import { Profile } from '../Pages/Profile';
+import { Profiles } from '../Pages/Profiles';
 import { Incidencias } from '../Pages/Incidencias';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route path='/admin' element={<UserListScreen />} />
             <Route path='/logout' element={<Logout forceAppUpdate={forceUpdate} />} />
             <Route path='/myprofile' element={<Profile usuarioActual={VibecarContext.value.usuarioActual} API={API} forceAppUpdate={forceUpdate}/>} />
+            <Route path='/profile/:id' element={<Profiles />} />
           </> }
           { !VibecarContext.value.usuarioActual
           && <>
