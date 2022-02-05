@@ -35,7 +35,7 @@ function App() {
             <Route path='/admin' element={<UserListScreen />} />
             <Route path='/logout' element={<Logout forceAppUpdate={forceUpdate} />} />
             <Route path='/myprofile' element={<Profile usuarioActual={VibecarContext.value.usuarioActual} API={API} forceAppUpdate={forceUpdate}/>} />
-            <Route path='/profile/:id' element={<Profiles API={API} />} />
+            
           </> }
           { !VibecarContext.value.usuarioActual
           && <>

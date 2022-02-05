@@ -1,6 +1,5 @@
 import React, {useEffect, useState } from 'react'
 import '../Styles/Profile.css'
-import VibecarContext from '../Components/VibecarContext';
 import { useMatch } from 'react-router-dom';
 
 export const Profiles = (props) => {
@@ -17,10 +16,8 @@ export const Profiles = (props) => {
     const [link_paypal, setLink_Paypal] = useState("")
     const [url_foto_perfil, setUrl_Foto_Perfil] = useState("")
     const [rol, setRol] = useState("");
-    const [editing, setEditing] = useState(false)
     const [valoraciones, setValoraciones] = useState([])
     const [media, setMedia] = useState([])
-    const [file, setFile] = useState("");
     
     const getValoraciones = async () => {
         const respuesta = await fetch(`${API}/api/v1/valoraciones/${id}`)
@@ -47,60 +44,6 @@ export const Profiles = (props) => {
         getValoraciones();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []) //[] para que se ejecuta nada más abrir la pagina
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setEditing(true);
-    }
-
-    const cambiarFoto = async(e) => {
-        e.preventDefault();
-        let formData = new FormData();
-        formData.append('file', file);
-        const respuesta = await fetch(`${props.API}/api/v1/usuarios/image/${id}`, {
-            method: 'PUT',
-            body: formData
-        })
-        const data = await respuesta.json();
-        if (data.msg === "El archivo no es una imagen")
-        {
-            alert("El archivo no es una imagen")
-        }else{
-            setUrl_Foto_Perfil(data.msg)
-            alert("Tu imagen se ha subido")
-        }
-    }
-
-    const actualizarUsuario = async (e) => {
-        e.preventDefault();
-        setEditing(false);
-        await fetch(`${API}/api/v1/usuarios/${id}`, {
-            method: 'PUT',
-            headers:{
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify({
-                nombre: nombre,
-                apellidos: apellidos,
-                email: email,
-                telefono: telefono,
-                link_paypal: link_paypal,
-                url_foto_perfil: url_foto_perfil,
-                rol: rol
-            })
-        })
-        VibecarContext.value.usuarioActual = {
-            "_id" : id,
-            "nombre": nombre,
-            "apellidos": apellidos,
-            "email": email,
-            "telefono": telefono,
-            "link_paypal": link_paypal,
-            "url_foto_perfil": url_foto_perfil,
-            "rol": rol
-    }
-        props.forceAppUpdate();
-    }
 
     const switchMedia = (mediaAux) => {
         switch(mediaAux) {
@@ -149,7 +92,6 @@ export const Profiles = (props) => {
                                 src={url_foto_perfil}
                         />
                     </div>
-                {!editing ?
                     <>
                     <span className='profile-name'>{`Perfil de ${nombre} ${apellidos}`}</span>
                     <span className='profile-email'>{`${email}`}</span>
@@ -163,91 +105,9 @@ export const Profiles = (props) => {
                     <div className='profile-paypal'>
                         <a href={link_paypal} className="btn btn-outline-info"><i className="bi bi-paypal"></i>{`Paypal de ${nombre} ${apellidos}`}</a>
                     </div>
-                    <form onSubmit={handleSubmit}>
-                    
-                        <button className="btn btn-primary btn-block btn-edit">
-                            <i className="bi bi-pencil-square"></i> Actualizar
-                        </button>
-                    
-                    </form>
                     </>
-                    :
-                    <div className="custom-file input-file mb-2">
-                        {/* <input type="file" className="custom-file-input file-button" id="archivoFoto" accept="image/png, image/jpeg"/> */}
-                        <form onSubmit={cambiarFoto}>
-                            <input type="file"
-                                id="file" 
-                                onChange={(e) => setFile(e.target.files[0])}
-                                className="custom-file-input file-button"
-                                accept="image/png, image/jpeg"
-                                placeholder="Imagen en .png o .jpg"/> 
-                            
-                                <button type="submit" className="btn btn-primary">
-                                    <i className="bi bi-pencil-square"></i> Guardar foto
-                                </button>
-                        </form>
-                    </div>
-                }
             </div>
             <div className="content container-right">
-                {editing ?
-                    <div className='form-update'>
-                    <h2>Mis detalles</h2> 
-                    <form onSubmit={actualizarUsuario}>
-                        <div className="form-group mb-2">
-                            <label htmlFor="email">Correo</label>
-                            <input type="email" disabled
-                            id="email" 
-                            onChange={e => setEmail(e.target.value)} 
-                            value={email}
-                            className="form-control"
-                            placeholder="Su correo..."
-                            autoFocus/>
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="nombre">Nombre</label>
-                            <input type="text"
-                            id="nombre" 
-                            onChange={e => setNombre(e.target.value)} 
-                            value={nombre}
-                            className="form-control"
-                            placeholder="Su nombre..."/>                        
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="apellidos">Apellidos</label>
-                            <input type="text"
-                            id="apellidos" 
-                            onChange={e => setApellidos(e.target.value)} 
-                            value={apellidos}
-                            className="form-control"
-                            placeholder="Sus apellidos..."/>  
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="telefono">Tel&eacute;fono</label>
-                            <input type="text"
-                            id="telefono" 
-                            onChange={e => setTelefono(e.target.value)} 
-                            value={telefono}
-                            className="form-control"
-                            placeholder="Su tel&eacute;fono..."/> 
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="link_paypal">Link de Paypal</label>
-                            <input type="url"
-                            id="link_paypal" 
-                            onChange={e => setLink_Paypal(e.target.value)} 
-                            value={link_paypal}
-                            className="form-control"
-                            placeholder="Introduzca su link de PayPal"/>
-                        </div>
-                        <div className="btn-actualizar mb-2">
-                            <button type="submit" className="btn btn-primary">
-                                <i className="bi bi-pencil-square"></i> Actualizar mis datos
-                            </button>
-                        </div>
-                    </form>
-                    </div> 
-                    :
                     <div className='form-comentarios'>
                         <h2>Valoraciones</h2>
                         <div className='comentarios'>
@@ -273,7 +133,6 @@ export const Profiles = (props) => {
                         ))}
                         </div>
                     </div>
-                }
             </div>
         </div>
     )
