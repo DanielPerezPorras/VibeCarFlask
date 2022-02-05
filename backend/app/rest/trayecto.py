@@ -51,6 +51,7 @@ def get_trayectos():
     
     origen = request.args.get("origen")
     destino = request.args.get("destino")
+    conductor = request.args.get("conductor")
     condiciones = []
     selector = {"$and": condiciones}
 
@@ -66,6 +67,12 @@ def get_trayectos():
             "$options": "i"
             }
         condiciones.append({"destino": regex})
+    if conductor is not None:
+        regex = {
+            "$regex": procesar_regex(conductor),
+            "$options": "i"
+            }
+        condiciones.append({"conductor._id": ObjectId(conductor)})
 
     if len(condiciones) == 0:
         selector = {}

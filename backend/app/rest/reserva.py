@@ -59,6 +59,7 @@ def get_reservas():
     
     estado = request.args.get("estado")
     pasajeros = request.args.get("pasajeros")
+    trayecto = request.args.get("trayecto")
 
     condiciones = []
     selector = {"$and": condiciones}
@@ -76,6 +77,13 @@ def get_reservas():
             "$options": "i"
             }
         condiciones.append({"pasajeros": regex})
+        
+    if trayecto is not None:
+        regex = {
+            "$regex": escape_regex(trayecto),
+            "$options": "i"
+            }
+        condiciones.append({"trayecto._id": ObjectId(trayecto)})
 
     if len(condiciones) == 0:
         selector = {}

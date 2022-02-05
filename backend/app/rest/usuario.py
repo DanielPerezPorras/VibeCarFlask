@@ -121,8 +121,9 @@ def login():
                 else:
                     return jsonify(msg="Usuario no encontrado"), 404
 
-            except:
+            except Exception as ex:
                 respuesta = jsonify(msg="Token no válido")
+                print(ex.args)
                 return make_response(respuesta, 406)
         else:
             respuesta = jsonify(msg="Petición no válida, faltan campos o no son del tipo correcto")

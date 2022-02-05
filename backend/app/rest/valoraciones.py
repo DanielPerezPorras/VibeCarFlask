@@ -32,6 +32,7 @@ def createValoracion():
                 respuesta = jsonify(msg="Petición no válida, faltan campos o no son del tipo correcto")
                 return make_response(respuesta, 400)
         else :
+            print(valoraciones.find_one({'idviaje' : ObjectId(request.json['idviaje']), 'usuarioQueValora' : ObjectId(request.json["usuarioQueValora"]), 'usuarioValorado' : ObjectId(request.json['usuarioValorado'])}))
             return jsonify(msg="El usuario ya ha valorado a esa persona en el mismo trayecto")
     else:
         respuesta = jsonify(msg="Petición no válida, se requiere JSON")

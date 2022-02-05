@@ -22,6 +22,9 @@ function Navbar() {
         <Link className="nav-link" to="/crearTrayecto">Nuevo trayecto</Link>
         </li>
         <li className="nav-item">
+        <Link className="nav-link" to="/viajesCreados">Viajes creados</Link>
+        </li>
+        <li className="nav-item">
         <Link className="nav-link" to="/reservas">Mis reservas</Link>
         </li>
         <li className="nav-item">

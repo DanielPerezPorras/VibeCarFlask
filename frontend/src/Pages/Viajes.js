@@ -53,44 +53,47 @@ function Viajes() {
             for (let d in data) {
                 console.log(data[d])
 
-                // Filtro precio
-                let filtroPrecio = true
-                if (precio !== "") {
-                    filtroPrecio = parseFloat(data[d]["precio"]) <= parseFloat(precio)
-                }
-
-                // Filtro plazas
-                let filtroPlaza = true
-                let plazasOcupadas = 0;
-                for (let r in dataReservas){
-                    if (dataReservas[r]["trayecto"]["_id"] === data[d]["_id"]){
-                        plazasOcupadas = plazasOcupadas + (dataReservas[r]["pasajeros"])
+                // El viaje tiene que estar disponible
+                if (data[d]["permitir_valoraciones"] === false){
+                    // Filtro precio
+                    let filtroPrecio = true
+                    if (precio !== "") {
+                        filtroPrecio = parseFloat(data[d]["precio"]) <= parseFloat(precio)
                     }
-                }
 
-                console.log("plazas ocupadas: " + String(plazasOcupadas))
-                console.log("plazas originales: " + parseInt(data[d]["plazas"]))
-                if (plazasOcupadas + (plazas === "" ? 1 : parseInt(plazas)) <= parseInt(data[d]["plazas"])){
-                    data[d]["plazas"] = parseInt(data[d]["plazas"]) - plazasOcupadas
-                } else {
-                    filtroPlaza = false
-                }
+                    // Filtro plazas
+                    let filtroPlaza = true
+                    let plazasOcupadas = 0;
+                    for (let r in dataReservas){
+                        if (dataReservas[r]["trayecto"]["_id"] === data[d]["_id"]){
+                            plazasOcupadas = plazasOcupadas + (dataReservas[r]["pasajeros"])
+                        }
+                    }
 
-                // Filtro fecha
-                let filtroFecha = true;
-                var fechaForm = importarFechaDeFormulario(fecha);
-                if (fechaForm !== null) {
-                    var fechaJson = importarFechaDeBD(data[d]["fecha_hora_salida"]);
+                    console.log("plazas ocupadas: " + String(plazasOcupadas))
+                    console.log("plazas originales: " + parseInt(data[d]["plazas"]))
+                    if (plazasOcupadas + (plazas === "" ? 1 : parseInt(plazas)) <= parseInt(data[d]["plazas"])){
+                        data[d]["plazas"] = parseInt(data[d]["plazas"]) - plazasOcupadas
+                    } else {
+                        filtroPlaza = false
+                    }
+
+                    // Filtro fecha
+                    let filtroFecha = true;
+                    var fechaForm = importarFechaDeFormulario(fecha);
+                    if (fechaForm !== null) {
+                        var fechaJson = importarFechaDeBD(data[d]["fecha_hora_salida"]);
+                        console.log(fechaForm)
+                        console.log(fechaJson)
+                        filtroFecha = parteFechaIgual(fechaJson, fechaForm);
+                    }
                     console.log(fechaForm)
                     console.log(fechaJson)
-                    filtroFecha = parteFechaIgual(fechaJson, fechaForm);
-                }
-                console.log(fechaForm)
-                console.log(fechaJson)
-                console.log(filtroFecha + ", " + filtroPrecio + ", " + filtroPlaza);
-                
-                if (filtroFecha && filtroPrecio && filtroPlaza){
-                    filtroRes.push(data[d])
+                    console.log(filtroFecha + ", " + filtroPrecio + ", " + filtroPlaza);
+                    
+                    if (filtroFecha && filtroPrecio && filtroPlaza){
+                        filtroRes.push(data[d])
+                    }
                 }
             }
             setTrayectos(filtroRes)

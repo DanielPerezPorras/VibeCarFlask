@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from "react-dom";
+import { useNavigate } from 'react-router-dom';
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
@@ -48,6 +49,12 @@ export const Reservas = (props, price) => {
         getReservas();
     })
 
+    let navigate = useNavigate();
+
+    function Redirect(id) {
+        navigate(`/infoViaje/${id}`)
+    };
+
     const getReservas = async () => {
         const res = await fetch(`${API}/api/v1/reservasCliente/${usuarioActual._id}`)
         const data = await res.json();
@@ -77,6 +84,7 @@ export const Reservas = (props, price) => {
                         <td>{reserva.fecha_hora_salida}</td>
                         <td>{reserva.pasajeros}</td>
                         <td>{reserva.estado}</td>
+                        <td><button onClick={() => Redirect(reserva.trayecto._id)} className='btn btn-warning btn-sm col-12'>Ver información</button></td>
                         <td>{reserva.estado === "disponible" ? (
                         <PayPalButton
                             createOrder={(data, actions) => createOrder(data, actions, reserva)}

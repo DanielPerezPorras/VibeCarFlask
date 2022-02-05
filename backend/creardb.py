@@ -3,7 +3,7 @@
 ##
 from bson import json_util
 import pymongo
-from app.rest.config import mongodb_connection_string
+from backend.app.rest.config import mongodb_connection_string
 
 _client = pymongo.MongoClient(mongodb_connection_string)
 _db = _client["vibecar"]
