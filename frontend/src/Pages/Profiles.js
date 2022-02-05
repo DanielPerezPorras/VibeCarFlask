@@ -5,18 +5,18 @@ import { useMatch } from 'react-router-dom';
 
 export const Profiles = (props) => {
     //Para coger el id
-    const routeData = useMatch('/character/:id');
+    const routeData = useMatch('/profile/:id');
     const personaId = routeData !== null ? routeData.params.id : '';
 
     const {usuarioActual, API} = props
     const id = personaId
-    const [nombre, setNombre] = useState(usuarioActual.nombre)
-    const [apellidos, setApellidos] = useState(usuarioActual.apellidos)
-    const [email, setEmail] = useState(usuarioActual.email)
-    const [telefono, setTelefono] = useState(usuarioActual.telefono)
-    const [link_paypal, setLink_Paypal] = useState(usuarioActual.link_paypal)
-    const [url_foto_perfil, setUrl_Foto_Perfil] = useState(usuarioActual.url_foto_perfil)
-    const rol = usuarioActual.rol
+    const [nombre, setNombre] = useState("")
+    const [apellidos, setApellidos] = useState("")
+    const [email, setEmail] = useState("")
+    const [telefono, setTelefono] = useState("")
+    const [link_paypal, setLink_Paypal] = useState("")
+    const [url_foto_perfil, setUrl_Foto_Perfil] = useState("")
+    const [rol, setRol] = useState("");
     const [editing, setEditing] = useState(false)
     const [valoraciones, setValoraciones] = useState([])
     const [media, setMedia] = useState([])
@@ -29,7 +29,21 @@ export const Profiles = (props) => {
         setMedia(data.media);
     }
     
+    const getUsuario = async() => {
+        //e.preventDefault();
+        const respuesta = await fetch(`${API}/api/v1/usuarios/${id}`)
+        const data = await respuesta.json();
+        setNombre(data.nombre);
+        setApellidos(data.apellidos);
+        setEmail(data.email);
+        setTelefono(data.telefono);
+        setLink_Paypal(data.link_paypal);
+        setUrl_Foto_Perfil(data.url_foto_perfil);
+        setRol(data.rol);
+    }
+
     useEffect(() => {
+        getUsuario();
         getValoraciones();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []) //[] para que se ejecuta nada más abrir la pagina

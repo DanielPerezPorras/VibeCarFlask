@@ -27,6 +27,7 @@ function App() {
           <Route path='/viajes' element={<Viajes />} />
           <Route path='/gasolineras' element={<Gasolineras/>} />
           <Route path='/incidencias' element={<Incidencias/>} />
+          <Route path='/profile/:id' element={<Profiles API={API} />} />
           { VibecarContext.value.usuarioActual
           && <>
             <Route path='/crearTrayecto' element={<CrearTrayecto  forceAppUpdate={forceUpdate} />} />
@@ -34,7 +35,7 @@ function App() {
             <Route path='/admin' element={<UserListScreen />} />
             <Route path='/logout' element={<Logout forceAppUpdate={forceUpdate} />} />
             <Route path='/myprofile' element={<Profile usuarioActual={VibecarContext.value.usuarioActual} API={API} forceAppUpdate={forceUpdate}/>} />
-            <Route path='/profile/:id' element={<Profiles />} />
+            <Route path='/profile/:id' element={<Profiles API={API} />} />
           </> }
           { !VibecarContext.value.usuarioActual
           && <>
