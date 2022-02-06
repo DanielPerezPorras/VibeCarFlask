@@ -160,15 +160,12 @@ def getTiempo():
     try:
         lat = str(request.args["lat"])
         lon = str(request.args["lon"])
-        # latd = str(request.args["latd"])
-        # lond = str(request.args["lond"])
     except:
         return jsonify({"msg":"No se ha especificado la latitud o la longitud"})
 
     response = urlopen(tiempo_url_coord+"lat="+lat+"&lon="+lon+"&appid="+openweathermap_api_key+"&lang=es")
     data = json.loads(response.read())
     datos_tiempo=data
-        # return jsonify(datos_tiempo)
 
     datos = []
 

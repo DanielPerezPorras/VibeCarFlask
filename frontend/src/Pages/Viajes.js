@@ -142,7 +142,7 @@ function Viajes() {
         }
     }
 
-
+    //Obtener el tiempo
     const getWeather = async(lat,lon,b) => {
 
         limpiartiempo()
@@ -162,6 +162,7 @@ function Viajes() {
             alert("Error al mostrar el tiempo")
         }else{
             
+            //Actualizar tiempo del origen
             if(b){
                 setNombreweathero(data[0].name)
                 setWeathero(data[0].weather[0].description)
@@ -169,6 +170,7 @@ function Viajes() {
                 setDwindweathero(data[0].wind.deg)
                 setTempo(data[1])
                 setHumidityo(data[2])
+            //Actualizar tiempo del destino
             }else{
                 setNombreweatherd(data[0].name)
                 setWeatherd(data[0].weather[0].description)
