@@ -1,3 +1,5 @@
+from multiprocessing import context
+import ssl
 from flask import request, jsonify, make_response
 from flask_pymongo import PyMongo, ObjectId
 from ..app import app
@@ -5,15 +7,21 @@ from .utils import usuario_existe, escape_regex
 from urllib.request import urlopen
 import json, geojson
 import unidecode
+from .config import openweathermap_api_key
+import certifi
 
 mongo = PyMongo(app)
 db = mongo.db
 
 incidencias_url = "https://opendata.arcgis.com/datasets/a64659151f0a42c69a38563e9d006c6b_0.geojson"
 gasolineras_url = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
+tiempo_url_coord = "https://api.openweathermap.org/data/2.5/weather?"
+tiempo_url_local= "https://api.openweathermap.org/data/2.5/find?"
+
 
 datos_incidencias = []
 datos_gasolineras = []
+datos_tiempo = []
 
 listaTiposGasolina = ["Biodiesel","Bioetanol","Gas Natural Comprimido","Gas Natural Licuado","Gases licuados del petróleo","Gasoleo A",
                       "Gasoleo B","Gasoleo Premium","Gasolina 95 E10","Gasolina 95 E5","Gasolina 95 E5 Premium","Gasolina 98 E10",
@@ -142,4 +150,37 @@ def getGasolineras():
     if len(res)==0:
         return jsonify({'msg' : 'La localidad buscada no contiene gasolineras del tipo indicado o no existe'})
     else:
-        return jsonify(res)    
+        return jsonify(res)  
+
+
+@app.route("/api/v1/tiempo/search", methods=['GET'])
+def getTiempo():
+    global datos_tiempo
+
+    try:
+        lat = str(request.args["lat"])
+        lon = str(request.args["lon"])
+        # latd = str(request.args["latd"])
+        # lond = str(request.args["lond"])
+    except:
+        return jsonify({"msg":"No se ha especificado la latitud o la longitud"})
+
+    response = urlopen(tiempo_url_coord+"lat="+lat+"&lon="+lon+"&appid="+openweathermap_api_key+"&lang=es")
+    data = json.loads(response.read())
+    datos_tiempo=data
+        # return jsonify(datos_tiempo)
+
+    datos = []
+
+    keys_to_extract  = ("name", "wind", "weather")
+    a_subset = {key: datos_tiempo[key] for key in keys_to_extract}
+    datos.append(a_subset)
+    datos.append(datos_tiempo["main"]["temp"])
+    datos.append(datos_tiempo["main"]["humidity"])
+
+    if len(datos)==0:
+        return jsonify({'msg' : 'La localidad buscada no existe o el tiempo no está disponible'})
+    else:
+        return jsonify(datos)  
+
+

@@ -20,6 +20,21 @@ function Viajes() {
     const [trayectos, setTrayectos] = useState([])
     const [coord, setCoord] = useState([])
 
+    const [nombreweathero, setNombreweathero] = useState("")
+    const [weathero, setWeathero] = useState("")
+    const [windweathero, setWindweathero] = useState("")
+    const [dwindweathero, setDwindweathero] = useState("")
+    const [tempo, setTempo] = useState("")
+    const [humidityo, setHumidityo] = useState("")
+
+    const [nombreweatherd, setNombreweatherd] = useState("")
+    const [weatherd, setWeatherd] = useState("")
+    const [windweatherd, setWindweatherd] = useState("")
+    const [dwindweatherd, setDwindweatherd] = useState("")
+    const [tempd, setTempd] = useState("")
+    const [humidityd, setHumidityd] = useState("")
+    const [weatherDone, setWeatherdone] = useState(false)
+
     let navigate = useNavigate();
     
     function LanzaMaquina (){
@@ -40,6 +55,22 @@ function Viajes() {
         setPrecio("")
         setFecha(new Date().toISOString().split("T")[0])
         setTrayectos([])
+    }
+
+    const limpiartiempo = () => {
+        setNombreweathero("")
+        setWeathero("")
+        setWindweathero("")
+        setDwindweathero("")
+        setTempo("")
+        setHumidityo("")
+        setNombreweatherd("")
+        setWeatherd("")
+        setWindweatherd("")
+        setDwindweatherd("")
+        setTempd("")
+        setHumidityd("")
+        setWeatherdone(false)
     }
 
     const handleSubmit = async (e) => {
@@ -111,6 +142,45 @@ function Viajes() {
         }
     }
 
+
+    const getWeather = async(lat,lon,b) => {
+
+        limpiartiempo()
+
+        console.log(lat)
+        console.log(lon)
+        console.log(b)
+        
+        const res = await fetch(API + `/api/v1/tiempo/search?lat=${lat}&lon=${lon}`)
+
+        const data = await res.json();
+        console.log(data)
+        console.log(data[0].name)
+
+        if (data.msg === 'La localidad buscada no existe o el tiempo no está disponible')
+        {
+            alert("Error al mostrar el tiempo")
+        }else{
+            
+            if(b){
+                setNombreweathero(data[0].name)
+                setWeathero(data[0].weather[0].description)
+                setWindweathero(data[0].wind.speed)
+                setDwindweathero(data[0].wind.deg)
+                setTempo(data[1])
+                setHumidityo(data[2])
+            }else{
+                setNombreweatherd(data[0].name)
+                setWeatherd(data[0].weather[0].description)
+                setWindweatherd(data[0].wind.speed)
+                setDwindweatherd(data[0].wind.deg)
+                setTempd(data[1])
+                setHumidityd(data[2])
+                setWeatherdone(true)
+            }
+        }
+    }
+
     // Crear la reserva
     const reservar = async (id) => {
         if (VibecarContext.value["usuarioActual"] == null){
@@ -147,8 +217,14 @@ function Viajes() {
             const data1 = await res1.json();
             const res2 = await fetch(`https://nominatim.openstreetmap.org/search?q=${destino}&country=Spain&format=json`)
             const data2 = await res2.json();
+
+            
+
             const data1Res = data1[0]
             const data2Res = data2[0]
+
+            console.log(data1Res)
+            console.log(data2Res)
 
             if (data1[0] !== undefined && data2[0] !== undefined) {
                 coords.push(parseFloat(data1Res["lat"]))
@@ -158,12 +234,21 @@ function Viajes() {
                 coords.push(origen)
                 coords.push(destino)
                 setCoord(coords)
+                console.log("coords:")
+                console.log(coords[0])
+                console.log(coords[1])
+                console.log(coords[2])
+                console.log(coords[3])
+                getWeather(coords[0],coords[1],true)
+                getWeather(coords[2],coords[3],false)
             } else {
                 setCoord([])
             }
         } else {
             setCoord([])
         }
+
+       
     }
 
     return (
@@ -251,7 +336,6 @@ function Viajes() {
                                                 width="80"
                                                 height="80"/><br />{t.conductor.nombre}
                                     </div>
-
                                     <b>Fecha y hora de salida: </b>{isNaN(Date.parse(t.fecha_hora_salida)) ? "" : format(Date.parse(t.fecha_hora_salida), 'dd/MM HH:mm')}<br />
                                     <b>Duración: </b>{t.duracion_estimada} min<br />
                                     <b>Plazas: </b>{t.plazas}<br />
@@ -275,6 +359,7 @@ function Viajes() {
                     </div>
                 </div>
                 <div className="col-12 col-md-4">
+                <div>
                     <MapContainer
                         doubleClickZoom={false}
                         id="mapId"
@@ -286,7 +371,21 @@ function Viajes() {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     <LanzaMaquina />
                     </MapContainer>
+                    </div>
+                    {weatherDone ?
+                        <div className='container-full'>
+                            <div align='left'>
+                                <a> <b>Tiempo actual {nombreweathero}:</b> <br />Clima: {weathero} <br /> Vel. viento: {windweathero} Km/h <br /> Dirección viento: {dwindweathero} º<br /> Temperatura: {(Math.round((tempo-273.15) * 10))/10} C <br /> Humedad: {humidityo} %<br /></a>
+                            </div>
+                            <div style={{ marginLeft: '3rem' }}>   
+                                <a > <b>Tiempo actual {nombreweatherd}:</b> <br />Clima: {weatherd} <br /> Vel. viento: {windweatherd} Km/h<br /> Dirección viento: {dwindweatherd} º<br /> Temperatura: {(Math.round((tempd-273.15) * 10))/10} C <br /> Humedad: {humidityd} %<br /></a>
+                            </div>
+                        </div>
+                        
+                     :
+                    <></>}
                 </div>
+                
             </div>
         </>
     );
