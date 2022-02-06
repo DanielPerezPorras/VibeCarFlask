@@ -30,6 +30,8 @@ except ModuleNotFoundError:
 mongo = PyMongo(app)
 usuario = mongo.db.usuario
 trayecto = mongo.db.trayecto
+reserva = mongo.db.reserva
+valoraciones = mongo.db.valoraciones
 
 
 
@@ -162,6 +164,20 @@ def update_usuario(id):
 
             usuario.update_one({"_id": oid}, {"$set": nuevos_valores})
 
+            user = usuario.find_one({"_id" : oid})
+            valoraciones.update_many({"usuarioQueValora" : oid}, {"$set" : {
+                "nombre" : user["nombre"],
+                "apellidos" : user["apellidos"],
+                "url_foto_perfil" : user["url_foto_perfil"]
+            }})
+            cliente = { "_id" : user["_id"], "nombre" : user["nombre"], "url_foto_perfil" : user["url_foto_perfil"]}
+            reserva.update_many({"cliente._id" : oid}, { "$set" : {
+                "cliente" : cliente
+            }})
+            trayecto.update_many({"conductor._id" : oid}, { "$set" : {
+                "conductor" : cliente
+            }})
+
             # Actualizar datos redundantes
             actualizar_conductor(oid)
 
@@ -182,7 +198,11 @@ def delete_usuario(id):
         usuario.delete_one({"_id": oid})
 
         # Cascada
-        trayecto.delete_many({"conductor._id": oid})
+        valoraciones.delete_many({"usuarioQueValora" : oid})
+        valoraciones.delete_many({"usuarioValorado" : oid})
+        reserva.delete_many({"cliente._id" : oid})
+        trayecto.delete_many({"conductor._id" : oid})
+        
 
         return jsonify(msg='Usuario borrado')
     else:
@@ -206,6 +226,16 @@ def uploadProfilePic(id):
         nuevos_valores = {}
         nuevos_valores["url_foto_perfil"] = str(res["url"])
         usuario.update_one({"_id": oid}, {"$set": nuevos_valores})
+
+        valoraciones.update_many({"usuarioQueValora" : oid}, {"$set" : {
+            "url_foto_perfil" : str(res["url"])
+        }})
+        reserva.update_many({"cliente._id" : oid}, { "$set" : {
+            "cliente.url_foto_perfil" : str(res["url"])
+        }})
+        trayecto.update_many({"conductor._id" : oid}, { "$set" : {
+            "conductor.url_foto_perfil" : str(res["url"])
+        }})
 
         return jsonify({"msg":str(res["url"])})
     else:
