@@ -30,6 +30,10 @@ function Viajes() {
         navigate("/reservas")
     }
 
+    function RedirectPerfil(id){
+        navigate(`/profile/${id}`)
+    }
+
     const limpiar = () => {
         setOrigen("")
         setDestino("")
@@ -53,8 +57,10 @@ function Viajes() {
             for (let d in data) {
                 console.log(data[d])
 
-                // El viaje tiene que estar disponible
-                if (data[d]["permitir_valoraciones"] === false){
+                // El viaje tiene que estar disponible y no debe ser del conductor
+                if (data[d]["permitir_valoraciones"] === false && 
+                    (VibecarContext.value["usuarioActual"] == null || 
+                    VibecarContext.value["usuarioActual"]["_id"] !== data[d]["conductor"]["_id"])){
                     // Filtro precio
                     let filtroPrecio = true
                     if (precio !== "") {
@@ -249,7 +255,16 @@ function Viajes() {
                                     <b>Fecha y hora de salida: </b>{isNaN(Date.parse(t.fecha_hora_salida)) ? "" : format(Date.parse(t.fecha_hora_salida), 'dd/MM HH:mm')}<br />
                                     <b>Duración: </b>{t.duracion_estimada} min<br />
                                     <b>Plazas: </b>{t.plazas}<br />
-                                    <b>Precio: </b>{t.precio} €
+                                    <b>Precio: </b>{t.precio} €  
+                                    {(VibecarContext.value["usuarioActual"] !== null && t.conductor._id !== VibecarContext.value["usuarioActual"]["_id"]) ?
+                                        (
+                                        <><br /><button onClick={() => RedirectPerfil(t.conductor._id)} className="btn btn-warning btn-sm">Ver Perfil</button></>
+                                        )
+                                    :
+                                        (
+                                        <></>
+                                        )
+                                    }
 
                                 </div>
                                 <button onClick={() => reservar(t._id)} className="btn btn-primary btn-sm col-12">Reservar</button>

@@ -4,6 +4,7 @@ import {recortarDireccion} from '../Utilities/direcciones';
 import {format} from 'date-fns';
 // Reseña
 import { Modal, ModalBody, ModalHeader} from 'reactstrap'
+import { useNavigate } from 'react-router-dom';
 
 export const InfoViaje = (props) => {
     const {usuarioActual,API} = props
@@ -121,6 +122,13 @@ export const InfoViaje = (props) => {
         
     }
 
+    // Ver perfil usuario
+    let navigate = useNavigate();
+
+    function Redirect(id) {
+        navigate(`/profile/${id}`)
+    };
+
     return (
         <>
         {trayecto !== null && bloqueos !== [] ? (
@@ -154,6 +162,15 @@ export const InfoViaje = (props) => {
                         <></>
                         )
                     }
+                    {(trayecto.conductor._id !== usuarioActual._id) ?
+                        (
+                        <button onClick={() => Redirect(trayecto.conductor._id)} className="btn btn-warning btn-sm">Ver Perfil</button>
+                        )
+                    :
+                        (
+                        <></>
+                        )
+                    }
 
                 <ColoredLine color={"blue"}></ColoredLine>
                 <h3><b>Pasajeros:</b></h3>
@@ -177,6 +194,15 @@ export const InfoViaje = (props) => {
                             )
                         :
                             (  
+                            <></>
+                            )
+                        }
+                        {(r.cliente._id !== usuarioActual._id) ?
+                            (
+                            <button onClick={() => Redirect(r.cliente._id)} className="btn btn-warning btn-sm">Ver Perfil</button>
+                            )
+                        :
+                            (
                             <></>
                             )
                         }
