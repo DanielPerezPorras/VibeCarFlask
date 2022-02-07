@@ -1,14 +1,19 @@
-from multiprocessing import context
-import ssl
-from flask import request, jsonify, make_response
-from flask_pymongo import PyMongo, ObjectId
+import os
+from flask import request, jsonify
+from flask_pymongo import PyMongo
 from ..app import app
-from .utils import usuario_existe, escape_regex
 from urllib.request import urlopen
 import json, geojson
 import unidecode
-from .config import openweathermap_api_key
-import certifi
+
+
+# Para importar la clave API del tiempo
+try:
+    # Fichero de configuración encontrado - lo usamos
+    from .config import openweathermap_api_key
+except ModuleNotFoundError:
+    # Fichero de configuración no encontrado - consultamos variables de entorno
+    openweathermap_api_key = os.environ["OPENWEATHER_API_KEY"]
 
 mongo = PyMongo(app)
 db = mongo.db
