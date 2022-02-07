@@ -40,7 +40,7 @@ export const Reservas = (props) => {
             },
             body: JSON.stringify(cuerpo)
         })
-        const datos = await res.json()
+        getReservas()
         return actions.order.capture();
     };
 
