@@ -2,4 +2,4 @@
 
 
 call env/scripts/activate
-call python app.py
+call python main.py
