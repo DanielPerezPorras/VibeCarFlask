@@ -28,9 +28,6 @@ function Navbar() {
         <Link className="nav-link" to="/reservas">Mis reservas</Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link" to="/admin">Lista usuarios</Link>
-        </li>
-        <li className="nav-item">
         <Link className="nav-link" to="/myprofile">Mi Perfil</Link>
         </li>
         <li className="nav-item">

@@ -34,7 +34,6 @@ function App() {
           && <>
             <Route path='/crearTrayecto' element={<CrearTrayecto  forceAppUpdate={forceUpdate} />} />
             <Route path='/reservas' element={<Reservas usuarioActual={VibecarContext.value.usuarioActual} API={API} />} /> 
-            <Route path='/admin' element={<UserListScreen />} />
             <Route path='/logout' element={<Logout forceAppUpdate={forceUpdate} />} />
             <Route path='/myprofile' element={<Profile usuarioActual={VibecarContext.value.usuarioActual} API={API} forceAppUpdate={forceUpdate}/>} />
             <Route path='/viajesCreados' element={<ViajesCreados usuarioActual={VibecarContext.value.usuarioActual} API={API} forceAppUpdate={forceUpdate}/>} />
