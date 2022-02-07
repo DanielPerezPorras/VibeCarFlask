@@ -49,21 +49,19 @@ Project developed using React as frontend, Flask as backend and MongoDB as Datab
     ```
     pip install -r requirements.txt
     ```
-    Otherwise you'll be installing all the dependencies in your python core.  
- 3. Once, you have installed the requirements, you have to fixed a <a href="https://stackoverflow.com/questions/67728474/modulenotfounderror-no-module-named-flask-compat" target="_blank">bug in Flask-Script</a>. Go to <strong>env/Lib/site-packages/flask_script/\_\_init\_\_.py</strong> and replace this line  
-    ```python
-    from flask._compat import text_type
-    ``` 
-    by  
-    ```python
-    from flask_script._compat import text_type
-    ```
- 4. Add a config.py to your *app/rest* folder with this content:
+    Otherwise you'll be installing all the dependencies in your python core.
+ 3. Add a config.py to your *app/rest* folder with this content:
     ```python
     # .gitignore should include reference to config.py
     cloud_name = "YOUR CLOUDINARY NAME", 
     cloud_api_key = "YOUR CLOUDINARY API KEY", 
     cloud_api_secret = "YOUR CLOUDINARY API SECRET"
+
+    mongodb_connection_string = "MONGODBURI"
+    openweathermap_api_key = "OPEN WEATHER KEY"
+
+    google_oauth_client_id = "CLIENT ID"
+    google_oauth_client_secret = "CLIENT SECRET"
     ```
 ### Folder structure📂
 - **requirements.txt**: File with the dependecies of the Python project.  
