@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from "react-dom";
 import { useNavigate } from 'react-router-dom';
+import {
+    PayPalScriptProvider,
+    PayPalButtons,
+    usePayPalScriptReducer
+} from "@paypal/react-paypal-js";
 
-const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
-
-export const Reservas = (props, price) => {
+export const Reservas = (props) => {
     const {usuarioActual,API} = props
 
     const [reservas, setReservas] = useState([])
@@ -47,7 +50,7 @@ export const Reservas = (props, price) => {
     };
     useEffect(() => {
         getReservas();
-    })
+    },[])
 
     let navigate = useNavigate();
 
@@ -86,11 +89,14 @@ export const Reservas = (props, price) => {
                         <td>{reserva.estado}</td>
                         <td><button onClick={() => Redirect(reserva.trayecto._id)} className='btn btn-warning btn-sm col-12'>Ver información</button></td>
                         <td>{reserva.estado === "disponible" ? (
-                        <PayPalButton
-                            createOrder={(data, actions) => createOrder(data, actions, reserva)}
-                            onApprove={(data, actions) => onApprove(data, actions, reserva)}
-                            onError = {(err) => onError(err)}
-                        />
+                            <PayPalScriptProvider options={{"client-id": "test"}}>
+                                <PayPalButtons
+                                    createOrder={(data, actions) => createOrder(data, actions, reserva)}
+                                    onApprove={(data, actions) => onApprove(data, actions, reserva)}
+                                    onError = {(err) => onError(err)}
+                                    />
+                            </PayPalScriptProvider>
+                                
                         ) : (<p>¡El viaje ya ha sido pagado!</p>)}</td>
                 </tr>
             ))}
