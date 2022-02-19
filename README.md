@@ -94,6 +94,6 @@ This project was made by:
 - <a href="https://github.com/GuillermoAguado" target="_blank">Guillermo Eduardo Aguado Mole&oacute;n</a>
 - <a href="https://github.com/franUma" target="_blank">Francisco Guerrero P&eacute;rez</a>
 - <a href="https://github.com/manuleivaUma" target="_blank">Manuel Leiva G&oacute;mez</a>
-- <a href="https://github.com/DanielPerezPorrasUMA" target="_blank">Daniel P&eacute;rez Porras</a>
+- <a href="https://github.com/DanielSDVG" target="_blank">Daniel P&eacute;rez Porras</a>
 - <a href="https://github.com/FranciscoSedeno" target="_blank">Francisco Jos&eacute; Sede&ntilde;o Guerrero</a>
      
